@@ -1,0 +1,2671 @@
+{
+  "garden1": {
+    "analysis": {
+      "actuators": {
+        "buzzer": {
+          "command": "OFF",
+          "created_at": 1785642042133,
+          "duration": 0,
+          "enable": false,
+          "executed": false,
+          "mode": "auto",
+          "priority": "NORMAL",
+          "reason": "",
+          "value": 0
+        },
+        "fan": {
+          "command": "OFF",
+          "created_at": 1785642042133,
+          "duration": 0,
+          "enable": false,
+          "executed": false,
+          "mode": "auto",
+          "priority": "NORMAL",
+          "reason": "",
+          "value": 0
+        },
+        "fertilizer": {
+          "command": "OFF",
+          "created_at": 1785642042133,
+          "duration": 0,
+          "enable": false,
+          "executed": false,
+          "mode": "manual",
+          "priority": "LOW",
+          "reason": "Chưa tới chu kỳ bón phân",
+          "value": 0
+        },
+        "light": {
+          "command": "ON",
+          "created_at": 1785642042133,
+          "duration": 3600,
+          "enable": true,
+          "executed": false,
+          "mode": "auto",
+          "priority": "NORMAL",
+          "reason": "Bổ sung ánh sáng theo lịch",
+          "value": 80
+        },
+        "mist": {
+          "command": "OFF",
+          "created_at": 1785642042133,
+          "duration": 0,
+          "enable": false,
+          "executed": false,
+          "mode": "auto",
+          "priority": "NORMAL",
+          "reason": "",
+          "value": 0
+        },
+        "pump": {
+          "command": "OFF",
+          "created_at": 1785642042133,
+          "duration": 0,
+          "enable": false,
+          "executed": false,
+          "mode": "auto",
+          "priority": "NORMAL",
+          "reason": "Độ ẩm đất đã đủ",
+          "value": 0
+        },
+        "valve": {
+          "command": "OFF",
+          "created_at": 1785642042133,
+          "duration": 0,
+          "enable": false,
+          "executed": false,
+          "mode": "auto",
+          "priority": "NORMAL",
+          "reason": "",
+          "value": 0
+        }
+      },
+      "averages": {
+        "air_humidity": 72.1,
+        "air_temperature": 25.4,
+        "soil_humidity": 68.4,
+        "soil_temperature": 21.01,
+        "water_storage": 5.2
+      },
+      "communication": {
+        "analysis_id": "an_1785642042133_garden1",
+        "api_version": "v1",
+        "esp32_sync": true,
+        "firebase_timestamp": 1785642042398,
+        "server_version": "1.3.0",
+        "web_sync": true
+      },
+      "dashboard": {
+        "active_alerts": 0,
+        "color": "#4CAF50",
+        "danger_level": "LOW",
+        "health_score": 100,
+        "icon": "leaf-check",
+        "last_analysis": 1785642042133,
+        "overall_status": "GOOD",
+        "recommendation_count": 5
+      },
+      "history": {
+        "hist_1785642020322": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 74.06,
+            "air_temperature": 25,
+            "soil_humidity": 68.92,
+            "soil_temperature": 21.22,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642020322,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642020770": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.74,
+            "air_temperature": 25.26,
+            "soil_humidity": 69.74,
+            "soil_temperature": 21.38,
+            "water_storage": 5.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642020770,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642021152": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.1,
+            "air_temperature": 25.08,
+            "soil_humidity": 69.7,
+            "soil_temperature": 21.22,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642021152,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642021626": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.76,
+            "air_temperature": 25,
+            "soil_humidity": 69.3,
+            "soil_temperature": 21.04,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642021626,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642021702": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 69.46,
+            "air_temperature": 25.2,
+            "soil_humidity": 69.18,
+            "soil_temperature": 20.91,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642021702,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642021779": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 69.26,
+            "air_temperature": 25.42,
+            "soil_humidity": 69,
+            "soil_temperature": 21.21,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642021779,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642022093": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.4,
+            "air_temperature": 25.38,
+            "soil_humidity": 69.04,
+            "soil_temperature": 21.05,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642022093,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642022394": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.38,
+            "air_temperature": 25.62,
+            "soil_humidity": 68.98,
+            "soil_temperature": 21.19,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642022394,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642023089": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.58,
+            "air_temperature": 25.58,
+            "soil_humidity": 69.12,
+            "soil_temperature": 21.15,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642023089,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642023166": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.48,
+            "air_temperature": 25.56,
+            "soil_humidity": 69.06,
+            "soil_temperature": 21.13,
+            "water_storage": 4.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642023166,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642023237": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 69.8,
+            "air_temperature": 25.44,
+            "soil_humidity": 68.14,
+            "soil_temperature": 21.21,
+            "water_storage": 4.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642023237,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642023313": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 69.16,
+            "air_temperature": 25.58,
+            "soil_humidity": 67.4,
+            "soil_temperature": 21.29,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642023313,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642023652": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.76,
+            "air_temperature": 25.24,
+            "soil_humidity": 67.3,
+            "soil_temperature": 21.27,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642023652,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642024127": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.96,
+            "air_temperature": 25.18,
+            "soil_humidity": 67.2,
+            "soil_temperature": 21.16,
+            "water_storage": 5.67
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642024127,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642024213": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.42,
+            "air_temperature": 25.24,
+            "soil_humidity": 66.76,
+            "soil_temperature": 20.99,
+            "water_storage": 5.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642024213,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642024498": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73.42,
+            "air_temperature": 25.56,
+            "soil_humidity": 67.88,
+            "soil_temperature": 21.05,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642024498,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642024775": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.66,
+            "air_temperature": 25.48,
+            "soil_humidity": 68.5,
+            "soil_temperature": 21.12,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642024775,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642025074": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.68,
+            "air_temperature": 25.66,
+            "soil_humidity": 68.28,
+            "soil_temperature": 21.16,
+            "water_storage": 5.6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642025074,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642025158": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.02,
+            "air_temperature": 25.6,
+            "soil_humidity": 68.48,
+            "soil_temperature": 21.09,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642025158,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642025447": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71,
+            "air_temperature": 25.64,
+            "soil_humidity": 68.84,
+            "soil_temperature": 21.29,
+            "water_storage": 6.6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642025447,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642025534": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.46,
+            "air_temperature": 25.32,
+            "soil_humidity": 68.6,
+            "soil_temperature": 21.19,
+            "water_storage": 6.2
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642025534,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642025609": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.42,
+            "air_temperature": 25.34,
+            "soil_humidity": 67.78,
+            "soil_temperature": 21.09,
+            "water_storage": 5.8
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642025609,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642025899": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.1,
+            "air_temperature": 25.46,
+            "soil_humidity": 67.58,
+            "soil_temperature": 21.05,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642025899,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642025976": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.64,
+            "air_temperature": 25.68,
+            "soil_humidity": 67.4,
+            "soil_temperature": 21.19,
+            "water_storage": 4.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642025976,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642026239": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.56,
+            "air_temperature": 25.74,
+            "soil_humidity": 67.12,
+            "soil_temperature": 21.09,
+            "water_storage": 3.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642026239,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642026500": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.26,
+            "air_temperature": 25.82,
+            "soil_humidity": 66.16,
+            "soil_temperature": 20.99,
+            "water_storage": 3
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642026500,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642026586": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.28,
+            "air_temperature": 25.78,
+            "soil_humidity": 66.76,
+            "soil_temperature": 21.25,
+            "water_storage": 3.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642026586,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642026865": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 69.98,
+            "air_temperature": 25.76,
+            "soil_humidity": 66.56,
+            "soil_temperature": 21.3,
+            "water_storage": 4
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642026865,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642027359": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.48,
+            "air_temperature": 25.62,
+            "soil_humidity": 66,
+            "soil_temperature": 21.17,
+            "water_storage": 4.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642027359,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642027459": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.76,
+            "air_temperature": 25.52,
+            "soil_humidity": 65.9,
+            "soil_temperature": 21.24,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642027459,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642027530": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.66,
+            "air_temperature": 25.44,
+            "soil_humidity": 66.72,
+            "soil_temperature": 21.57,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642027530,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642027839": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.38,
+            "air_temperature": 25.26,
+            "soil_humidity": 66.9,
+            "soil_temperature": 21.09,
+            "water_storage": 5.2
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642027839,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642028124": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.5,
+            "air_temperature": 25,
+            "soil_humidity": 67.38,
+            "soil_temperature": 21.07,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642028124,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642028638": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.04,
+            "air_temperature": 25.23,
+            "soil_humidity": 67.74,
+            "soil_temperature": 21.03,
+            "water_storage": 5.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642028638,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642028723": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.48,
+            "air_temperature": 25.3,
+            "soil_humidity": 68.06,
+            "soil_temperature": 21.11,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642028723,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642028805": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.4,
+            "air_temperature": 25.38,
+            "soil_humidity": 67.62,
+            "soil_temperature": 21.01,
+            "water_storage": 5.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642028805,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642028902": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.26,
+            "air_temperature": 25.65,
+            "soil_humidity": 67.32,
+            "soil_temperature": 21.19,
+            "water_storage": 5.67
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642028902,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642028975": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.96,
+            "air_temperature": 25.54,
+            "soil_humidity": 66.78,
+            "soil_temperature": 21.15,
+            "water_storage": 5.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642028975,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642029676": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72,
+            "air_temperature": 25.46,
+            "soil_humidity": 66.46,
+            "soil_temperature": 21.19,
+            "water_storage": 5.8
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642029676,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642029950": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.82,
+            "air_temperature": 25.34,
+            "soil_humidity": 66.78,
+            "soil_temperature": 21.09,
+            "water_storage": 6.4
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642029950,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642030036": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73.28,
+            "air_temperature": 25.32,
+            "soil_humidity": 66.64,
+            "soil_temperature": 21.01,
+            "water_storage": 5.8
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642030036,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642030138": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.36,
+            "air_temperature": 25.34,
+            "soil_humidity": 66.52,
+            "soil_temperature": 20.87,
+            "water_storage": 5.2
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642030138,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642030223": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.4,
+            "air_temperature": 25.54,
+            "soil_humidity": 67.54,
+            "soil_temperature": 20.83,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642030223,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642030706": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.84,
+            "air_temperature": 25.7,
+            "soil_humidity": 68.44,
+            "soil_temperature": 20.87,
+            "water_storage": 4.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642030706,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642030796": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.44,
+            "air_temperature": 25.8,
+            "soil_humidity": 68,
+            "soil_temperature": 20.89,
+            "water_storage": 3.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642030796,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642030883": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.94,
+            "air_temperature": 25.88,
+            "soil_humidity": 68.04,
+            "soil_temperature": 20.59,
+            "water_storage": 3.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642030883,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642031188": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73.66,
+            "air_temperature": 25.6,
+            "soil_humidity": 68.62,
+            "soil_temperature": 20.76,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642031188,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642031266": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.78,
+            "air_temperature": 25.44,
+            "soil_humidity": 67.42,
+            "soil_temperature": 20.91,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642031266,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642031354": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.8,
+            "air_temperature": 25.24,
+            "soil_humidity": 66.78,
+            "soil_temperature": 20.94,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642031354,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642031647": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.46,
+            "air_temperature": 25.02,
+            "soil_humidity": 66.42,
+            "soil_temperature": 21.01,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642031647,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642031910": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.14,
+            "air_temperature": 25.12,
+            "soil_humidity": 66.78,
+            "soil_temperature": 21.37,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642031910,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642032203": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 69.98,
+            "air_temperature": 25.42,
+            "soil_humidity": 65.9,
+            "soil_temperature": 21.27,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642032203,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642032494": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.8,
+            "air_temperature": 25.58,
+            "soil_humidity": 65.96,
+            "soil_temperature": 21.29,
+            "water_storage": 4.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642032494,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642032942": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.02,
+            "air_temperature": 25.54,
+            "soil_humidity": 66.1,
+            "soil_temperature": 21.14,
+            "water_storage": 4.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642032942,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642033047": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.42,
+            "air_temperature": 25.58,
+            "soil_humidity": 66.76,
+            "soil_temperature": 21.04,
+            "water_storage": 5.67
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642033047,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642033145": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.16,
+            "air_temperature": 25.4,
+            "soil_humidity": 66.82,
+            "soil_temperature": 20.89,
+            "water_storage": 5.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642033145,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642033443": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.68,
+            "air_temperature": 25.16,
+            "soil_humidity": 67.66,
+            "soil_temperature": 20.94,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642033443,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642033521": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.6,
+            "air_temperature": 25,
+            "soil_humidity": 68.24,
+            "soil_temperature": 20.89,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642033521,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642033614": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.18,
+            "air_temperature": 25.14,
+            "soil_humidity": 67.92,
+            "soil_temperature": 21.01,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642033614,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642033704": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.02,
+            "air_temperature": 25.22,
+            "soil_humidity": 67.3,
+            "soil_temperature": 20.99,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642033704,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642033980": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.12,
+            "air_temperature": 25.34,
+            "soil_humidity": 67.02,
+            "soil_temperature": 21.05,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642033980,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642034286": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.94,
+            "air_temperature": 25.4,
+            "soil_humidity": 66.92,
+            "soil_temperature": 21.01,
+            "water_storage": 6.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642034286,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642034369": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.58,
+            "air_temperature": 25.66,
+            "soil_humidity": 67.18,
+            "soil_temperature": 21.17,
+            "water_storage": 6.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642034369,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642034685": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.34,
+            "air_temperature": 25.68,
+            "soil_humidity": 67.64,
+            "soil_temperature": 21.13,
+            "water_storage": 6.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642034685,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642034978": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.82,
+            "air_temperature": 25.92,
+            "soil_humidity": 68.74,
+            "soil_temperature": 21.15,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642034978,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642035306": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.46,
+            "air_temperature": 25.74,
+            "soil_humidity": 68.48,
+            "soil_temperature": 21.11,
+            "water_storage": 6.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642035306,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642035386": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.16,
+            "air_temperature": 25.86,
+            "soil_humidity": 67.7,
+            "soil_temperature": 21.17,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642035386,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642035463": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73.52,
+            "air_temperature": 25.76,
+            "soil_humidity": 67.52,
+            "soil_temperature": 21.01,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642035463,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642035792": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.34,
+            "air_temperature": 25.56,
+            "soil_humidity": 67.3,
+            "soil_temperature": 21.03,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642035792,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642036183": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.06,
+            "air_temperature": 25.32,
+            "soil_humidity": 66.12,
+            "soil_temperature": 21.19,
+            "water_storage": 4.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642036183,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642036491": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.56,
+            "air_temperature": 25.42,
+            "soil_humidity": 66.17,
+            "soil_temperature": 21.15,
+            "water_storage": 4.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642036491,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642036574": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.98,
+            "air_temperature": 25.36,
+            "soil_humidity": 66.6,
+            "soil_temperature": 21.17,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642036574,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642036876": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.6,
+            "air_temperature": 25.46,
+            "soil_humidity": 66.18,
+            "soil_temperature": 21.31,
+            "water_storage": 4.8
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642036876,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642037187": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.88,
+            "air_temperature": 25.6,
+            "soil_humidity": 66.42,
+            "soil_temperature": 21.39,
+            "water_storage": 5.2
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642037187,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642037267": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.52,
+            "air_temperature": 25.48,
+            "soil_humidity": 66.88,
+            "soil_temperature": 21.29,
+            "water_storage": 5.6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642037267,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642037556": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.18,
+            "air_temperature": 25.65,
+            "soil_humidity": 67.68,
+            "soil_temperature": 21.33,
+            "water_storage": 5.4
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642037556,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642037632": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.32,
+            "air_temperature": 25.77,
+            "soil_humidity": 67.52,
+            "soil_temperature": 21.17,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642037632,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642037711": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.18,
+            "air_temperature": 25.3,
+            "soil_humidity": 67.6,
+            "soil_temperature": 21.11,
+            "water_storage": 6.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642037711,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642037797": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.54,
+            "air_temperature": 25.48,
+            "soil_humidity": 67.2,
+            "soil_temperature": 20.99,
+            "water_storage": 5.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642037797,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642038030": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.2,
+            "air_temperature": 25.9,
+            "soil_humidity": 67.6,
+            "soil_temperature": 20.91,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642038030,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642038311": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73.22,
+            "air_temperature": 25.76,
+            "soil_humidity": 67.24,
+            "soil_temperature": 20.89,
+            "water_storage": 5.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642038311,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642038548": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73.56,
+            "air_temperature": 25.48,
+            "soil_humidity": 67.42,
+            "soil_temperature": 21.01,
+            "water_storage": 5.2
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642038548,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642038790": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73.64,
+            "air_temperature": 25.68,
+            "soil_humidity": 67.84,
+            "soil_temperature": 21.07,
+            "water_storage": 4.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642038790,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642038865": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.2,
+            "air_temperature": 25.5,
+            "soil_humidity": 67.5,
+            "soil_temperature": 20.99,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642038865,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642038943": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.92,
+            "air_temperature": 25.24,
+            "soil_humidity": 67.44,
+            "soil_temperature": 21.17,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642038943,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642039202": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.2,
+            "air_temperature": 25.18,
+            "soil_humidity": 67.9,
+            "soil_temperature": 21.19,
+            "water_storage": 5.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642039202,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642039279": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.8,
+            "air_temperature": 25.46,
+            "soil_humidity": 67.94,
+            "soil_temperature": 21.23,
+            "water_storage": 6
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642039279,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642039353": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.18,
+            "air_temperature": 25.38,
+            "soil_humidity": 67.18,
+            "soil_temperature": 21.13,
+            "water_storage": 5.5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642039353,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642039650": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.64,
+            "air_temperature": 25.32,
+            "soil_humidity": 67.98,
+            "soil_temperature": 21.21,
+            "water_storage": 5.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642039650,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642040086": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.82,
+            "air_temperature": 25.52,
+            "soil_humidity": 67.14,
+            "soil_temperature": 21.01,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642040086,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642040184": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.14,
+            "air_temperature": 25.5,
+            "soil_humidity": 66.76,
+            "soil_temperature": 21.03,
+            "water_storage": 5.25
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642040184,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642040284": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.18,
+            "air_temperature": 25.2,
+            "soil_humidity": 67.12,
+            "soil_temperature": 21.18,
+            "water_storage": 4.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642040284,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642040386": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.34,
+            "air_temperature": 25.4,
+            "soil_humidity": 67.84,
+            "soil_temperature": 21.15,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642040386,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642040692": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.98,
+            "air_temperature": 25.46,
+            "soil_humidity": 67.52,
+            "soil_temperature": 21.05,
+            "water_storage": 4.33
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642040692,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642040963": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 70.3,
+            "air_temperature": 25.52,
+            "soil_humidity": 67.96,
+            "soil_temperature": 21.2,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642040963,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642041228": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.4,
+            "air_temperature": 25.74,
+            "soil_humidity": 68.32,
+            "soil_temperature": 21.13,
+            "water_storage": 4.75
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642041228,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642041497": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 73,
+            "air_temperature": 25.72,
+            "soil_humidity": 68.4,
+            "soil_temperature": 20.95,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642041497,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642041602": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.16,
+            "air_temperature": 25.62,
+            "soil_humidity": 68.38,
+            "soil_temperature": 21.03,
+            "water_storage": 5
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642041602,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642041872": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 71.12,
+            "air_temperature": 25.42,
+            "soil_humidity": 68.56,
+            "soil_temperature": 21.09,
+            "water_storage": 5.4
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642041872,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        },
+        "hist_1785642042133": {
+          "actions_sent": [
+            "light:ON"
+          ],
+          "averages": {
+            "air_humidity": 72.1,
+            "air_temperature": 25.4,
+            "soil_humidity": 68.4,
+            "soil_temperature": 21.01,
+            "water_storage": 5.2
+          },
+          "labels": [
+            "A4.3",
+            "E4.3",
+            "I2.3",
+            "P2",
+            "Q2"
+          ],
+          "timestamp": 1785642042133,
+          "weather": {
+            "outdoor_temperature": 30.6,
+            "rainfall_mm": 0
+          }
+        }
+      },
+      "labels": {
+        "label_1785642042133_1": {
+          "description": "Độ ẩm đất trong khoảng 65-75%, phù hợp cho giai đoạn 'Trưởng thành sinh dưỡng'.",
+          "group": "A",
+          "label_id": "A4.3",
+          "label_name": "Ẩm độ & nước ổn định (GĐ 3)",
+          "matched_time": 1785642042133,
+          "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+          "severity": "Normal"
+        },
+        "label_1785642042133_2": {
+          "description": "Nhiệt độ trong khoảng 24-30°C, thuận lợi cho giai đoạn 'Trưởng thành sinh dưỡng'.",
+          "group": "E",
+          "label_id": "E4.3",
+          "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 3)",
+          "matched_time": 1785642042133,
+          "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+          "severity": "Normal"
+        },
+        "label_1785642042133_3": {
+          "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+          "group": "I",
+          "label_id": "I2.3",
+          "label_name": "Nguy cơ Phytophthora thấp (GĐ 3)",
+          "matched_time": 1785642042133,
+          "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+          "severity": "Normal"
+        },
+        "label_1785642042133_4": {
+          "description": "Nguồn nước dự trữ và độ ẩm đất đảm bảo, hệ thống tưới hoạt động hiệu quả.",
+          "group": "P",
+          "label_id": "P2",
+          "label_name": "Hệ thống tưới đáp ứng tốt",
+          "matched_time": 1785642042133,
+          "recommendation": "Duy trì bảo trì hệ thống tưới định kỳ.",
+          "severity": "Normal"
+        },
+        "label_1785642042133_5": {
+          "description": "Độ ẩm đất không tích tụ quá cao sau mưa/tưới, hệ thống thoát nước hoạt động hiệu quả.",
+          "group": "Q",
+          "label_id": "Q2",
+          "label_name": "Thoát nước tốt",
+          "matched_time": 1785642042133,
+          "recommendation": "Duy trì bảo trì hệ thống mương/rãnh thoát nước theo mùa.",
+          "severity": "Normal"
+        }
+      },
+      "recommendations": {
+        "rec_1785642042133_1": {
+          "action": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+          "estimated_effect": "",
+          "generated_at": 1785642042133,
+          "priority": "LOW",
+          "reason": "Độ ẩm đất trong khoảng 65-75%, phù hợp cho giai đoạn 'Trưởng thành sinh dưỡng'."
+        },
+        "rec_1785642042133_2": {
+          "action": "Duy trì điều kiện canh tác hiện tại.",
+          "estimated_effect": "",
+          "generated_at": 1785642042133,
+          "priority": "LOW",
+          "reason": "Nhiệt độ trong khoảng 24-30°C, thuận lợi cho giai đoạn 'Trưởng thành sinh dưỡng'."
+        },
+        "rec_1785642042133_3": {
+          "action": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+          "estimated_effect": "",
+          "generated_at": 1785642042133,
+          "priority": "LOW",
+          "reason": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp."
+        },
+        "rec_1785642042133_4": {
+          "action": "Duy trì bảo trì hệ thống tưới định kỳ.",
+          "estimated_effect": "",
+          "generated_at": 1785642042133,
+          "priority": "LOW",
+          "reason": "Nguồn nước dự trữ và độ ẩm đất đảm bảo, hệ thống tưới hoạt động hiệu quả."
+        },
+        "rec_1785642042133_5": {
+          "action": "Duy trì bảo trì hệ thống mương/rãnh thoát nước theo mùa.",
+          "estimated_effect": "",
+          "generated_at": 1785642042133,
+          "priority": "LOW",
+          "reason": "Độ ẩm đất không tích tụ quá cao sau mưa/tưới, hệ thống thoát nước hoạt động hiệu quả."
+        }
+      },
+      "statistics": {
+        "_run_count": 5372,
+        "average_health_score": 99.85,
+        "critical_alerts": 2,
+        "last_fertilizer": 1751834269166,
+        "last_irrigation": 1753253869166,
+        "normal_days": 5309,
+        "total_alerts": 131,
+        "warning_alerts": 113
+      },
+      "summary": {
+        "analyzed_at": 1785642042133,
+        "data_source": "node1,node2,node3,node4,node5",
+        "model_version": "sam-ai-v1.3.0",
+        "overall_confidence": 1,
+        "processing_time_ms": 0,
+        "status": "completed",
+        "updated_at": 1785642042133
+      },
+      "weather": {
+        "fetched_at": "2026-08-02T03:38:10.967496+00:00",
+        "lat": 10.253722,
+        "lng": 105.972194,
+        "observed_at": "2026-08-02T10:30",
+        "outdoor_humidity": 67,
+        "outdoor_temperature": 30.6,
+        "rain_probability": 84,
+        "rainfall_mm": 0,
+        "source": "open-meteo.com"
+      }
+    },
+    "coordinates": {
+      "lat": 10.253722,
+      "lng": 105.972194
+    },
+    "growth_stage": 3,
+    "node1": {
+      "air_humidity": 82.8,
+      "air_temperature": 24.1,
+      "soil_humidity": 87.2,
+      "soil_temperature": 20.5,
+      "time": 1785642039259,
+      "water_storage": 4
+    },
+    "node2": {
+      "air_humidity": 72.77,
+      "air_temperature": 25.5,
+      "soil_humidity": 59.4,
+      "soil_temperature": 21.9,
+      "time": 1785642039326,
+      "water_storage": 6
+    },
+    "node3": {
+      "air_humidity": 80.41,
+      "air_temperature": 24.1,
+      "soil_humidity": 52.86,
+      "soil_temperature": 22.71,
+      "time": 1785642039386,
+      "water_storage": 4
+    },
+    "node4": {
+      "air_humidity": 64.9,
+      "air_temperature": 25.8,
+      "soil_humidity": 70.73,
+      "soil_temperature": 20.45,
+      "time": 1785642039447,
+      "water_storage": 3
+    },
+    "node5": {
+      "air_humidity": 49.61,
+      "air_temperature": 24.7,
+      "soil_humidity": 69.82,
+      "soil_temperature": 21.1,
+      "time": 1785642039508,
+      "water_storage": 7
+    }
+  }
+}
