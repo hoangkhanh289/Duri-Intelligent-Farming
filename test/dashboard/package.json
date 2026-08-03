@@ -1,0 +1,17 @@
+{
+  "name": "sam-team-firebase-dashboard",
+  "version": "1.0.0",
+  "description": "Trạm giám sát Firebase (sam-team) - Electron wrapper cho firebase_ui.html / firebase_style.css / firebase_runner.py",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "allowScripts": {
+    "electron@31.7.7": true
+  },
+  "devDependencies": {
+    "electron": "^43.2.0"
+  }
+}

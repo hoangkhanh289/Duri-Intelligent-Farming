@@ -1,0 +1,5 @@
+firebase-admin>=6.0.0
+# joblib + scikit-learn CHỈ cần nếu bạn dùng action predict-models / analyze-labels
+# với model đã train (models/*.pkl). Không cài vẫn chạy được get-all, set-node, ...
+joblib>=1.3.0
+scikit-learn>=1.3.0

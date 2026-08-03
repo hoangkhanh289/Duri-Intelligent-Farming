@@ -1,0 +1,7 @@
+node_modules/
+dist/
+out/
+*.log
+firebase/dashboard/credentials/serviceAccountKey.json
+firebase/dashboard/runtime_config.json
+firebase/dashboard/rainfall_cache.json

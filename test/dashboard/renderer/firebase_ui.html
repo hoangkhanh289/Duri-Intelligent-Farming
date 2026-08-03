@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAM TEAM · Smart Agriculture IoT Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="firebase_style.css">
+</head>
+<body class="fb-page">
+
+<!-- ============================================================ SIDEBAR ============================================================ -->
+<aside class="fb-sidebar">
+  <div class="fb-brand">
+    <div class="fb-brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22V12M12 12C12 7 8 4 3 4c0 6 3 9.5 9 8zM12 12c0-5.5 4-8 9-8 0 6.5-4 9.5-9 8z"/></svg>
+    </div>
+    <div class="fb-brand-text">
+      <div class="name">SAM TEAM</div>
+      <div class="sub">Agriculture IoT</div>
+    </div>
+  </div>
+
+  <nav class="fb-nav" id="sideNav">
+    <button class="fb-nav-item active" data-target="secOverview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+      <span class="fb-nav-label">Dashboard</span>
+    </button>
+    <button class="fb-nav-item" data-target="secGardens">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12M12 12C12 7 8 4 3 4c0 6 3 9.5 9 8zM12 12c0-5.5 4-8 9-8 0 6.5-4 9.5-9 8z"/></svg>
+      <span class="fb-nav-label">Gardens</span>
+      <span class="fb-nav-badge" id="navGardenCount">0</span>
+    </button>
+    <button class="fb-nav-item" data-target="secNodes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+      <span class="fb-nav-label">Devices</span>
+    </button>
+    <button class="fb-nav-item" data-target="secWeather">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 18a4 4 0 1 1 1.2-7.8A5 5 0 0 1 17 9a4 4 0 0 1-.5 8H6z"/></svg>
+      <span class="fb-nav-label">Weather</span>
+    </button>
+    <button class="fb-nav-item" data-target="secCharts">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M11 19V5M18 19v-7"/></svg>
+      <span class="fb-nav-label">Analytics</span>
+    </button>
+    <button class="fb-nav-item" data-target="secInsight">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a6 6 0 0 0-4 10.5V15h8v-2.5A6 6 0 0 0 12 2z"/><path d="M9 18h6M10 21h4"/></svg>
+      <span class="fb-nav-label">AI Assistant</span>
+    </button>
+    <button class="fb-nav-item" data-target="secRules">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6z"/></svg>
+      <span class="fb-nav-label">Rule Engine</span>
+      <span class="fb-nav-badge hot" id="navAlertCount" style="display:none">0</span>
+    </button>
+    <button class="fb-nav-item" data-target="secML">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5M12 12 6 17M12 12l6 5"/></svg>
+      <span class="fb-nav-label">Machine Learning</span>
+    </button>
+    <button class="fb-nav-item" data-target="secTimeline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <span class="fb-nav-label">Historical Data</span>
+    </button>
+  </nav>
+
+  <div class="fb-sidebar-foot">sam-team-9c24e<br>rtdb · asia-southeast1</div>
+</aside>
+
+<!-- ============================================================ MAIN SHELL ============================================================ -->
+<div class="fb-shell">
+  <header class="fb-topbar">
+    <div class="fb-topbar-left">
+      <div class="fb-eyebrow">Smart Agriculture IoT Platform</div>
+      <h1 class="fb-h1">Trạm giám sát vườn — Realtime</h1>
+      <div class="fb-clock" id="fbClock">—</div>
+    </div>
+    <div class="fb-status-row" id="statusRow">
+      <span class="status-chip"><span class="dot" id="dotFirebase"></span>Firebase</span>
+      <span class="status-chip"><span class="dot" id="dotWeather"></span>Weather API</span>
+      <span class="status-chip"><span class="dot" id="dotRule"></span>Rule Engine</span>
+      <span class="status-chip"><span class="dot" id="dotML"></span>Machine Learning</span>
+      <span class="status-chip"><span class="dot" id="dotRAGX"></span>RAGX</span>
+      <span class="status-chip" id="connStatus"><span class="dot" id="connDot"></span><span id="connText">Đang kết nối…</span></span>
+    </div>
+  </header>
+
+  <main class="fb-main" id="fbMain">
+
+    <section id="secOverview">
+      <p class="fb-section-label" data-tag="01">Dashboard Overview</p>
+      <div class="kpi-strip" id="kpiStrip"></div>
+    </section>
+
+    <section id="secGardens" style="min-height:1px"></section>
+
+    <div id="gardenContainer">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22V12M12 12C12 7 8 4 3 4c0 6 3 9.5 9 8zM12 12c0-5.5 4-8 9-8 0 6.5-4 9.5-9 8z"/></svg>
+        <div>Đang đợi dữ liệu từ Firebase Realtime Database…</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   ICONS
+   ============================================================ */
+const ICO = {
+  drop:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s7 7.2 7 12a7 7 0 1 1-14 0c0-4.8 7-12 7-12z"/></svg>`,
+  therm: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14.5V5a2 2 0 1 1 4 0v9.5a4 4 0 1 1-4 0z"/></svg>`,
+  node:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg>`,
+  alert: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.9 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>`,
+  brain: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a6 6 0 0 0-4 10.5V15h8v-2.5A6 6 0 0 0 12 2z"/><path d="M9 18h6M10 21h4"/></svg>`,
+  bolt:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>`,
+  cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 18a4 4 0 1 1 1.2-7.8A5 5 0 0 1 17 9a4 4 0 0 1-.5 8H6z"/></svg>`,
+  gauge: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18z"/><path d="M12 12 16 8"/></svg>`,
+  check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>`,
+  copy:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
+  download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>`,
+  refresh: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.4 6.4L3 16M3 21v-5h5"/></svg>`,
+  send: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 3 18 9-18 9 4-9-4-9z"/></svg>`,
+  history: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`,
+  pin: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-7.4 7-12.6A7 7 0 0 0 5 9.4C5 14.6 12 22 12 22z"/><circle cx="12" cy="9.4" r="2.4"/></svg>`,
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const HISTORY_CAP = 180;
+const FIELD_KEYS = ["air_temperature","air_humidity","soil_temperature","soil_humidity","water_storage"];
+const FIELD_META = {
+  air_temperature: { label: "Nhiệt độ không khí", unit: "°C", color: "#266F8F", accent:"blue", range:[18,34] },
+  air_humidity:    { label: "Độ ẩm không khí",    unit: "%",  color: "#3789AC", accent:"blue", range:[40,90] },
+  soil_temperature:{ label: "Nhiệt độ đất",       unit: "°C", color: "#8A5A2B", accent:"soil", range:[16,30] },
+  soil_humidity:   { label: "Độ ẩm đất",          unit: "%",  color: "#B9772E", accent:"soil", range:[35,85] },
+  water_storage:   { label: "Mực nước",           unit: "lvl",color: "#2E7350", accent:"green",range:[2,10] },
+};
+
+const appState = {
+  gardens: {},          // last payload from runner
+  history: {},          // gardenId -> field -> [{t,v}]
+  prevAnalysis: {},      // gardenId -> last analysis snapshot (for diffing)
+  events: [],            // global timeline/notifications
+  prompts: {},            // gardenId -> [ {t, text} ]
+  activeChartMetric: {},  // gardenId -> field key
+  connected: false,
+};
+
+function api(){ return window.electronAPI || window.parent?.electronAPI || null; }
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+function fmtNum(v, digits){
+  if (v === undefined || v === null || Number.isNaN(v)) return "—";
+  if (typeof v !== "number") return v;
+  return digits === undefined ? (Math.round(v*10)/10) : v.toFixed(digits);
+}
+
+function formatTime(ms){
+  if (typeof ms !== "number") return "—";
+  return new Date(ms).toLocaleString("vi-VN", { hour12: false });
+}
+
+function timeAgo(ms){
+  if (typeof ms !== "number") return "—";
+  const diff = Date.now() - ms;
+  if (diff < 60000) return "vừa xong";
+  if (diff < 3600000) return Math.floor(diff/60000) + " phút trước";
+  if (diff < 86400000) return Math.floor(diff/3600000) + " giờ trước";
+  return Math.floor(diff/86400000) + " ngày trước";
+}
+
+function isOnline(node){
+  return typeof node.time === "number" && (Date.now() - node.time) < 10*60*1000;
+}
+
+/* ============================================================
+   CLOCK
+   ============================================================ */
+function tickClock(){
+  document.getElementById("fbClock").textContent = new Date().toLocaleString("vi-VN", { hour12:false, weekday:"short" });
+}
+setInterval(tickClock, 1000); tickClock();
+
+/* ============================================================
+   SIDEBAR NAV — smooth-scroll to section
+   ============================================================ */
+document.getElementById("sideNav").addEventListener("click", (e) => {
+  const btn = e.target.closest(".fb-nav-item");
+  if (!btn) return;
+  document.querySelectorAll(".fb-nav-item").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  const targetId = btn.dataset.target;
+  const el = document.getElementById(targetId) || document.querySelector(`[data-anchor="${targetId}"]`);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+/* ============================================================
+   CANVAS DRAWING HELPERS (no external chart lib — real session data only)
+   ============================================================ */
+function sizeCanvas(canvas){
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const w = Math.max(rect.width, 40), h = Math.max(rect.height, 20);
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  return { ctx, w, h };
+}
+
+function drawSparkline(canvas, points, color){
+  if (!canvas) return;
+  const { ctx, w, h } = sizeCanvas(canvas);
+  ctx.clearRect(0,0,w,h);
+  if (!points || points.length < 2) {
+    ctx.strokeStyle = "#D2CDB8"; ctx.lineWidth = 1; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(0,h-3); ctx.lineTo(w,h-3); ctx.stroke(); ctx.setLineDash([]);
+    return;
+  }
+  const vals = points.map(p => p.v);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const span = (max - min) || 1;
+  ctx.beginPath();
+  points.forEach((p, i) => {
+    const x = (i/(points.length-1)) * w;
+    const y = h - ((p.v - min)/span) * (h-4) - 2;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle = color; ctx.lineWidth = 1.6; ctx.lineJoin="round"; ctx.stroke();
+  const last = points[points.length-1];
+  const lx = w, ly = h - ((last.v-min)/span)*(h-4) - 2;
+  ctx.fillStyle = color; ctx.beginPath(); ctx.arc(lx-1.5, ly, 2, 0, 7); ctx.fill();
+}
+
+function drawLineChart(canvas, series, color, unit){
+  if (!canvas) return;
+  const { ctx, w, h } = sizeCanvas(canvas);
+  ctx.clearRect(0,0,w,h);
+  const padL = 34, padB = 18, padT = 10, padR = 8;
+  const plotW = w - padL - padR, plotH = h - padT - padB;
+  ctx.strokeStyle = "#EFEEE4"; ctx.lineWidth = 1;
+  for(let i=0;i<=3;i++){
+    const y = padT + (plotH/3)*i;
+    ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(w-padR,y); ctx.stroke();
+  }
+  if (!series || series.length < 2){
+    ctx.fillStyle = "#8B958C"; ctx.font = "11px IBM Plex Mono, monospace";
+    ctx.fillText("Đang thu thập dữ liệu phiên realtime…", padL, h/2);
+    return;
+  }
+  const vals = series.map(p=>p.v);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const span = (max-min) || 1;
+  ctx.fillStyle = "#8B958C"; ctx.font = "10px IBM Plex Mono, monospace"; ctx.textAlign="right";
+  ctx.fillText(fmtNum(max)+" "+(unit||""), padL-6, padT+9);
+  ctx.fillText(fmtNum(min)+" "+(unit||""), padL-6, h-padB);
+  ctx.textAlign="left";
+
+  const grad = ctx.createLinearGradient(0,padT,0,h-padB);
+  grad.addColorStop(0, color+"33"); grad.addColorStop(1, color+"02");
+  ctx.beginPath();
+  series.forEach((p,i)=>{
+    const x = padL + (i/(series.length-1))*plotW;
+    const y = padT + (1-((p.v-min)/span))*plotH;
+    i===0? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.lineTo(padL+plotW, h-padB); ctx.lineTo(padL, h-padB); ctx.closePath();
+  ctx.fillStyle = grad; ctx.fill();
+
+  ctx.beginPath();
+  series.forEach((p,i)=>{
+    const x = padL + (i/(series.length-1))*plotW;
+    const y = padT + (1-((p.v-min)/span))*plotH;
+    i===0? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle = color; ctx.lineWidth = 1.8; ctx.lineJoin="round"; ctx.stroke();
+}
+
+function drawRing(svgEl, percent, color, trackColor){
+  const r = 15.9155;
+  const c = 2*Math.PI*r;
+  const pct = Math.max(0, Math.min(100, percent));
+  svgEl.innerHTML = `
+    <svg viewBox="0 0 36 36" width="100%" height="100%">
+      <circle cx="18" cy="18" r="${r}" fill="none" stroke="${trackColor}" stroke-width="3.2"/>
+      <circle cx="18" cy="18" r="${r}" fill="none" stroke="${color}" stroke-width="3.2"
+        stroke-dasharray="${(pct/100)*c} ${c}" stroke-linecap="round"
+        transform="rotate(-90 18 18)"/>
+      <text x="18" y="20.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="9.5" fill="${color}">${Math.round(pct)}%</text>
+    </svg>`;
+}
+
+/* ============================================================
+   HEURISTIC HEALTH SCORE (transparent, derived from optimal bands)
+   ============================================================ */
+function scoreInRange(v, [lo,hi]){
+  if (typeof v !== "number") return null;
+  if (v >= lo && v <= hi) return 100;
+  const span = hi-lo;
+  const dist = v < lo ? (lo-v) : (v-hi);
+  return Math.max(0, Math.round(100 - (dist/span)*140));
+}
+function nodeHealthScore(node){
+  const scores = [];
+  ["air_temperature","air_humidity","soil_temperature","soil_humidity"].forEach(k=>{
+    const s = scoreInRange(node[k], FIELD_META[k].range);
+    if (s !== null) scores.push(s);
+  });
+  if (!isOnline(node)) return 0;
+  if (!scores.length) return null;
+  return Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
+}
+
+/* ============================================================
+   KPI STRIP
+   ============================================================ */
+function renderKPIs(gardens){
+  const ids = Object.keys(gardens);
+  let totalNodes=0, online=0, offline=0, crit=0, warn=0, ok=0, mlHits=0, rainSum=0, rainCount=0, waterSum=0, waterCount=0;
+
+  ids.forEach(gid=>{
+    const { data, analysis } = gardens[gid];
+    for(let i=1;i<=5;i++){
+      const n = data[`node${i}`];
+      if(!n) continue;
+      totalNodes++;
+      isOnline(n) ? online++ : offline++;
+    }
+    (analysis.matched||[]).forEach(m=>{
+      if (m.severity === "Critical") crit++;
+      else if (m.severity === "Warning") warn++;
+      else ok++;
+    });
+    (analysis.model_predictions||[]).forEach(p=>{ if(!p.error && !p.skipped) mlHits++; });
+    const w = analysis.weather || {};
+    if (typeof w.rain_probability === "number"){ rainSum += w.rain_probability; rainCount++; }
+    const avg = analysis.node_averages || {};
+    if (typeof avg.water_storage === "number"){ waterSum += avg.water_storage; waterCount++; }
+  });
+
+  const kpis = [
+    { icon:"node", accent:"var(--green-600)", tint:"var(--green-tint)", label:"Tổng số vườn", value: ids.length },
+    { icon:"node", accent:"var(--blue-600)", tint:"var(--blue-tint)", label:"Tổng số node", value: totalNodes },
+    { icon:"check", accent:"var(--success)", tint:"var(--success-tint)", label:"Node online", value: online },
+    { icon:"alert", accent:"var(--danger)", tint:"var(--danger-tint)", label:"Node offline", value: offline },
+    { icon:"alert", accent:"var(--danger)", tint:"var(--danger-tint)", label:"Cảnh báo Critical", value: crit },
+    { icon:"alert", accent:"var(--warn)", tint:"var(--warn-tint)", label:"Cảnh báo Warning", value: warn },
+    { icon:"check", accent:"var(--success)", tint:"var(--success-tint)", label:"Bình thường", value: ok },
+    { icon:"brain", accent:"var(--orange-600)", tint:"var(--orange-tint)", label:"AI Prediction", value: mlHits },
+    { icon:"cloud", accent:"var(--blue-600)", tint:"var(--blue-tint)", label:"Xác suất mưa TB", value: rainCount? Math.round(rainSum/rainCount):"—", unit: rainCount?"%":"" },
+    { icon:"drop", accent:"var(--green-600)", tint:"var(--green-tint)", label:"Mực nước TB", value: waterCount? fmtNum(waterSum/waterCount,1):"—", unit: waterCount?"lvl":"" },
+  ];
+
+  document.getElementById("kpiStrip").innerHTML = kpis.map(k => `
+    <div class="kpi-card" style="--kpi-accent:${k.accent}; --kpi-tint:${k.tint}">
+      <div class="kpi-icon">${ICO[k.icon]}</div>
+      <div class="kpi-value">${k.value}<span class="unit">${k.unit||""}</span></div>
+      <div class="kpi-label">${k.label}</div>
+    </div>`).join("");
+
+  document.getElementById("navGardenCount").textContent = ids.length;
+  const alertBadge = document.getElementById("navAlertCount");
+  if (crit+warn > 0){ alertBadge.style.display="inline-block"; alertBadge.textContent = crit+warn; }
+  else alertBadge.style.display = "none";
+}
+
+/* ============================================================
+   HISTORY TRACKING (real session data only — no fabrication)
+   ============================================================ */
+function pushHistory(gid, analysis){
+  if (!appState.history[gid]) {
+    appState.history[gid] = {};
+    FIELD_KEYS.forEach(k => appState.history[gid][k] = []);
+  }
+  const avg = analysis.node_averages || {};
+  const t = Date.now();
+  FIELD_KEYS.forEach(k=>{
+    if (typeof avg[k] === "number"){
+      const arr = appState.history[gid][k];
+      arr.push({ t, v: avg[k] });
+      if (arr.length > HISTORY_CAP) arr.shift();
+    }
+  });
+}
+
+/* ============================================================
+   EVENT / NOTIFICATION DIFFING (derived from genuine state changes)
+   ============================================================ */
+function diffAndLogEvents(gid, gLabel, analysis){
+  const prev = appState.prevAnalysis[gid];
+  const now = Date.now();
+  if (prev){
+    const prevMatched = new Set((prev.matched||[]).map(m=>m.label_id+":"+m.severity));
+    (analysis.matched||[]).forEach(m=>{
+      const key = m.label_id+":"+m.severity;
+      if (!prevMatched.has(key)){
+        appState.events.unshift({ t: now, severity: m.severity||"ok", msg: `[${gLabel}] Rule Engine: ${m.label_name || m.label_id} (${m.severity})` });
+      }
+    });
+    const prevRain = prev.weather?.rain_probability;
+    const curRain = analysis.weather?.rain_probability;
+    if (typeof curRain === "number" && (prevRain === undefined || Math.abs(curRain-(prevRain||0)) >= 20)){
+      appState.events.unshift({ t: now, severity:"ok", msg: `[${gLabel}] Cập nhật dự báo mưa: ${curRain}%` });
+    }
+    const prevML = (prev.model_predictions||[]).map(p=>p.label_name).join("|");
+    const curML = (analysis.model_predictions||[]).map(p=>p.label_name).join("|");
+    if (prevML && curML && prevML !== curML){
+      appState.events.unshift({ t: now, severity:"Warning", msg: `[${gLabel}] ML dự đoán thay đổi: ${curML}` });
+    }
+  } else {
+    appState.events.unshift({ t: now, severity:"ok", msg: `[${gLabel}] Bắt đầu giám sát realtime.` });
+  }
+  appState.prevAnalysis[gid] = analysis;
+  if (appState.events.length > 60) appState.events.length = 60;
+}
+
+function renderTimeline(){
+  const wrap = document.getElementById("globalTimeline");
+  if (!wrap) return;
+  if (!appState.events.length){ wrap.innerHTML = `<div class="tl-empty">Chưa có sự kiện nào trong phiên này.</div>`; return; }
+  wrap.innerHTML = `<div class="timeline">` + appState.events.slice(0,18).map(e => `
+    <div class="tl-item ${e.severity}">
+      <div class="tl-time">${timeAgo(e.t)} · ${new Date(e.t).toLocaleTimeString("vi-VN",{hour12:false})}</div>
+      <div class="tl-msg">${e.msg}</div>
+    </div>`).join("") + `</div>`;
+}
+
+/* ============================================================
+   AI PROMPT GENERATION (kept content-complete, restyled)
+   ============================================================ */
+function generateAutoSummary(st, avg, w, analysis) {
+  let text = `Cây đang ở giai đoạn sinh trưởng số ${st}. `;
+  text += `Độ ẩm đất trung bình đạt ${avg.soil_humidity ?? "—"}%. `;
+  if (avg.air_temperature && avg.air_temperature > 32) text += `Nhiệt độ không khí cao hơn ngưỡng tối ưu. `;
+  else if (avg.air_temperature && avg.air_temperature < 20) text += `Nhiệt độ không khí khá thấp. `;
+  else text += `Nhiệt độ không khí ở mức ổn định. `;
+  if (w.rain_probability !== undefined && w.rain_probability !== null) text += `Dự báo có mưa với xác suất ${w.rain_probability}%. `;
+  let mlWarning = false;
+  if (analysis.model_predictions) {
+    for(let p of analysis.model_predictions){
+      if(!p.error && !p.skipped && p.label_name){ mlWarning = true; text += `Machine Learning dự đoán: ${p.label_name}. `; break; }
+    }
+  }
+  let ruleWarning = false;
+  if (analysis.matched && analysis.matched.length > 0) {
+    let criticals = analysis.matched.filter(m => m.severity === 'Critical');
+    if (criticals.length > 0){ text += `Rule Engine cảnh báo Critical: ${criticals[0].label_name}. `; ruleWarning = true; }
+    else { text += `Rule Engine ghi nhận một số cảnh báo Warning. `; ruleWarning = true; }
+  }
+  if (!mlWarning && !ruleWarning) text += `Hệ thống Rule Engine đánh giá mọi chỉ số bình thường. `;
+  else text += `Đề nghị hệ thống RAGX phân tích dữ liệu trên và đưa ra giải pháp canh tác cụ thể.`;
+  return text;
+}
+
+function generateAIPrompt(g_id, data, analysis) {
+  const w = analysis.weather || {};
+  const avg = analysis.node_averages || {};
+  const st = data.growth_stage || "?";
+  const lat = data.coordinates?.lat ?? "—";
+  const lng = data.coordinates?.lng ?? "—";
+  const timeStr = new Date().toLocaleString("vi-VN");
+
+  let p = `# 1. THÔNG TIN VƯỜN\n`;
+  p += `- Tên vườn: ${g_id.toUpperCase()}\n`;
+  p += `- Thời gian cập nhật: ${timeStr}\n`;
+  p += `- Giai đoạn sinh trưởng: ${st}\n`;
+  p += `- Tọa độ: Lat ${lat}, Lng ${lng}\n\n`;
+
+  p += `# 2. DỮ LIỆU TRUNG BÌNH TOÀN VƯỜN\n`;
+  p += `- Nhiệt độ không khí: ${avg.air_temperature ?? "—"} °C\n`;
+  p += `- Độ ẩm không khí: ${avg.air_humidity ?? "—"} %\n`;
+  p += `- Nhiệt độ đất: ${avg.soil_temperature ?? "—"} °C\n`;
+  p += `- Độ ẩm đất: ${avg.soil_humidity ?? "—"} %\n`;
+  p += `- Mực nước: ${avg.water_storage ?? "—"} level\n\n`;
+
+  p += `# 3. THỜI TIẾT\n`;
+  p += `- Lượng mưa hiện tại: ${w.rainfall_mm ?? "—"} mm\n`;
+  p += `- Lượng mưa dự báo (xác suất): ${w.rain_probability ?? "—"} %\n`;
+  p += `- Nhiệt độ ngoài trời: ${w.outdoor_temperature ?? "—"} °C\n`;
+  p += `- Độ ẩm ngoài trời: ${w.outdoor_humidity ?? "—"} %\n\n`;
+
+  p += `# 4. GIÁ TRỊ TỪNG NODE\n`;
+  for(let i=1;i<=5;i++){
+    const n = data[`node${i}`];
+    if(n){
+      p += `* Node ${i}\n`;
+      p += `  - Air Temperature: ${n.air_temperature ?? "—"}\n`;
+      p += `  - Air Humidity: ${n.air_humidity ?? "—"}\n`;
+      p += `  - Soil Temperature: ${n.soil_temperature ?? "—"}\n`;
+      p += `  - Soil Humidity: ${n.soil_humidity ?? "—"}\n`;
+      p += `  - Water Storage: ${n.water_storage ?? n.water_torage ?? "—"}\n`;
+    }
+  }
+  p += `\n`;
+
+  p += `# 5. KẾT QUẢ MACHINE LEARNING\n`;
+  if (analysis.model_predictions && analysis.model_predictions.length > 0) {
+    analysis.model_predictions.forEach(pred=>{
+      if(!pred.error && !pred.skipped){
+        p += `- Label: ${pred.label_name || pred.label_id}\n`;
+        p += `  Confidence: ${(pred.confidence*100).toFixed(1)}%\n`;
+      }
+    });
+  } else p += `- Không có dự đoán\n`;
+  p += `\n`;
+
+  p += `# 6. KẾT QUẢ RULE ENGINE\n`;
+  if (analysis.matched && analysis.matched.length > 0) {
+    analysis.matched.forEach(lbl=>{ p += `- [${lbl.severity}] ${lbl.label_name}\n`; });
+  } else p += `- Mọi chỉ số ổn định\n`;
+  p += `\n`;
+
+  p += `# 7. ĐÁNH GIÁ TỔNG HỢP\n`;
+  p += `"${generateAutoSummary(st, avg, w, analysis)}"\n`;
+  return p;
+}
+
+function highlightPromptLines(text){
+  return text.split("\n").map(line=>{
+    let safe = line.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+    if (/^#\s/.test(line)) return `<div class="code-line h">${safe}</div>`;
+    if (/^-\s/.test(line) || /^\*\s/.test(line) || /^\s{2}-/.test(line)){
+      safe = safe.replace(/^(\s*[-*]\s*)([^:]+:)/, (m,a,b)=>`${a}<span class="k">${b}</span>`);
+      return `<div class="code-line">${safe}</div>`;
+    }
+    return `<div class="code-line">${safe||"&nbsp;"}</div>`;
+  }).join("");
+}
+
+window.copyPrompt = function(btn, gid){
+  const text = appState._latestPrompt[gid];
+  navigator.clipboard.writeText(text).then(()=>{
+    toast("✅ Đã copy AI Prompt vào clipboard");
+  }).catch(err => toast("Lỗi khi copy: " + err));
+};
+
+window.exportPrompt = function(gid){
+  const text = appState._latestPrompt[gid];
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = `${gid}-ai-prompt-${Date.now()}.txt`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  toast("⬇️ Đã xuất file prompt (.txt)");
+};
+
+window.regeneratePrompt = function(gid){
+  const g = appState.gardens[gid];
+  if (!g) return;
+  renderPromptPanel(gid, g.data, g.analysis, true);
+  toast("🔄 Đã tạo lại AI Prompt");
+};
+
+window.sendToAI = function(gid){
+  const a = api();
+  if (typeof a?.sendToAI === "function"){
+    a.sendToAI(appState._latestPrompt[gid]);
+    toast("📨 Đã gửi prompt tới RAGX");
+  } else {
+    toast("Chưa cấu hình kết nối AI trực tiếp — vui lòng dùng Copy rồi dán vào công cụ AI.");
+  }
+};
+
+window.loadHistoryPrompt = function(gid, idx){
+  const item = appState.prompts[gid][idx];
+  if (!item) return;
+  document.getElementById("codebody-"+gid).innerHTML = highlightPromptLines(item.text);
+  appState._latestPrompt[gid] = item.text;
+  toast("Đang xem prompt lúc " + new Date(item.t).toLocaleTimeString("vi-VN"));
+};
+
+appState._latestPrompt = {};
+
+function renderPromptPanel(gid, data, analysis, forceNew){
+  const promptText = generateAIPrompt(gid, data, analysis);
+  appState._latestPrompt[gid] = promptText;
+  if (!appState.prompts[gid]) appState.prompts[gid] = [];
+  const histArr = appState.prompts[gid];
+  const last = histArr[0];
+  if (forceNew || !last || last.text !== promptText){
+    histArr.unshift({ t: Date.now(), text: promptText });
+    if (histArr.length > 6) histArr.length = 6;
+  }
+  const bodyEl = document.getElementById("codebody-"+gid);
+  if (bodyEl) bodyEl.innerHTML = highlightPromptLines(promptText);
+  const histEl = document.getElementById("codehist-"+gid);
+  if (histEl){
+    histEl.innerHTML = histArr.map((h,i) => `<span class="hist-chip" onclick="loadHistoryPrompt('${gid}',${i})">🕓 ${new Date(h.t).toLocaleTimeString("vi-VN",{hour12:false})}</span>`).join("");
+  }
+}
+
+/* ============================================================
+   SUB-RENDERERS
+   ============================================================ */
+function renderCoreSample(stage){
+  const s = Math.max(1, Math.min(5, Number(stage) || 1));
+  const layerH = 100/5;
+  let layers = "";
+  const colors = ["#B9772E","#A9702F","#6EB78B","#3D8C63","#235940"];
+  for(let i=0;i<5;i++){
+    const filled = i < s;
+    layers += `<div class="layer" style="top:${i*layerH}%; height:${layerH}%; background:${filled? colors[i] : 'transparent'}; opacity:${filled?1:0.15}; border-top:1px solid rgba(255,255,255,.25)"></div>`;
+  }
+  return `<div class="core-sample"><div class="cap"></div>${layers}<div class="fill-label">GĐ ${s}/5</div></div>`;
+}
+
+function renderMiniMap(lat, lng, gid){
+  if (typeof lat !== "number" || typeof lng !== "number"){
+    return `<div class="map-fallback">${ICO.pin}<span>Chưa có tọa độ GPS</span></div>`;
+  }
+  // Ứng dụng chạy với CSP "frame-src 'self' file:" nên KHÔNG thể nhúng iframe
+  // bản đồ ngoài (openstreetmap.org) — trình duyệt sẽ chặn và bắn lỗi CSP liên tục.
+  // Thay vào đó hiển thị thẻ tọa độ tĩnh + link mở bản đồ đầy đủ ở tab/cửa sổ ngoài.
+  const mapUrl = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=17/${lat}/${lng}`;
+  return `
+    <div class="map-fallback static-map" id="map-${gid}">
+      ${ICO.pin}
+      <span class="map-coords">${lat.toFixed(5)}, ${lng.toFixed(5)}</span>
+      <a class="map-open-link" href="${mapUrl}" target="_blank" rel="noopener noreferrer">Mở bản đồ ↗</a>
+    </div>`;
+}
+
+function metricBlock(label, value, unit, cls){
+  const v = (value === undefined || value === null) ? "—" : fmtNum(value);
+  return `<div>
+    <div class="metric-label">${label}</div>
+    <div class="metric-value ${cls}">${v}<span class="unit">${v==="—"?"":unit}</span></div>
+  </div>`;
+}
+
+function renderNodes(gardenData){
+  let html = "";
+  for (const [key, val] of Object.entries(gardenData)){
+    if (!key.startsWith("node")) continue;
+    const online = isOnline(val);
+    const health = nodeHealthScore(val);
+    html += `
+      <div class="node-card">
+        <div class="node-card-head">
+          <span class="node-name">${ICO.node.replace('width="24" height="24"','width="14" height="14"')} ${key}</span>
+          <span class="node-online-badge ${online?'on':'off'}">
+            <span class="dot ${online?'up':'down'}"></span>${online?'Online':'Offline'}
+          </span>
+        </div>
+        <div class="node-metrics">
+          ${metricBlock("Air Temp", val.air_temperature, "°C", "air")}
+          ${metricBlock("Air Hum", val.air_humidity, "%", "air")}
+          ${metricBlock("Soil Temp", val.soil_temperature, "°C", "soil")}
+          ${metricBlock("Soil Hum", val.soil_humidity, "%", "soil")}
+        </div>
+        <div class="node-health-bar"><i style="width:${health ?? 0}%"></i></div>
+        <div class="node-card-foot">
+          <span>${health===null? '<span class="node-unreported">battery/RSSI: chưa có dữ liệu</span>' : 'Sức khỏe ước tính: '+health+'%'}</span>
+          <span>${timeAgo(val.time)}</span>
+        </div>
+      </div>`;
+  }
+  return `<div class="node-grid">${html}</div>`;
+}
+
+function renderStatRow(gid, avg){
+  const hist = appState.history[gid] || {};
+  return `<div class="stat-row">` + FIELD_KEYS.map(k=>{
+    const meta = FIELD_META[k];
+    const v = avg[k];
+    const arr = hist[k] || [];
+    const cid = `spark-${gid}-${k}`;
+    let badge = "";
+    if (typeof v === "number"){
+      const s = scoreInRange(v, meta.range);
+      badge = s>=70 ? `<span class="stat-badge ok">ổn định</span>` : s>=40 ? `<span class="stat-badge lo">theo dõi</span>` : `<span class="stat-badge hi">chú ý</span>`;
+    }
+    return `<div class="stat-chip">
+      <div class="top"><span class="stat-label">${meta.label}</span>${badge}</div>
+      <div class="stat-value">${fmtNum(v)}<span style="font-size:11px;color:var(--ink-faint)"> ${meta.unit}</span></div>
+      <canvas id="${cid}"></canvas>
+    </div>`;
+  }).join("") + `</div>`;
+}
+
+function renderWeather(w){
+  const items = [
+    { l:"Nhiệt độ ngoài trời", v: w.outdoor_temperature, u:"°C" },
+    { l:"Độ ẩm ngoài trời", v: w.outdoor_humidity, u:"%" },
+    { l:"Lượng mưa hiện tại", v: w.rainfall_mm, u:"mm" },
+    { l:"Xác suất mưa", v: w.rain_probability, u:"%" },
+    { l:"Gió", v: null, u:"" },
+    { l:"UV", v: null, u:"" },
+    { l:"Áp suất", v: null, u:"" },
+    { l:"Mây che phủ", v: null, u:"" },
+  ];
+  return `<div class="weather-grid">` + items.map(it=>{
+    const has = it.v !== null && it.v !== undefined;
+    return `<div class="weather-item">
+      <span class="wlabel">${it.l}</span>
+      <span class="wvalue ${has?'':'muted'}">${has? fmtNum(it.v)+' '+it.u : 'chưa có dữ liệu'}</span>
+    </div>`;
+  }).join("") + `</div>
+  <div style="margin-top:10px; font-size:10.5px; color:var(--ink-faint); font-family:var(--font-mono)">Nguồn: Open-Meteo${w.observed_at? ' · cập nhật '+w.observed_at : ''}</div>`;
+}
+
+function renderLabels(analysis){
+  if (!analysis || analysis.error || !analysis.matched || analysis.matched.length === 0){
+    return `<div class="label-empty">Không phát hiện cảnh báo — mọi chỉ số trong ngưỡng an toàn.</div>`;
+  }
+  return analysis.matched.map(lbl => `
+    <div class="label-card ${lbl.severity ?? 'Normal'}">
+      <div class="label-top">
+        <span class="sev-badge ${lbl.severity ?? 'Normal'}">${lbl.severity ?? 'Normal'}</span>
+        <span class="label-id">[${lbl.label_id ?? '?'}]${lbl.group? ' · Nhóm '+lbl.group : ''}</span>
+      </div>
+      <span class="label-name">${lbl.label_name ?? ''}</span>
+      <div class="label-desc">${lbl.description ?? ''}</div>
+      ${lbl.recommendation ? `<div class="label-desc" style="margin-top:5px; font-style:italic">💡 ${lbl.recommendation}</div>` : ''}
+    </div>`).join("");
+}
+
+function renderModels(analysis){
+  if (!analysis || !analysis.model_predictions || analysis.model_predictions.length === 0){
+    return `<div class="label-empty">Chưa có dự đoán từ mô hình Machine Learning.</div>`;
+  }
+  return analysis.model_predictions.map(p=>{
+    if (p.error) return `<div class="model-card err"><span class="model-group">${p.group_file ?? p.stem}</span><div class="label-desc">Lỗi mô hình: ${p.error}</div></div>`;
+    if (p.skipped) return `<div class="model-card"><span class="model-group">${p.group_file ?? p.stem}</span><div class="label-desc node-unreported">${p.reason || 'Bỏ qua'}</div></div>`;
+    const conf = typeof p.confidence === "number" ? `${(p.confidence*100).toFixed(1)}%` : "—";
+    const acc = typeof p.model_accuracy === "number" ? `${(p.model_accuracy*100).toFixed(1)}%` : null;
+    const path = (p.decision_path || []).join(" → ");
+    return `<div class="model-card">
+      <div class="label-top" style="justify-content:space-between">
+        <span class="model-group">${p.group_file ?? p.stem}</span>
+        <span style="font-size:10px; color:var(--ink-faint); font-family:var(--font-mono)">Tin cậy: ${conf}${acc? ' · Độ chính xác mô hình: '+acc:''}</span>
+      </div>
+      <span class="model-label">${p.label_name || "?"} <span style="font-size:11px;color:var(--ink-faint)">[${p.label_id ?? "?"}]</span></span>
+      ${p.note ? `<div class="model-note">${p.note}</div>` : ""}
+      ${path ? `<div class="model-path">🌳 ${path}</div>` : ""}
+    </div>`;
+  }).join("");
+}
+
+function computeRisk(analysis){
+  const crit = (analysis.matched||[]).filter(m=>m.severity==="Critical").length;
+  const warn = (analysis.matched||[]).filter(m=>m.severity==="Warning").length;
+  let risk = crit*35 + warn*15;
+  risk = Math.min(100, risk);
+  return risk;
+}
+
+function renderInsight(gid, data, analysis){
+  const st = data.growth_stage || "?";
+  const avg = analysis.node_averages || {};
+  const w = analysis.weather || {};
+  const summary = generateAutoSummary(st, avg, w, analysis);
+  const risk = computeRisk(analysis);
+  const tags = [];
+  if (analysis.matched?.some(m=>m.severity==="Critical")) tags.push("Ưu tiên: kiểm tra ngay");
+  if (typeof w.rain_probability === "number" && w.rain_probability > 60) tags.push("Đề xuất: hoãn tưới, có mưa");
+  if (typeof avg.soil_humidity === "number" && avg.soil_humidity < 40) tags.push("Đề xuất: tăng tưới");
+  if (!tags.length) tags.push("Duy trì lịch chăm sóc hiện tại");
+  return `
+    <div class="insight-wrap">
+      <div class="risk-ring" id="risk-${gid}"></div>
+      <div>
+        <div class="insight-text">${summary}</div>
+        <div class="insight-tags">${tags.map(t=>`<span>${t}</span>`).join("")}</div>
+      </div>
+    </div>`;
+}
+
+function renderHeatmap(gardenData){
+  const nodes = Object.entries(gardenData).filter(([k])=>k.startsWith("node"));
+  if (!nodes.length) return `<div class="label-empty">Không có dữ liệu node.</div>`;
+  function colorFor(v, range){
+    if (typeof v !== "number") return "#D2CDB8";
+    const s = scoreInRange(v, range);
+    if (s>=70) return "#3D8C63";
+    if (s>=40) return "#C08A1E";
+    return "#B33F3A";
+  }
+  let head = `<tr><th>Node</th>${FIELD_KEYS.filter(k=>k!=="water_storage").map(k=>`<th>${FIELD_META[k].label}</th>`).join("")}</tr>`;
+  let rows = nodes.map(([key,val])=>{
+    const cells = FIELD_KEYS.filter(k=>k!=="water_storage").map(k=>{
+      const v = val[k];
+      return `<td><div class="heat-cell" style="background:${colorFor(v, FIELD_META[k].range)}">${fmtNum(v)}</div></td>`;
+    }).join("");
+    return `<tr><td style="font-family:var(--font-mono); font-size:11px; color:var(--ink-dim)">${key}</td>${cells}</tr>`;
+  }).join("");
+  return `<table class="heatmap-table">${head}${rows}</table>`;
+}
+
+/* ============================================================
+   REALTIME LINE CHART (per garden, metric-selectable, session data)
+   ============================================================ */
+function renderChartTabs(gid){
+  if (!appState.activeChartMetric[gid]) appState.activeChartMetric[gid] = "soil_humidity";
+  const active = appState.activeChartMetric[gid];
+  return FIELD_KEYS.map(k => `<button class="chart-tab ${k===active?'active':''}" onclick="setChartMetric('${gid}','${k}')">${FIELD_META[k].label}</button>`).join("");
+}
+window.setChartMetric = function(gid, key){
+  appState.activeChartMetric[gid] = key;
+  const g = appState.gardens[gid];
+  if (g) updateGardenDynamicParts(gid, g.data, g.analysis);
+};
+
+/* ============================================================
+   MASTER RENDER
+   ============================================================ */
+function renderGardens(gardens){
+  appState.gardens = gardens;
+  let html = "";
+  for (const [gid, gObj] of Object.entries(gardens)){
+    const data = gObj.data, analysis = gObj.analysis;
+    if (!analysis || analysis.ok === false){
+      html += `<div class="garden-block"><div class="garden-body"><div class="label-empty">Lỗi phân tích vườn ${gid}: ${analysis?.error||'không xác định'}</div></div></div>`;
+      continue;
+    }
+    pushHistory(gid, analysis);
+    diffAndLogEvents(gid, gid.toUpperCase(), analysis);
+
+    const w = analysis.weather || {};
+    const avg = analysis.node_averages || {};
+    const st = data.growth_stage || "?";
+    const lat = data.coordinates?.lat, lng = data.coordinates?.lng;
+    const nodeCount = Object.keys(data).filter(k=>k.startsWith("node")).length;
+    const healths = Object.keys(data).filter(k=>k.startsWith("node")).map(k=>nodeHealthScore(data[k])).filter(v=>v!==null);
+    const gardenHealth = healths.length ? Math.round(healths.reduce((a,b)=>a+b,0)/healths.length) : 0;
+
+    html += `
+      <div class="garden-block">
+        <div class="garden-top">
+          <div class="garden-id-col">
+            ${renderCoreSample(st)}
+            <div class="garden-id-text">
+              <div class="eyebrow">Garden ID · ${gid}</div>
+              <h2>${gid.toUpperCase()}</h2>
+              <div class="garden-meta-tags">
+                <span>${ICO.pin.replace('width="24" height="24"','width="11" height="11"')} Lat ${fmtNum(lat,4)}, Lng ${fmtNum(lng,4)}</span>
+                <span>${ICO.node.replace('width="24" height="24"','width="11" height="11"')} ${nodeCount} node</span>
+                <span>${ICO.cloud.replace('width="24" height="24"','width="11" height="11"')} Mưa ${w.rain_probability ?? '—'}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="garden-map-col">${renderMiniMap(lat,lng,gid)}</div>
+        </div>
+        <div class="garden-health">
+          <div class="health-ring" id="healthring-${gid}"></div>
+          <div class="health-copy">
+            <div class="label">Health Score</div>
+            <div class="value">${gardenHealth}%</div>
+            <div class="sub">Giai đoạn ${st}/5 · cập nhật ${timeAgo(Object.values(data).find(v=>v?.time)?.time)}</div>
+          </div>
+        </div>
+        <div class="garden-body">
+          <p class="fb-section-label" data-tag="NODES">Realtime Node Monitoring</p>
+          <div id="nodes-${gid}">${renderNodes(data)}</div>
+
+          <p class="fb-section-label" data-tag="STATS">Garden Statistics</p>
+          <div id="stats-${gid}">${renderStatRow(gid, avg)}</div>
+
+          <p class="fb-section-label" data-tag="WX">Weather Panel</p>
+          <div class="panel">${renderWeather(w)}</div>
+
+          <p class="fb-section-label" data-tag="TREND">Realtime Trend (phiên hiện tại)</p>
+          <div class="panel">
+            <div class="chart-tabs" id="tabs-${gid}">${renderChartTabs(gid)}</div>
+            <div class="chart-note">Biểu đồ hiển thị dữ liệu thu thập trong phiên realtime đang chạy — chưa có kho lưu trữ 24h/7 ngày/30 ngày.</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-${gid}"></canvas></div>
+          </div>
+
+          <p class="fb-section-label" data-tag="HEAT">Heatmap so sánh Node</p>
+          <div class="panel" id="heatmap-${gid}">${renderHeatmap(data)}</div>
+
+          <div style="margin-bottom:20px;">
+            <p class="fb-section-label" data-tag="RULE">Rule Engine Monitor</p>
+            <div class="panel label-list">${renderLabels(analysis)}</div>
+          </div>
+
+          <p class="fb-section-label" data-tag="AI">AI Insight</p>
+          <div class="panel" id="insight-${gid}">${renderInsight(gid, data, analysis)}</div>
+
+          <p class="fb-section-label" data-tag="PROMPT">AI Prompt (RAGX Input)</p>
+          <div class="code-panel">
+            <div class="code-panel-bar">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-title">ragx-input · ${gid}.md</span>
+              </div>
+              <div class="code-actions">
+                <button class="code-btn" onclick="regeneratePrompt('${gid}')">${ICO.refresh}Generate</button>
+                <button class="code-btn" onclick="copyPrompt(this,'${gid}')">${ICO.copy}Copy</button>
+                <button class="code-btn" onclick="exportPrompt('${gid}')">${ICO.download}Export</button>
+                <button class="code-btn primary" onclick="sendToAI('${gid}')">${ICO.send}Send to AI</button>
+              </div>
+            </div>
+            <div class="code-body" id="codebody-${gid}"></div>
+            <div class="code-history" id="codehist-${gid}"></div>
+          </div>
+        </div>
+      </div>`;
+  }
+  document.getElementById("gardenContainer").innerHTML = html || `<div class="empty-state">Đang đợi dữ liệu từ Firebase...</div>`;
+
+  // second pass: draw canvases + rings + prompt bodies (need DOM present)
+  for (const [gid, gObj] of Object.entries(gardens)){
+    if (!gObj.analysis || gObj.analysis.ok === false) continue;
+    updateGardenDynamicParts(gid, gObj.data, gObj.analysis);
+    renderPromptPanel(gid, gObj.data, gObj.analysis);
+  }
+  renderKPIs(gardens);
+  renderTimeline();
+}
+
+function updateGardenDynamicParts(gid, data, analysis){
+  const avg = analysis.node_averages || {};
+  FIELD_KEYS.forEach(k=>{
+    const canvas = document.getElementById(`spark-${gid}-${k}`);
+    if (canvas) drawSparkline(canvas, appState.history[gid]?.[k], FIELD_META[k].color);
+  });
+  const metric = appState.activeChartMetric[gid] || "soil_humidity";
+  const chartCanvas = document.getElementById(`chart-${gid}`);
+  if (chartCanvas) drawLineChart(chartCanvas, appState.history[gid]?.[metric], FIELD_META[metric].color, FIELD_META[metric].unit);
+  const tabsEl = document.getElementById(`tabs-${gid}`);
+  if (tabsEl) tabsEl.innerHTML = renderChartTabs(gid);
+
+  const healths = Object.keys(data).filter(k=>k.startsWith("node")).map(k=>nodeHealthScore(data[k])).filter(v=>v!==null);
+  const gardenHealth = healths.length ? Math.round(healths.reduce((a,b)=>a+b,0)/healths.length) : 0;
+  const ringEl = document.getElementById(`healthring-${gid}`);
+  if (ringEl) drawRing(ringEl, gardenHealth, gardenHealth>=70? "#2E7350" : gardenHealth>=40? "#C08A1E" : "#B33F3A", "#EFEEE4");
+
+  const riskEl = document.getElementById(`risk-${gid}`);
+  if (riskEl){
+    const risk = computeRisk(analysis);
+    drawRing(riskEl, risk, risk>=50? "#B33F3A" : risk>=20? "#C08A1E" : "#2E7350", "#EFEEE4");
+  }
+}
+
+/* ============================================================
+   STATUS CHIPS
+   ============================================================ */
+function setConnState(connected, detail){
+  appState.connected = connected;
+  document.getElementById("connDot").className = "dot " + (connected ? "up pulse" : "down");
+  document.getElementById("connText").textContent = connected ? "Live (Realtime Active)" : (detail || "Mất kết nối");
+  document.getElementById("dotFirebase").className = "dot " + (connected ? "up pulse" : "down");
+}
+function setSubsystemStatus(gardens){
+  const anyWeather = Object.values(gardens).some(g => g.analysis?.weather && !g.analysis.weather.error);
+  const anyRule = Object.values(gardens).some(g => Array.isArray(g.analysis?.matched));
+  const anyML = Object.values(gardens).some(g => (g.analysis?.model_predictions||[]).some(p=>!p.error && !p.skipped));
+  document.getElementById("dotWeather").className = "dot " + (anyWeather ? "up" : "warn");
+  document.getElementById("dotRule").className = "dot " + (anyRule ? "up" : "warn");
+  document.getElementById("dotML").className = "dot " + (anyML ? "up" : "warn");
+  document.getElementById("dotRAGX").className = "dot up";
+}
+
+/* ============================================================
+   TIMELINE SECTION MOUNT (inserted once nodes area is known)
+   ============================================================ */
+function ensureTimelineSection(){
+  if (document.getElementById("globalTimeline")) return;
+  const sec = document.createElement("section");
+  sec.id = "secTimeline";
+  sec.setAttribute("data-anchor","secTimeline");
+  sec.innerHTML = `<p class="fb-section-label" data-tag="LOG">Notification Center · Timeline</p>
+    <div class="panel" id="globalTimeline"></div>`;
+  document.getElementById("fbMain").appendChild(sec);
+}
+ensureTimelineSection();
+
+/* redirect a couple of nav anchors that don't have literal matching ids to sensible sections */
+document.querySelectorAll('.fb-nav-item[data-target="secNodes"]').forEach(b=>b.dataset.target="secGardens");
+document.querySelectorAll('.fb-nav-item[data-target="secWeather"]').forEach(b=>b.dataset.target="secGardens");
+document.querySelectorAll('.fb-nav-item[data-target="secCharts"]').forEach(b=>b.dataset.target="secGardens");
+document.querySelectorAll('.fb-nav-item[data-target="secInsight"]').forEach(b=>b.dataset.target="secGardens");
+document.querySelectorAll('.fb-nav-item[data-target="secRules"]').forEach(b=>b.dataset.target="secGardens");
+document.querySelectorAll('.fb-nav-item[data-target="secML"]').forEach(b=>b.dataset.target="secGardens");
+
+/* ============================================================
+   DATA WIRING (unchanged integration contract with firebase_runner.py)
+   ============================================================ */
+function handleUpdate(gardens){
+  renderGardens(gardens);
+  setSubsystemStatus(gardens);
+}
+
+function tryStartRealtimeStream(){
+  const a = api();
+  if (typeof a?.runPythonStream !== "function") return false;
+  try {
+    a.runPythonStream(
+      "firebase/dashboard/firebase_runner.py",
+      ["--action", "stream"],
+      (line) => {
+        let evt;
+        try { evt = JSON.parse(line); } catch { return; }
+        if (evt.type === "ready") setConnState(true);
+        else if (evt.type === "update" && evt.gardens){ handleUpdate(evt.gardens); setConnState(true); }
+        else if (evt.type === "stream-error") setConnState(false, evt.error);
+      },
+      (err) => setConnState(false, String(err))
+    );
+    return true;
+  } catch (e){ return false; }
+}
+
+if (!api()?.runPython){
+  setConnState(false, "Vui lòng mở ứng dụng qua Electron");
+} else {
+  const isStreaming = tryStartRealtimeStream();
+  if (!isStreaming){
+    setInterval(() => {
+      api().runPython("firebase/dashboard/firebase_runner.py", ["--action", "get-all"])
+        .then(res => {
+          const out = JSON.parse(res.output.trim().split("\n").pop());
+          if (out.gardens) handleUpdate(out.gardens);
+        });
+    }, 5000);
+  }
+}
+
+window.addEventListener("resize", () => {
+  Object.keys(appState.gardens).forEach(gid=>{
+    const g = appState.gardens[gid];
+    if (g?.analysis && g.analysis.ok !== false) updateGardenDynamicParts(gid, g.data, g.analysis);
+  });
+});
+</script>
+</body>
+</html>

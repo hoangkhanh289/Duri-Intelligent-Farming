@@ -1,0 +1,42 @@
+{
+  "file": "soil_exchange.xlsx",
+  "stem": "soil_exchange",
+  "features": [
+    "Growth Stage"
+  ],
+  "groups": [
+    "D",
+    "F"
+  ],
+  "note": "Growth Stage + Cation Exchange Capacity + Electrical Conductivity",
+  "n_train": 13776,
+  "n_test": 3444,
+  "accuracy": 0.5122,
+  "classes": [
+    "D4.1",
+    "D4.2",
+    "D4.3",
+    "D4.4",
+    "D4.5",
+    "D4.6",
+    "D4.7",
+    "F1",
+    "F2",
+    "F3"
+  ],
+  "label_meaning": {
+    "D4.1": "EC & độ mặn an toàn (GĐ 1)",
+    "D4.2": "EC & độ mặn an toàn (GĐ 2)",
+    "D4.3": "EC & độ mặn an toàn (GĐ 3)",
+    "D4.4": "EC & độ mặn an toàn (GĐ 4)",
+    "D4.5": "EC & độ mặn an toàn (GĐ 5)",
+    "D4.6": "EC & độ mặn an toàn (GĐ 6)",
+    "D4.7": "EC & độ mặn an toàn (GĐ 7)",
+    "F1": "CEC rất thấp — đất nghèo dinh dưỡng",
+    "F2": "CEC trung bình — cần cải thiện",
+    "F3": "CEC tốt"
+  },
+  "feature_defaults": {
+    "Growth Stage": 4.0
+  }
+}

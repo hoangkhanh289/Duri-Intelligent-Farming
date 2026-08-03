@@ -1,0 +1,45 @@
+{
+  "file": "water.xlsx",
+  "stem": "water",
+  "features": [
+    "Growth Stage",
+    "Nhóm P",
+    "Nhóm P - Mức độ"
+  ],
+  "groups": [
+    "A",
+    "P",
+    "Q"
+  ],
+  "note": "Growth Stage + Water Storage + Rainfall",
+  "n_train": 1736,
+  "n_test": 434,
+  "accuracy": 0.9124,
+  "classes": [
+    "A2.1",
+    "A2.2",
+    "A2.3",
+    "A2.5",
+    "A2.6",
+    "A4.4",
+    "A4.7",
+    "A6.4",
+    "A7.5"
+  ],
+  "label_meaning": {
+    "A2.1": "Đất thiếu ẩm nhẹ (GĐ 1)",
+    "A2.2": "Đất thiếu ẩm nhẹ (GĐ 2)",
+    "A2.3": "Đất thiếu ẩm nhẹ (GĐ 3)",
+    "A2.5": "Đất thiếu ẩm nhẹ (GĐ 5)",
+    "A2.6": "Đất thiếu ẩm nhẹ (GĐ 6)",
+    "A4.4": "Ẩm độ & nước ổn định (GĐ 4)",
+    "A4.7": "Ẩm độ & nước ổn định (GĐ 7)",
+    "A6.4": "Mưa lớn trong mùa ra hoa — nguy hiểm",
+    "A7.5": "Mưa lớn giai đoạn đậu trái non"
+  },
+  "feature_defaults": {
+    "Growth Stage": 4.0,
+    "Nhóm P": NaN,
+    "Nhóm P - Mức độ": NaN
+  }
+}

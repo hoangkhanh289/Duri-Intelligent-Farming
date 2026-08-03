@@ -1,0 +1,7138 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "description": "Hệ thống nhãn chi tiết cho AI tư vấn canh tác sầu riêng — 7 giai đoạn sinh trưởng, 23 nhóm chỉ tiêu (A-W). Mỗi nhãn gồm mã, tên, mô tả, mức độ nghiêm trọng, khuyến nghị và điều kiện (rule) để gán tự động.",
+    "growth_stages": {
+      "1": "Cây con (0-12 tháng)",
+      "2": "Kiến thiết cơ bản (1-3 năm)",
+      "3": "Trưởng thành sinh dưỡng",
+      "4": "Ra hoa",
+      "5": "Đậu trái non",
+      "6": "Nuôi trái",
+      "7": "Trưởng thành trái - Thu hoạch"
+    },
+    "severity_levels": [
+      "Normal",
+      "Warning",
+      "Critical"
+    ],
+    "groups": {
+      "A": "Độ ẩm và nước",
+      "B": "Dinh dưỡng NPK",
+      "C": "pH và chất hữu cơ",
+      "D": "Mặn và EC",
+      "E": "Nhiệt độ và khí hậu",
+      "F": "CEC và khả năng giữ dinh dưỡng",
+      "G": "Sức khỏe bộ rễ",
+      "H": "Nguy cơ nấm bệnh",
+      "I": "Nguy cơ thối rễ Phytophthora",
+      "J": "Nguy cơ cháy lá",
+      "K": "Nguy cơ rụng hoa",
+      "L": "Nguy cơ rụng trái non",
+      "M": "Chất lượng nuôi trái",
+      "N": "Chất lượng cơm trái",
+      "O": "Điều kiện thu hoạch",
+      "P": "Tưới tiêu",
+      "Q": "Thoát nước",
+      "R": "Tình trạng sinh trưởng",
+      "S": "Cân bằng dinh dưỡng",
+      "T": "Khả năng ra hoa",
+      "U": "Khả năng đậu trái",
+      "V": "Khả năng đạt năng suất",
+      "W": "Khả năng đạt chất lượng xuất khẩu"
+    },
+    "col_aliases": {
+      "Growth Stage": "stage",
+      "Soil Humidity (%)": "soil_humidity",
+      "Soil Temperature (°C)": "soil_temp",
+      "Air Humidity (%)": "air_humidity",
+      "Air Temperature (°C)": "air_temp",
+      "Water Storage": "water_storage",
+      "Rainfall (mm/ngày)": "rainfall",
+      "pH": "ph",
+      "Organic Matter (%)": "organic_matter",
+      "N - Nitrogen (mg/kg)": "n",
+      "P - Phosphorus (mg/kg)": "p",
+      "K - Potassium (mg/kg)": "k",
+      "Cation Exchange \nCapacity (meq/100g)": "cec",
+      "Electrical \nConductivity (mS/cm)": "ec",
+      "Soil salinity (‰)": "soil_salinity",
+      "Water salinity (‰)": "water_salinity"
+    }
+  },
+  "defaults": {
+    "_comment": "Giá trị mặc định khi cột không có trong file (tránh lỗi rule cần cột không tồn tại)",
+    "soil_humidity": 60,
+    "rainfall": 0,
+    "soil_salinity": 0,
+    "water_salinity": 0,
+    "ec": 0,
+    "cec": 15,
+    "n": 100,
+    "p": 40,
+    "k": 120,
+    "ph": 6.0,
+    "organic_matter": 2.5,
+    "air_temp": 28,
+    "soil_temp": 28,
+    "air_humidity": 70,
+    "water_storage": 1,
+    "stage": 3
+  },
+  "labels": [
+    {
+      "label_id": "A1.1",
+      "label_name": "Đất rất thiếu ẩm — khẩn cấp (GĐ 1)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất dưới 50% ở giai đoạn 'Cây con (0-12 tháng)', cây có nguy cơ mất nước, héo rễ tơ, rụng lá, khả năng hấp thu N,P,K rất thấp.",
+      "recommendation": "Tưới bổ sung ngay, ưu tiên tưới nhỏ giọt/phun gốc, kiểm tra hệ thống tưới và lớp phủ giữ ẩm (rơm, mùn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A2.1",
+      "label_name": "Đất thiếu ẩm nhẹ (GĐ 1)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 75% nhưng chưa tới mức nguy hiểm, cây bắt đầu chịu stress nước nhẹ, khả năng hấp thu N,P,K giảm.",
+      "recommendation": "Theo dõi sát, lên lịch tưới sớm hơn 1-2 ngày, kiểm tra ẩm độ tầng rễ 20-40cm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "A3.1",
+      "label_name": "Đất quá ẩm — nguy hiểm (GĐ 1)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất trên 90%, nguy cơ thiếu oxy vùng rễ, khả năng hấp thu N,P,K giảm, thối rễ, tạo điều kiện nấm Phytophthora.",
+      "recommendation": "Ngừng tưới ngay, kiểm tra hệ thống thoát nước, xới nhẹ phá váng mặt liếp, tránh để đọng nước quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "A4.1",
+      "label_name": "Ẩm độ & nước ổn định (GĐ 1)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất trong khoảng 75-85%, phù hợp cho giai đoạn 'Cây con (0-12 tháng)'.",
+      "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            75,
+            85
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A1.2",
+      "label_name": "Đất rất thiếu ẩm — khẩn cấp (GĐ 2)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất dưới 50% ở giai đoạn 'Kiến thiết cơ bản (1-3 năm)', cây có nguy cơ mất nước, héo rễ tơ, rụng lá, khả năng hấp thu N,P,K rất thấp.",
+      "recommendation": "Tưới bổ sung ngay, ưu tiên tưới nhỏ giọt/phun gốc, kiểm tra hệ thống tưới và lớp phủ giữ ẩm (rơm, mùn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A2.2",
+      "label_name": "Đất thiếu ẩm nhẹ (GĐ 2)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 65% nhưng chưa tới mức nguy hiểm, cây bắt đầu chịu stress nước nhẹ, khả năng hấp thu N,P,K giảm.",
+      "recommendation": "Theo dõi sát, lên lịch tưới sớm hơn 1-2 ngày, kiểm tra ẩm độ tầng rễ 20-40cm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 65
+        }
+      ]
+    },
+    {
+      "label_id": "A3.2",
+      "label_name": "Đất quá ẩm — nguy hiểm (GĐ 2)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất trên 90%, nguy cơ thiếu oxy vùng rễ, khả năng hấp thu N,P,K giảm, thối rễ, tạo điều kiện nấm Phytophthora.",
+      "recommendation": "Ngừng tưới ngay, kiểm tra hệ thống thoát nước, xới nhẹ phá váng mặt liếp, tránh để đọng nước quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "A4.2",
+      "label_name": "Ẩm độ & nước ổn định (GĐ 2)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất trong khoảng 65-75%, phù hợp cho giai đoạn 'Kiến thiết cơ bản (1-3 năm)'.",
+      "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            75
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A1.3",
+      "label_name": "Đất rất thiếu ẩm — khẩn cấp (GĐ 3)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất dưới 50% ở giai đoạn 'Trưởng thành sinh dưỡng', cây có nguy cơ mất nước, héo rễ tơ, rụng lá, khả năng hấp thu N,P,K giảm.",
+      "recommendation": "Tưới bổ sung ngay, ưu tiên tưới nhỏ giọt/phun gốc, kiểm tra hệ thống tưới và lớp phủ giữ ẩm (rơm, mùn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A2.3",
+      "label_name": "Đất thiếu ẩm nhẹ (GĐ 3)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 65% nhưng chưa tới mức nguy hiểm, cây bắt đầu chịu stress nước nhẹ.",
+      "recommendation": "Theo dõi sát, lên lịch tưới sớm hơn 1-2 ngày, kiểm tra ẩm độ tầng rễ 20-40cm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 65
+        }
+      ]
+    },
+    {
+      "label_id": "A3.3",
+      "label_name": "Đất quá ẩm — nguy hiểm (GĐ 3)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất trên 90%, nguy cơ thiếu oxy vùng rễ, khả năng hấp thu N,P,K giảm, thối rễ, tạo điều kiện nấm Phytophthora.",
+      "recommendation": "Ngừng tưới ngay, kiểm tra hệ thống thoát nước, xới nhẹ phá váng mặt liếp, tránh để đọng nước quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "A4.3",
+      "label_name": "Ẩm độ & nước ổn định (GĐ 3)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất trong khoảng 65-75%, phù hợp cho giai đoạn 'Trưởng thành sinh dưỡng'.",
+      "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            75
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A1.4",
+      "label_name": "Đất rất thiếu ẩm — khẩn cấp (GĐ 4)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất dưới 45% ở giai đoạn 'Ra hoa', cây mất nước nhanh dẫn đến khô và rụng mầm hoa.",
+      "recommendation": "Tưới bổ sung ngay, ưu tiên tưới nhỏ giọt/phun gốc, kiểm tra hệ thống tưới và lớp phủ giữ ẩm (rơm, mùn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 45
+        }
+      ]
+    },
+    {
+      "label_id": "A2.4",
+      "label_name": "Đất thiếu ẩm nhẹ (GĐ 4)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 50% ở giai đoạn 'Ra hoa', mầm hoa dễ bị đen và rụng, hạt phấn kém sức sống làm khả năng thụ phấn giảm, khả năng hấp thu N,P,K giảm.",
+      "recommendation": "Theo dõi sát, lên lịch tưới sớm hơn 1-2 ngày, kiểm tra ẩm độ tầng rễ 20-40cm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A3.4",
+      "label_name": "Đất quá ẩm — nguy hiểm (GĐ 4)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất trên 60%, cây ra chồi non, không phân hóa mầm hoa hoặc tỷ lệ ra hoa thấp.",
+      "recommendation": "Ngừng tưới ngay, kiểm tra hệ thống thoát nước, xới nhẹ phá váng mặt liếp, tránh để đọng nước quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "A4.4",
+      "label_name": "Ẩm độ & nước ổn định (GĐ 4)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất trong khoảng 50-60%, phù hợp cho giai đoạn 'Ra hoa'.",
+      "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            50,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A1.5",
+      "label_name": "Đất rất thiếu ẩm — khẩn cấp (GĐ 5)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất dưới 50% ở giai đoạn 'Đậu trái non', hạt phấn kém sức sống và rễ hấp thụ dinh dưỡng kém làm giảm tỷ lệ thụ phấn và rụng trái non.",
+      "recommendation": "Tưới bổ sung ngay, ưu tiên tưới nhỏ giọt/phun gốc, kiểm tra hệ thống tưới và lớp phủ giữ ẩm (rơm, mùn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A2.5",
+      "label_name": "Đất thiếu ẩm nhẹ (GĐ 5)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 65% hạt phấn kém sức sống, tỷ lệ thụ phấn giảm,",
+      "recommendation": "Theo dõi sát, lên lịch tưới sớm hơn 1-2 ngày, kiểm tra ẩm độ tầng rễ 20-40cm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 65
+        }
+      ]
+    },
+    {
+      "label_id": "A3.5",
+      "label_name": "Đất quá ẩm — nguy hiểm (GĐ 5)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất trên 75%, nguy cơ thiếu oxy vùng rễ, thối rễ, tạo điều kiện nấm Phytophthora, khả năng hấp thu N,P,K giảm, hạt phấn chết do nước nhiều làm giảm tỷ lệ thụ tinh.",
+      "recommendation": "Ngừng tưới ngay, kiểm tra hệ thống thoát nước, xới nhẹ phá váng mặt liếp, tránh để đọng nước quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "A4.5",
+      "label_name": "Ẩm độ & nước ổn định (GĐ 5)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất trong khoảng 65-75%, phù hợp cho giai đoạn 'Đậu trái non'.",
+      "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            75
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A1.6",
+      "label_name": "Đất rất thiếu ẩm — khẩn cấp (GĐ 6)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất dưới 50% ở giai đoạn 'Nuôi trái',cây có nguy cơ mất nước, héo rễ tơ, rụng lá, trái nhỏ, lép, sượng, nứt trái.",
+      "recommendation": "Tưới bổ sung ngay, ưu tiên tưới nhỏ giọt/phun gốc, kiểm tra hệ thống tưới và lớp phủ giữ ẩm (rơm, mùn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A2.6",
+      "label_name": "Đất thiếu ẩm nhẹ (GĐ 6)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 65% nhưng chưa tới mức nguy hiểm, cây bắt đầu chịu stress nước nhẹ.",
+      "recommendation": "Theo dõi sát, lên lịch tưới sớm hơn 1-2 ngày, kiểm tra ẩm độ tầng rễ 20-40cm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 65
+        }
+      ]
+    },
+    {
+      "label_id": "A3.6",
+      "label_name": "Đất quá ẩm — nguy hiểm (GĐ 6)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất trên 80%, giảm hấp thu K, Ca, Mg, trái nhạt, dễ nứt, nguy cơ thiếu oxy vùng rễ, thối rễ, tạo điều kiện nấm Phytophthora.",
+      "recommendation": "Ngừng tưới ngay, kiểm tra hệ thống thoát nước, xới nhẹ phá váng mặt liếp, tránh để đọng nước quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "A4.6",
+      "label_name": "Ẩm độ & nước ổn định (GĐ 6)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất trong khoảng 65-80%, phù hợp cho giai đoạn 'Nuôi trái'.",
+      "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A1.7",
+      "label_name": "Đất rất thiếu ẩm — khẩn cấp (GĐ 7)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất dưới 50% ở giai đoạn 'Trưởng thành trái - Thu hoạch', cây có nguy cơ mất nước, héo rễ tơ, rụng lá, giảm khả năng hấp thu dinh dưỡng dẫn đến chất lượng trái giảm.",
+      "recommendation": "Tưới bổ sung ngay, ưu tiên tưới nhỏ giọt/phun gốc, kiểm tra hệ thống tưới và lớp phủ giữ ẩm (rơm, mùn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A2.7",
+      "label_name": "Đất thiếu ẩm nhẹ (GĐ 7)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 60% cây bắt đầu chịu stress.",
+      "recommendation": "Theo dõi sát, lên lịch tưới sớm hơn 1-2 ngày, kiểm tra ẩm độ tầng rễ 20-40cm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "A3.7",
+      "label_name": "Đất quá ẩm — nguy hiểm (GĐ 7)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất trên 70%, nguy cơ thiếu oxy vùng rễ, thối rễ, tạo điều kiện nấm Phytophthora, trái dễ bị nứt gai, giảm chất lượng thương phẩm.",
+      "recommendation": "Ngừng tưới ngay, kiểm tra hệ thống thoát nước, xới nhẹ phá váng mặt liếp, tránh để đọng nước quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 70
+        }
+      ]
+    },
+    {
+      "label_id": "A4.7",
+      "label_name": "Ẩm độ & nước ổn định (GĐ 7)",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất trong khoảng 60-70%, phù hợp cho giai đoạn 'Trưởng thành trái - Thu hoạch'.",
+      "recommendation": "Duy trì chế độ tưới hiện tại, theo dõi định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            60,
+            70
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A5.4",
+      "label_name": "Khô hạn kích thích ra hoa — đúng quy trình",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất hạ chủ động xuống 50-60% trong 3-4 tuần để tạo stress nước, kích thích phân hóa mầm hoa — kỹ thuật xiết nước chuẩn.",
+      "recommendation": "Tiếp tục xiết nước theo lịch, theo dõi mầm hoa nhú; ngưng xiết khi mầm hoa đạt 'mắt cua'.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            50,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "A6.4",
+      "label_name": "Mưa lớn trong mùa ra hoa — nguy hiểm",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Lượng mưa ≥50mm/ngày trong giai đoạn ra hoa làm ướt mầm hoa, gây rụng hoa, thối hoa, giảm tỷ lệ đậu trái.",
+      "recommendation": "Che mưa nếu có thể, thoát nước nhanh, phun phòng nấm sau mưa, hạn chế xiết nước bị phá vỡ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "rainfall",
+          "op": "ge",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A7.5",
+      "label_name": "Mưa lớn giai đoạn đậu trái non",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Mưa lớn liên tục giai đoạn đậu trái làm sốc ẩm độ đột ngột, gây rụng trái non hàng loạt.",
+      "recommendation": "Tăng cường thoát nước, bổ sung Canxi-Bo qua lá để hạn chế sốc sinh lý, tránh bón đạm sau mưa lớn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "rainfall",
+          "op": "ge",
+          "val": 45
+        }
+      ]
+    },
+    {
+      "label_id": "A8.6",
+      "label_name": "Thiếu ẩm giai đoạn nuôi trái",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất dưới 50% trong giai đoạn nuôi trái làm trái phát triển chậm, có thể gây nứt trái khi tưới đột ngột sau đó.",
+      "recommendation": "Tưới đều đặn, tránh để khô hạn kéo dài rồi tưới đẫm đột ngột — nên tăng dần lượng nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "A9.6",
+      "label_name": "Tưới đột ngột sau khô hạn — nguy cơ nứt trái",
+      "group": "A",
+      "group_name": "Độ ẩm & nước",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Đất chuyển từ khô hạn sang quá ẩm đột ngột (chênh lệch lớn) trong giai đoạn nuôi trái, nguy cơ nứt vỏ trái do hấp thu nước nhanh.",
+      "recommendation": "Tưới chia nhỏ nhiều lần trong ngày thay vì tưới đẫm một lần, duy trì ẩm độ ổn định.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "B1.1",
+      "label_name": "Thiếu đạm (N) nặng (GĐ 1)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "N < 35 mg/kg, cây sinh trưởng kém, lá vàng, ảnh hưởng nghiêm trọng đến năng suất.",
+      "recommendation": "Bón phân đạm cân đối (urea/NPK giàu N tuỳ giai đoạn), kết hợp phân hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "B2.1",
+      "label_name": "Thiếu đạm (N) nhẹ (GĐ 1)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "N < 60 mg/kg, cần bổ sung để đảm bảo sinh trưởng/nuôi trái tốt.",
+      "recommendation": "Bổ sung phân đạm liều thấp, theo dõi màu lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "B3.1",
+      "label_name": "Thiếu lân (P) (GĐ 1)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "P < 15 mg/kg, ảnh hưởng phát triển rễ và phân hóa mầm hoa.",
+      "recommendation": "Bón lân (DAP/super lân), ưu tiên bón gốc kết hợp hữu cơ để tăng hấp thu.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 15
+        }
+      ]
+    },
+    {
+      "label_id": "B4.1",
+      "label_name": "Thiếu kali (K) (GĐ 1)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "K < 50 mg/kg, ảnh hưởng chất lượng trái, khả năng chống chịu sâu bệnh.",
+      "recommendation": "Bón bổ sung Kali sulfat (K2SO4), tránh dùng KCl gần thu hoạch để không ảnh hưởng vị trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "B5.1",
+      "label_name": "NPK cân bằng — điều kiện tốt (GĐ 1)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "Hàm lượng N-P-K trong ngưỡng phù hợp giai đoạn, không ghi nhận thiếu hụt nghiêm trọng.",
+      "recommendation": "Duy trì chế độ bón hiện tại, bón theo định kỳ và kiểm tra đất 3-6 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 60
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 15
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "B1.2",
+      "label_name": "Thiếu đạm (N) nặng (GĐ 2)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "N < 40 mg/kg, cây sinh trưởng kém, lá vàng, ảnh hưởng nghiêm trọng đến năng suất.",
+      "recommendation": "Bón phân đạm cân đối (urea/NPK giàu N tuỳ giai đoạn), kết hợp phân hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 40
+        }
+      ]
+    },
+    {
+      "label_id": "B2.2",
+      "label_name": "Thiếu đạm (N) nhẹ (GĐ 2)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "N < 70 mg/kg, cần bổ sung để đảm bảo sinh trưởng/nuôi trái tốt.",
+      "recommendation": "Bổ sung phân đạm liều thấp, theo dõi màu lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 70
+        }
+      ]
+    },
+    {
+      "label_id": "B3.2",
+      "label_name": "Thiếu lân (P) (GĐ 2)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "P < 18 mg/kg, ảnh hưởng phát triển rễ và phân hóa mầm hoa.",
+      "recommendation": "Bón lân (DAP/super lân), ưu tiên bón gốc kết hợp hữu cơ để tăng hấp thu.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 18
+        }
+      ]
+    },
+    {
+      "label_id": "B4.2",
+      "label_name": "Thiếu kali (K) (GĐ 2)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "K < 55 mg/kg, ảnh hưởng chất lượng trái, khả năng chống chịu sâu bệnh.",
+      "recommendation": "Bón bổ sung Kali sulfat (K2SO4), tránh dùng KCl gần thu hoạch để không ảnh hưởng vị trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 55
+        }
+      ]
+    },
+    {
+      "label_id": "B5.2",
+      "label_name": "NPK cân bằng — điều kiện tốt (GĐ 2)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "Hàm lượng N-P-K trong ngưỡng phù hợp giai đoạn, không ghi nhận thiếu hụt nghiêm trọng.",
+      "recommendation": "Duy trì chế độ bón hiện tại, bón theo định kỳ và kiểm tra đất 3-6 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 70
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 18
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 55
+        }
+      ]
+    },
+    {
+      "label_id": "B1.3",
+      "label_name": "Thiếu đạm (N) nặng (GĐ 3)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "N < 45 mg/kg, cây sinh trưởng kém, lá vàng, ảnh hưởng nghiêm trọng đến năng suất.",
+      "recommendation": "Bón phân đạm cân đối (urea/NPK giàu N tuỳ giai đoạn), kết hợp phân hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 45
+        }
+      ]
+    },
+    {
+      "label_id": "B2.3",
+      "label_name": "Thiếu đạm (N) nhẹ (GĐ 3)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "N < 80 mg/kg, cần bổ sung để đảm bảo sinh trưởng/nuôi trái tốt.",
+      "recommendation": "Bổ sung phân đạm liều thấp, theo dõi màu lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "B3.3",
+      "label_name": "Thiếu lân (P) (GĐ 3)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "P < 20 mg/kg, ảnh hưởng phát triển rễ và phân hóa mầm hoa.",
+      "recommendation": "Bón lân (DAP/super lân), ưu tiên bón gốc kết hợp hữu cơ để tăng hấp thu.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 20
+        }
+      ]
+    },
+    {
+      "label_id": "B4.3",
+      "label_name": "Thiếu kali (K) (GĐ 3)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "K < 60 mg/kg, ảnh hưởng chất lượng trái, khả năng chống chịu sâu bệnh.",
+      "recommendation": "Bón bổ sung Kali sulfat (K2SO4), tránh dùng KCl gần thu hoạch để không ảnh hưởng vị trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "B5.3",
+      "label_name": "NPK cân bằng — điều kiện tốt (GĐ 3)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Hàm lượng N-P-K trong ngưỡng phù hợp giai đoạn, không ghi nhận thiếu hụt nghiêm trọng.",
+      "recommendation": "Duy trì chế độ bón hiện tại, bón theo định kỳ và kiểm tra đất 3-6 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 80
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 20
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "B1.4",
+      "label_name": "Thiếu đạm (N) nặng (GĐ 4)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "N < 35 mg/kg, cây sinh trưởng kém, lá vàng, ảnh hưởng nghiêm trọng đến năng suất.",
+      "recommendation": "Bón phân đạm cân đối (urea/NPK giàu N tuỳ giai đoạn), kết hợp phân hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "B2.4",
+      "label_name": "Thiếu đạm (N) nhẹ (GĐ 4)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "N < 60 mg/kg, cần bổ sung để đảm bảo sinh trưởng/nuôi trái tốt.",
+      "recommendation": "Bổ sung phân đạm liều thấp, theo dõi màu lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "B3.4",
+      "label_name": "Thiếu lân (P) (GĐ 4)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "P < 20 mg/kg, ảnh hưởng phát triển rễ và phân hóa mầm hoa.",
+      "recommendation": "Bón lân (DAP/super lân), ưu tiên bón gốc kết hợp hữu cơ để tăng hấp thu.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 20
+        }
+      ]
+    },
+    {
+      "label_id": "B4.4",
+      "label_name": "Thiếu kali (K) (GĐ 4)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "K < 65 mg/kg, ảnh hưởng chất lượng trái, khả năng chống chịu sâu bệnh.",
+      "recommendation": "Bón bổ sung Kali sulfat (K2SO4), tránh dùng KCl gần thu hoạch để không ảnh hưởng vị trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 65
+        }
+      ]
+    },
+    {
+      "label_id": "B5.4",
+      "label_name": "NPK cân bằng — điều kiện tốt (GĐ 4)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Hàm lượng N-P-K trong ngưỡng phù hợp giai đoạn, không ghi nhận thiếu hụt nghiêm trọng.",
+      "recommendation": "Duy trì chế độ bón hiện tại, bón theo định kỳ và kiểm tra đất 3-6 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 60
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 20
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 65
+        }
+      ]
+    },
+    {
+      "label_id": "B1.5",
+      "label_name": "Thiếu đạm (N) nặng (GĐ 5)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "N < 40 mg/kg, cây sinh trưởng kém, lá vàng, ảnh hưởng nghiêm trọng đến năng suất.",
+      "recommendation": "Bón phân đạm cân đối (urea/NPK giàu N tuỳ giai đoạn), kết hợp phân hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 40
+        }
+      ]
+    },
+    {
+      "label_id": "B2.5",
+      "label_name": "Thiếu đạm (N) nhẹ (GĐ 5)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "N < 70 mg/kg, cần bổ sung để đảm bảo sinh trưởng/nuôi trái tốt.",
+      "recommendation": "Bổ sung phân đạm liều thấp, theo dõi màu lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 70
+        }
+      ]
+    },
+    {
+      "label_id": "B3.5",
+      "label_name": "Thiếu lân (P) (GĐ 5)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "P < 18 mg/kg, ảnh hưởng phát triển rễ và phân hóa mầm hoa.",
+      "recommendation": "Bón lân (DAP/super lân), ưu tiên bón gốc kết hợp hữu cơ để tăng hấp thu.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 18
+        }
+      ]
+    },
+    {
+      "label_id": "B4.5",
+      "label_name": "Thiếu kali (K) (GĐ 5)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "K < 80 mg/kg, ảnh hưởng chất lượng trái, khả năng chống chịu sâu bệnh.",
+      "recommendation": "Bón bổ sung Kali sulfat (K2SO4), tránh dùng KCl gần thu hoạch để không ảnh hưởng vị trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "B5.5",
+      "label_name": "NPK cân bằng — điều kiện tốt (GĐ 5)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Hàm lượng N-P-K trong ngưỡng phù hợp giai đoạn, không ghi nhận thiếu hụt nghiêm trọng.",
+      "recommendation": "Duy trì chế độ bón hiện tại, bón theo định kỳ và kiểm tra đất 3-6 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 70
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 18
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "B1.6",
+      "label_name": "Thiếu đạm (N) nặng (GĐ 6)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "N < 40 mg/kg, cây sinh trưởng kém, lá vàng, ảnh hưởng nghiêm trọng đến năng suất.",
+      "recommendation": "Bón phân đạm cân đối (urea/NPK giàu N tuỳ giai đoạn), kết hợp phân hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 40
+        }
+      ]
+    },
+    {
+      "label_id": "B2.6",
+      "label_name": "Thiếu đạm (N) nhẹ (GĐ 6)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "N < 75 mg/kg, cần bổ sung để đảm bảo sinh trưởng/nuôi trái tốt.",
+      "recommendation": "Bổ sung phân đạm liều thấp, theo dõi màu lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "B3.6",
+      "label_name": "Thiếu lân (P) (GĐ 6)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "P < 18 mg/kg, ảnh hưởng phát triển rễ và phân hóa mầm hoa.",
+      "recommendation": "Bón lân (DAP/super lân), ưu tiên bón gốc kết hợp hữu cơ để tăng hấp thu.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 18
+        }
+      ]
+    },
+    {
+      "label_id": "B4.6",
+      "label_name": "Thiếu kali (K) (GĐ 6)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "K < 100 mg/kg, ảnh hưởng chất lượng trái, khả năng chống chịu sâu bệnh.",
+      "recommendation": "Bón bổ sung Kali sulfat (K2SO4), tránh dùng KCl gần thu hoạch để không ảnh hưởng vị trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 100
+        }
+      ]
+    },
+    {
+      "label_id": "B5.6",
+      "label_name": "NPK cân bằng — điều kiện tốt (GĐ 6)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "Hàm lượng N-P-K trong ngưỡng phù hợp giai đoạn, không ghi nhận thiếu hụt nghiêm trọng.",
+      "recommendation": "Duy trì chế độ bón hiện tại, bón theo định kỳ và kiểm tra đất 3-6 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 75
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 18
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 100
+        }
+      ]
+    },
+    {
+      "label_id": "B1.7",
+      "label_name": "Thiếu đạm (N) nặng (GĐ 7)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "N < 35 mg/kg, cây sinh trưởng kém, lá vàng, ảnh hưởng nghiêm trọng đến năng suất.",
+      "recommendation": "Bón phân đạm cân đối (urea/NPK giàu N tuỳ giai đoạn), kết hợp phân hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "B2.7",
+      "label_name": "Thiếu đạm (N) nhẹ (GĐ 7)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "N < 60 mg/kg, cần bổ sung để đảm bảo sinh trưởng/nuôi trái tốt.",
+      "recommendation": "Bổ sung phân đạm liều thấp, theo dõi màu lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "B3.7",
+      "label_name": "Thiếu lân (P) (GĐ 7)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "P < 15 mg/kg, ảnh hưởng phát triển rễ và phân hóa mầm hoa.",
+      "recommendation": "Bón lân (DAP/super lân), ưu tiên bón gốc kết hợp hữu cơ để tăng hấp thu.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 15
+        }
+      ]
+    },
+    {
+      "label_id": "B4.7",
+      "label_name": "Thiếu kali (K) (GĐ 7)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "K < 90 mg/kg, ảnh hưởng chất lượng trái, khả năng chống chịu sâu bệnh.",
+      "recommendation": "Bón bổ sung Kali sulfat (K2SO4), tránh dùng KCl gần thu hoạch để không ảnh hưởng vị trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "B5.7",
+      "label_name": "NPK cân bằng — điều kiện tốt (GĐ 7)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Hàm lượng N-P-K trong ngưỡng phù hợp giai đoạn, không ghi nhận thiếu hụt nghiêm trọng.",
+      "recommendation": "Duy trì chế độ bón hiện tại, bón theo định kỳ và kiểm tra đất 3-6 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 60
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 15
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "B6.4",
+      "label_name": "Đạm cao cản trở phân hóa mầm hoa",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "N > 140 mg/kg trong giai đoạn ra hoa khiến cây thiên về sinh trưởng dinh dưỡng (ra đọt non), cản trở phân hóa mầm hoa, giảm tỷ lệ ra hoa.",
+      "recommendation": "Ngừng bón đạm, có thể phun MKP hoặc kali trắng để ức chế sinh trưởng, hỗ trợ phân hóa mầm hoa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "n",
+          "op": "gt",
+          "val": 140
+        }
+      ]
+    },
+    {
+      "label_id": "B7.5",
+      "label_name": "Thiếu Kali gây rụng trái non",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "K thấp giai đoạn đậu trái làm giảm khả năng vận chuyển dinh dưỡng nuôi trái non, tăng tỷ lệ rụng trái sinh lý.",
+      "recommendation": "Bổ sung Kali qua gốc và phun qua lá (Kali hữu cơ, MKP), kết hợp Canxi-Bo để giữ trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "B8.6",
+      "label_name": "Thiếu Kali ảnh hưởng kích thước trái",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "K < 100mg/kg trong giai đoạn nuôi trái làm trái phát triển chậm, cơm mỏng, trọng lượng trái thấp.",
+      "recommendation": "Tăng cường bón Kali định kỳ 10-15 ngày/lần, ưu tiên K2SO4 kết hợp trung vi lượng.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 100
+        }
+      ]
+    },
+    {
+      "label_id": "B9.6",
+      "label_name": "Mất cân bằng N:K (N quá cao so với K)",
+      "group": "B",
+      "group_name": "Dinh dưỡng NPK",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Tỷ lệ N/K > 2.5 trong giai đoạn nuôi trái gây mất cân đối dinh dưỡng, ảnh hưởng chất lượng cơm trái.",
+      "recommendation": "Giảm bón đạm, tăng tỷ lệ Kali trong công thức phân bón giai đoạn nuôi trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 80
+        },
+        {
+          "col": "k",
+          "op": "gt",
+          "val": 0
+        },
+        {
+          "col": "n_over_k_ratio",
+          "op": "gt",
+          "val": 2.5
+        }
+      ]
+    },
+    {
+      "label_id": "C1.1",
+      "label_name": "Đất rất chua (GĐ 1)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "pH < 4.5, ảnh hưởng nghiêm trọng đến hấp thu dinh dưỡng, dễ ngộ độc nhôm/sắt, ức chế rễ.",
+      "recommendation": "Bón vôi nông nghiệp (CaCO3/Dolomite) để nâng pH dần, chia làm nhiều lần, kết hợp hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 4.5
+        }
+      ]
+    },
+    {
+      "label_id": "C2.1",
+      "label_name": "Đất chua nhẹ (GĐ 1)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "pH 4.5-5.5, hơi thấp so với mức lý tưởng (5.5-6.5) của sầu riêng.",
+      "recommendation": "Bón vôi liều thấp định kỳ, theo dõi pH 2-3 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            4.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C3.1",
+      "label_name": "Đất kiềm (GĐ 1)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "pH > 7.0, có thể gây thiếu vi lượng (Fe, Zn, Mn) do giảm khả năng hòa tan.",
+      "recommendation": "Bón phân hữu cơ, lưu huỳnh hoặc phân chua sinh lý để hạ pH dần, bổ sung vi lượng dạng chelate.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "ph",
+          "op": "gt",
+          "val": 7.0
+        }
+      ]
+    },
+    {
+      "label_id": "C4.1",
+      "label_name": "Thiếu chất hữu cơ nghiêm trọng (GĐ 1)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "Hàm lượng hữu cơ < 2%, đất nghèo mùn, khả năng giữ nước và dinh dưỡng kém.",
+      "recommendation": "Bổ sung phân hữu cơ hoai mục, phân chuồng ủ, vỏ trấu, hoặc trồng cây phủ đất cải tạo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "C5.1",
+      "label_name": "Hữu cơ tốt — pH lý tưởng (GĐ 1)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "Hữu cơ ≥4% và pH trong khoảng 5,5-6,5, điều kiện đất thuận lợi cho phát triển bộ rễ.",
+      "recommendation": "Duy trì bón hữu cơ định kỳ, tránh lạm dụng phân hóa học gây thoái hóa đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 4.0
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C1.2",
+      "label_name": "Đất rất chua (GĐ 2)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "pH < 4.5, ảnh hưởng nghiêm trọng đến hấp thu dinh dưỡng, dễ ngộ độc nhôm/sắt, ức chế rễ.",
+      "recommendation": "Bón vôi nông nghiệp (CaCO3/Dolomite) để nâng pH dần, chia làm nhiều lần, kết hợp hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 4.5
+        }
+      ]
+    },
+    {
+      "label_id": "C2.2",
+      "label_name": "Đất chua nhẹ (GĐ 2)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "pH 4.5-5.5, hơi thấp so với mức lý tưởng (5.5-6.5) của sầu riêng.",
+      "recommendation": "Bón vôi liều thấp định kỳ, theo dõi pH 2-3 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            4.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C3.2",
+      "label_name": "Đất kiềm (GĐ 2)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "pH > 7.0, có thể gây thiếu vi lượng (Fe, Zn, Mn) do giảm khả năng hòa tan.",
+      "recommendation": "Bón phân hữu cơ, lưu huỳnh hoặc phân chua sinh lý để hạ pH dần, bổ sung vi lượng dạng chelate.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "ph",
+          "op": "gt",
+          "val": 7.0
+        }
+      ]
+    },
+    {
+      "label_id": "C4.2",
+      "label_name": "Thiếu chất hữu cơ nghiêm trọng (GĐ 2)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "Hàm lượng hữu cơ < 2%, đất nghèo mùn, khả năng giữ nước và dinh dưỡng kém.",
+      "recommendation": "Bổ sung phân hữu cơ hoai mục, phân chuồng ủ, vỏ trấu, hoặc trồng cây phủ đất cải tạo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "C5.2",
+      "label_name": "Hữu cơ tốt — pH lý tưởng (GĐ 2)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "Hữu cơ ≥4% và pH trong khoảng 5,5-6,5, điều kiện đất thuận lợi cho phát triển bộ rễ.",
+      "recommendation": "Duy trì bón hữu cơ định kỳ, tránh lạm dụng phân hóa học gây thoái hóa đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 4.0
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C1.3",
+      "label_name": "Đất rất chua (GĐ 3)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "pH < 4.5, ảnh hưởng nghiêm trọng đến hấp thu dinh dưỡng, dễ ngộ độc nhôm/sắt, ức chế rễ.",
+      "recommendation": "Bón vôi nông nghiệp (CaCO3/Dolomite) để nâng pH dần, chia làm nhiều lần, kết hợp hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 4.5
+        }
+      ]
+    },
+    {
+      "label_id": "C2.3",
+      "label_name": "Đất chua nhẹ (GĐ 3)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "pH 4.5-5.5, hơi thấp so với mức lý tưởng (5.5-6.5) của sầu riêng.",
+      "recommendation": "Bón vôi liều thấp định kỳ, theo dõi pH 2-3 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            4.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C3.3",
+      "label_name": "Đất kiềm (GĐ 3)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "pH > 7.0, có thể gây thiếu vi lượng (Fe, Zn, Mn) do giảm khả năng hòa tan.",
+      "recommendation": "Bón phân hữu cơ, lưu huỳnh hoặc phân chua sinh lý để hạ pH dần, bổ sung vi lượng dạng chelate.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "ph",
+          "op": "gt",
+          "val": 7.0
+        }
+      ]
+    },
+    {
+      "label_id": "C4.3",
+      "label_name": "Thiếu chất hữu cơ nghiêm trọng (GĐ 3)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "Hàm lượng hữu cơ < 2%, đất nghèo mùn, khả năng giữ nước và dinh dưỡng kém.",
+      "recommendation": "Bổ sung phân hữu cơ hoai mục, phân chuồng ủ, vỏ trấu, hoặc trồng cây phủ đất cải tạo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "C5.3",
+      "label_name": "Hữu cơ tốt — pH lý tưởng (GĐ 3)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Hữu cơ ≥4% và pH trong khoảng 5,5-6,5, điều kiện đất thuận lợi cho phát triển bộ rễ.",
+      "recommendation": "Duy trì bón hữu cơ định kỳ, tránh lạm dụng phân hóa học gây thoái hóa đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 4.0
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C1.4",
+      "label_name": "Đất rất chua (GĐ 4)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "pH < 4.5, ảnh hưởng nghiêm trọng đến hấp thu dinh dưỡng, dễ ngộ độc nhôm/sắt, ức chế rễ.",
+      "recommendation": "Bón vôi nông nghiệp (CaCO3/Dolomite) để nâng pH dần, chia làm nhiều lần, kết hợp hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 4.5
+        }
+      ]
+    },
+    {
+      "label_id": "C2.4",
+      "label_name": "Đất chua nhẹ (GĐ 4)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "pH 4.5-5.5, hơi thấp so với mức lý tưởng (5.5-6.5) của sầu riêng.",
+      "recommendation": "Bón vôi liều thấp định kỳ, theo dõi pH 2-3 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            4.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C3.4",
+      "label_name": "Đất kiềm (GĐ 4)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "pH > 7.0, có thể gây thiếu vi lượng (Fe, Zn, Mn) do giảm khả năng hòa tan.",
+      "recommendation": "Bón phân hữu cơ, lưu huỳnh hoặc phân chua sinh lý để hạ pH dần, bổ sung vi lượng dạng chelate.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "ph",
+          "op": "gt",
+          "val": 7.0
+        }
+      ]
+    },
+    {
+      "label_id": "C4.4",
+      "label_name": "Thiếu chất hữu cơ nghiêm trọng (GĐ 4)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Hàm lượng hữu cơ < 2%, đất nghèo mùn, khả năng giữ nước và dinh dưỡng kém.",
+      "recommendation": "Bổ sung phân hữu cơ hoai mục, phân chuồng ủ, vỏ trấu, hoặc trồng cây phủ đất cải tạo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "C5.4",
+      "label_name": "Hữu cơ tốt — pH lý tưởng (GĐ 4)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Hữu cơ ≥4% và pH trong khoảng 5,5-6,5, điều kiện đất thuận lợi cho phát triển bộ rễ.",
+      "recommendation": "Duy trì bón hữu cơ định kỳ, tránh lạm dụng phân hóa học gây thoái hóa đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 4.0
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C1.5",
+      "label_name": "Đất rất chua (GĐ 5)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "pH < 4.5, ảnh hưởng nghiêm trọng đến hấp thu dinh dưỡng, dễ ngộ độc nhôm/sắt, ức chế rễ.",
+      "recommendation": "Bón vôi nông nghiệp (CaCO3/Dolomite) để nâng pH dần, chia làm nhiều lần, kết hợp hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 4.5
+        }
+      ]
+    },
+    {
+      "label_id": "C2.5",
+      "label_name": "Đất chua nhẹ (GĐ 5)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "pH 4.5-5.5, hơi thấp so với mức lý tưởng (5.5-6.5) của sầu riêng.",
+      "recommendation": "Bón vôi liều thấp định kỳ, theo dõi pH 2-3 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            4.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C3.5",
+      "label_name": "Đất kiềm (GĐ 5)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "pH > 7.0, có thể gây thiếu vi lượng (Fe, Zn, Mn) do giảm khả năng hòa tan.",
+      "recommendation": "Bón phân hữu cơ, lưu huỳnh hoặc phân chua sinh lý để hạ pH dần, bổ sung vi lượng dạng chelate.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "ph",
+          "op": "gt",
+          "val": 7.0
+        }
+      ]
+    },
+    {
+      "label_id": "C4.5",
+      "label_name": "Thiếu chất hữu cơ nghiêm trọng (GĐ 5)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Hàm lượng hữu cơ < 2%, đất nghèo mùn, khả năng giữ nước và dinh dưỡng kém.",
+      "recommendation": "Bổ sung phân hữu cơ hoai mục, phân chuồng ủ, vỏ trấu, hoặc trồng cây phủ đất cải tạo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "C5.5",
+      "label_name": "Hữu cơ tốt — pH lý tưởng (GĐ 5)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Hữu cơ ≥4% và pH trong khoảng 5,5-6,5, điều kiện đất thuận lợi cho phát triển bộ rễ.",
+      "recommendation": "Duy trì bón hữu cơ định kỳ, tránh lạm dụng phân hóa học gây thoái hóa đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 4.0
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C1.6",
+      "label_name": "Đất rất chua (GĐ 6)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "pH < 4.5, ảnh hưởng nghiêm trọng đến hấp thu dinh dưỡng, dễ ngộ độc nhôm/sắt, ức chế rễ.",
+      "recommendation": "Bón vôi nông nghiệp (CaCO3/Dolomite) để nâng pH dần, chia làm nhiều lần, kết hợp hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 4.5
+        }
+      ]
+    },
+    {
+      "label_id": "C2.6",
+      "label_name": "Đất chua nhẹ (GĐ 6)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "pH 4.5-5.5, hơi thấp so với mức lý tưởng (5.5-6.5) của sầu riêng.",
+      "recommendation": "Bón vôi liều thấp định kỳ, theo dõi pH 2-3 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            4.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C3.6",
+      "label_name": "Đất kiềm (GĐ 6)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "pH > 7.0, có thể gây thiếu vi lượng (Fe, Zn, Mn) do giảm khả năng hòa tan.",
+      "recommendation": "Bón phân hữu cơ, lưu huỳnh hoặc phân chua sinh lý để hạ pH dần, bổ sung vi lượng dạng chelate.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ph",
+          "op": "gt",
+          "val": 7.0
+        }
+      ]
+    },
+    {
+      "label_id": "C4.6",
+      "label_name": "Thiếu chất hữu cơ nghiêm trọng (GĐ 6)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Hàm lượng hữu cơ < 2%, đất nghèo mùn, khả năng giữ nước và dinh dưỡng kém.",
+      "recommendation": "Bổ sung phân hữu cơ hoai mục, phân chuồng ủ, vỏ trấu, hoặc trồng cây phủ đất cải tạo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "C5.6",
+      "label_name": "Hữu cơ tốt — pH lý tưởng (GĐ 6)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "Hữu cơ ≥4% và pH trong khoảng 5,5-6,5, điều kiện đất thuận lợi cho phát triển bộ rễ.",
+      "recommendation": "Duy trì bón hữu cơ định kỳ, tránh lạm dụng phân hóa học gây thoái hóa đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 4.0
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C1.7",
+      "label_name": "Đất rất chua (GĐ 7)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "pH < 4.5, ảnh hưởng nghiêm trọng đến hấp thu dinh dưỡng, dễ ngộ độc nhôm/sắt, ức chế rễ.",
+      "recommendation": "Bón vôi nông nghiệp (CaCO3/Dolomite) để nâng pH dần, chia làm nhiều lần, kết hợp hữu cơ hoai mục.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 4.5
+        }
+      ]
+    },
+    {
+      "label_id": "C2.7",
+      "label_name": "Đất chua nhẹ (GĐ 7)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "pH 4.5-5.5, hơi thấp so với mức lý tưởng (5.5-6.5) của sầu riêng.",
+      "recommendation": "Bón vôi liều thấp định kỳ, theo dõi pH 2-3 tháng/lần.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            4.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "C3.7",
+      "label_name": "Đất kiềm (GĐ 7)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "pH > 7.0, có thể gây thiếu vi lượng (Fe, Zn, Mn) do giảm khả năng hòa tan.",
+      "recommendation": "Bón phân hữu cơ, lưu huỳnh hoặc phân chua sinh lý để hạ pH dần, bổ sung vi lượng dạng chelate.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "ph",
+          "op": "gt",
+          "val": 7.0
+        }
+      ]
+    },
+    {
+      "label_id": "C4.7",
+      "label_name": "Thiếu chất hữu cơ nghiêm trọng (GĐ 7)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Hàm lượng hữu cơ < 2%, đất nghèo mùn, khả năng giữ nước và dinh dưỡng kém.",
+      "recommendation": "Bổ sung phân hữu cơ hoai mục, phân chuồng ủ, vỏ trấu, hoặc trồng cây phủ đất cải tạo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "C5.7",
+      "label_name": "Hữu cơ tốt — pH lý tưởng (GĐ 7)",
+      "group": "C",
+      "group_name": "pH & hữu cơ",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Hữu cơ ≥4% và pH trong khoảng 5,5-6,5, điều kiện đất thuận lợi cho phát triển bộ rễ.",
+      "recommendation": "Duy trì bón hữu cơ định kỳ, tránh lạm dụng phân hóa học gây thoái hóa đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 4.0
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "D1.1",
+      "label_name": "Nhiễm mặn nặng — ngừng canh tác (GĐ 1)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "EC ≥2 mS/cm và độ mặn đất ≥1%, gây ngộ độc ion, rễ bị tổn thương nặng, lá rũ xuống và rụng hàng loạt, nguy cơ chết cây.",
+      "recommendation": "Ngừng tưới nước nhiễm mặn ngay, rửa mặn bằng nước ngọt, bón vôi + hữu cơ cải tạo, theo dõi sát.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "ec",
+          "op": "ge",
+          "val": 2.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "D2.1",
+      "label_name": "Nhiễm mặn trung bình (GĐ 1)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "EC >1,2 mS/cm và độ mặn đất ≥0,5%, cây bắt đầu biểu hiện stress mặn (cháy mép lá, rễ non chưa hóa gỗ dễ bị cháy).",
+      "recommendation": "Tăng cường rửa mặn bằng nước ngọt khi có thể, hạn chế bón phân hóa học nồng độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.2
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "D3.1",
+      "label_name": "Nhiễm mặn nhẹ (GĐ 1)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "EC >1 mS/cm và độ mặn đất ≥0.3%, cần theo dõi đặc biệt vào mùa khô hạn/xâm nhập mặn.",
+      "recommendation": "Theo dõi độ mặn nguồn nước tưới, dự trữ nước ngọt, hạn chế tưới nước có độ mặn cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D4.1",
+      "label_name": "EC & độ mặn an toàn (GĐ 1)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "EC <0,8 mS/cm và độ mặn đất <0,3% ngưỡng an toàn, không ảnh hưởng đến hấp thu dinh dưỡng.",
+      "recommendation": "Duy trì theo dõi định kỳ, đặc biệt trong mùa khô và các khu vực gần vùng nhiễm mặn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "ec",
+          "op": "lt",
+          "val": 0.8
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D1.2",
+      "label_name": "Nhiễm mặn nặng — ngừng canh tác (GĐ 2)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "EC ≥2 mS/cm và độ mặn đất ≥1% , gây ngộ độc ion, rễ bị tổn thương nặng, lá rũ xuống và rụng hàng loạt, nguy cơ chết cây.",
+      "recommendation": "Ngừng tưới nước nhiễm mặn ngay, rửa mặn bằng nước ngọt, bón vôi + hữu cơ cải tạo, theo dõi sát.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "ec",
+          "op": "ge",
+          "val": 2.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "D2.2",
+      "label_name": "Nhiễm mặn trung bình (GĐ 2)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": ": EC >1,2 mS/cm và độ mặn đất ≥0,5%, cây bắt đầu biểu hiện stress mặn (cháy mép lá, rễ non chưa hóa gỗ dễ bị cháy, sinh trưởng chậm).",
+      "recommendation": "Tăng cường rửa mặn bằng nước ngọt khi có thể, hạn chế bón phân hóa học nồng độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.2
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "D3.2",
+      "label_name": "Nhiễm mặn nhẹ (GĐ 2)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "EC >1 mS/cm và Độ mặn đất ≥0.3%, cần theo dõi đặc biệt vào mùa khô hạn/xâm nhập mặn.",
+      "recommendation": "Theo dõi độ mặn nguồn nước tưới, dự trữ nước ngọt, hạn chế tưới nước có độ mặn cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D4.2",
+      "label_name": "EC & độ mặn an toàn (GĐ 2)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "EC <0,8 mS/cm và độ mặn đất <0,3 % ngưỡng an toàn, không ảnh hưởng đến hấp thu dinh dưỡng.",
+      "recommendation": "Duy trì theo dõi định kỳ, đặc biệt trong mùa khô và các khu vực gần vùng nhiễm mặn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "ec",
+          "op": "lt",
+          "val": 0.8
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D1.3",
+      "label_name": "Nhiễm mặn nặng — ngừng canh tác (GĐ 3)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "EC ≥2 mS/cm và độ mặn đất ≥1%, gây ngộ độc ion, rễ bị tổn thương nặng, lá rũ xuống và rụng hàng loạt, nguy cơ chết cây.",
+      "recommendation": "Ngừng tưới nước nhiễm mặn ngay, rửa mặn bằng nước ngọt, bón vôi + hữu cơ cải tạo, theo dõi sát.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "ec",
+          "op": "ge",
+          "val": 2.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "D2.3",
+      "label_name": "Nhiễm mặn trung bình (GĐ 3)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": ": EC >1,2 mS/cm và Độ mặn đất ≥0,5%, cây bắt đầu biểu hiện stress mặn (cháy mép lá, sinh trưởng chậm).",
+      "recommendation": "Tăng cường rửa mặn bằng nước ngọt khi có thể, hạn chế bón phân hóa học nồng độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.2
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "D3.3",
+      "label_name": "Nhiễm mặn nhẹ (GĐ 3)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "EC >1 mS/cm và Độ mặn đất ≥0.3%, cần theo dõi đặc biệt vào mùa khô hạn/xâm nhập mặn.",
+      "recommendation": "Theo dõi độ mặn nguồn nước tưới, dự trữ nước ngọt, hạn chế tưới nước có độ mặn cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D4.3",
+      "label_name": "EC & độ mặn an toàn (GĐ 3)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "EC <0,8 mS/cm và độ mặn đất <0,3% ngưỡng an toàn, không ảnh hưởng đến hấp thu dinh dưỡng.",
+      "recommendation": "Duy trì theo dõi định kỳ, đặc biệt trong mùa khô và các khu vực gần vùng nhiễm mặn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "ec",
+          "op": "lt",
+          "val": 0.8
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D1.4",
+      "label_name": "Nhiễm mặn nặng — ngừng canh tác (GĐ 4)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "EC ≥2 mS/cm và độ mặn đất ≥1%, gây ngộ độc ion, cây bị sốc dẫn đến hoa khô đen, rụng hàng loạt, lá bị cháy mép và rễ bị tổn thương nặng không thể hấp thu dinh dưỡng.",
+      "recommendation": "Ngừng tưới nước nhiễm mặn ngay, rửa mặn bằng nước ngọt, bón vôi + hữu cơ cải tạo, theo dõi sát.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "ec",
+          "op": "ge",
+          "val": 2.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "D2.4",
+      "label_name": "Nhiễm mặn trung bình (GĐ 4)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "EC >1,2 mS/cm và Độ mặn đất ≥0,5%, cây bắt đầu biểu hiện stress mặn (cháy mép lá; mắt cua đang phát triển bị chững lại, khô đen và chết; nụ hoa bị héo, chuyển vàng nhạt rồi đen dần).",
+      "recommendation": "Tăng cường rửa mặn bằng nước ngọt khi có thể, hạn chế bón phân hóa học nồng độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.2
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "D3.4",
+      "label_name": "Nhiễm mặn nhẹ (GĐ 4)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "EC >1 mS/cm và Độ mặn đất ≥0.3%, cần theo dõi đặc biệt vào mùa khô hạn/xâm nhập mặn.",
+      "recommendation": "Theo dõi độ mặn nguồn nước tưới, dự trữ nước ngọt, hạn chế tưới nước có độ mặn cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D4.4",
+      "label_name": "EC & độ mặn an toàn (GĐ 4)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "EC <0,8 mS/cm và độ mặn đất <0,3% ngưỡng an toàn, không ảnh hưởng đến hấp thu dinh dưỡng.",
+      "recommendation": "Duy trì theo dõi định kỳ, đặc biệt trong mùa khô và các khu vực gần vùng nhiễm mặn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "ec",
+          "op": "lt",
+          "val": 0.8
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D1.5",
+      "label_name": "Nhiễm mặn nặng — ngừng canh tác (GĐ 5)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "EC ≥2 mS/cm và độ mặn đất ≥1%, gây ngộ độc ion, cây bị sốc dẫn đến rụng trái non, méo trái, dị dạng, lá bị cháy mép và rễ bị tổn thương nặng không thể hấp thu dinh dưỡng.",
+      "recommendation": "Ngừng tưới nước nhiễm mặn ngay, rửa mặn bằng nước ngọt, bón vôi + hữu cơ cải tạo, theo dõi sát.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "ec",
+          "op": "ge",
+          "val": 2.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "D2.5",
+      "label_name": "Nhiễm mặn trung bình (GĐ 5)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": ": EC >1,2 mS/cm và Độ mặn đất ≥0,5%, cây bắt đầu biểu hiện stress mặn (cháy mép lá, sinh trưởng chậm).",
+      "recommendation": "Tăng cường rửa mặn bằng nước ngọt khi có thể, hạn chế bón phân hóa học nồng độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.2
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "D3.5",
+      "label_name": "Nhiễm mặn nhẹ (GĐ 5)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "EC >1 mS/cm và Độ mặn đất ≥0.3%, cần theo dõi đặc biệt vào mùa khô hạn/xâm nhập mặn.",
+      "recommendation": "Theo dõi độ mặn nguồn nước tưới, dự trữ nước ngọt, hạn chế tưới nước có độ mặn cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D4.5",
+      "label_name": "EC & độ mặn an toàn (GĐ 5)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "EC <0,8 mS/cm và độ mặn đất <0,3% ngưỡng an toàn, không ảnh hưởng đến hấp thu dinh dưỡng.",
+      "recommendation": "Duy trì theo dõi định kỳ, đặc biệt trong mùa khô và các khu vực gần vùng nhiễm mặn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "ec",
+          "op": "lt",
+          "val": 0.8
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D1.6",
+      "label_name": "Nhiễm mặn nặng — ngừng canh tác (GĐ 6)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Độ mặn đất ≥1‰ hoặc EC ≥2 mS/cm, gây ngộ độc ion, trái bị đỏ gai, còi cọc không lớn , lá bị cháy mép và rễ bị tổn thương nặng không thể hấp thu dinh dưỡng.",
+      "recommendation": "Ngừng tưới nước nhiễm mặn ngay, rửa mặn bằng nước ngọt, bón vôi + hữu cơ cải tạo, theo dõi sát.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ec",
+          "op": "ge",
+          "val": 2.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "D2.6",
+      "label_name": "Nhiễm mặn trung bình (GĐ 6)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": ": EC >1,2 mS/cm và Độ mặn đất ≥0,5%, cây bắt đầu biểu hiện stress mặn (cháy mép lá, sinh trưởng chậm).",
+      "recommendation": "Tăng cường rửa mặn bằng nước ngọt khi có thể, hạn chế bón phân hóa học nồng độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.2
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "D3.6",
+      "label_name": "Nhiễm mặn nhẹ (GĐ 6)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "EC >1 mS/cm và Độ mặn đất ≥0.3%, cần theo dõi đặc biệt vào mùa khô hạn/xâm nhập mặn.",
+      "recommendation": "Theo dõi độ mặn nguồn nước tưới, dự trữ nước ngọt, hạn chế tưới nước có độ mặn cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D4.6",
+      "label_name": "EC & độ mặn an toàn (GĐ 6)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "EC <0,8 mS/cm và độ mặn đất <0,3 % ngưỡng an toàn, không ảnh hưởng đến hấp thu dinh dưỡng.",
+      "recommendation": "Duy trì theo dõi định kỳ, đặc biệt trong mùa khô và các khu vực gần vùng nhiễm mặn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ec",
+          "op": "lt",
+          "val": 0.8
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D1.7",
+      "label_name": "Nhiễm mặn nặng — ngừng canh tác (GĐ 7)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "EC ≥2 mS/cm và độ mặn đất ≥1%, gây ngộ độc ion, trái dễ bị nứt hoặc có hiện tượng thối đít do cây thiếu canxi và bo, lá bị cháy mép và rễ bị tổn thương nặng không thể hấp thu dinh dưỡng.",
+      "recommendation": "Ngừng tưới nước nhiễm mặn ngay, rửa mặn bằng nước ngọt, bón vôi + hữu cơ cải tạo, theo dõi sát.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "ec",
+          "op": "ge",
+          "val": 2.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "D2.7",
+      "label_name": "Nhiễm mặn trung bình (GĐ 7)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": ": EC>1,2 mS/cm và Độ mặn đất ≥0,5%, cây bắt đầu biểu hiện stress mặn (cháy mép lá, sinh trưởng chậm).",
+      "recommendation": "Tăng cường rửa mặn bằng nước ngọt khi có thể, hạn chế bón phân hóa học nồng độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.2
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "D3.7",
+      "label_name": "Nhiễm mặn nhẹ (GĐ 7)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "EC>1 mS/cm và Độ mặn đất ≥0.3%, cần theo dõi đặc biệt vào mùa khô hạn/xâm nhập mặn.",
+      "recommendation": "Theo dõi độ mặn nguồn nước tưới, dự trữ nước ngọt, hạn chế tưới nước có độ mặn cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "ec",
+          "op": "gt",
+          "val": 1.0
+        },
+        {
+          "col": "soil_salinity",
+          "op": "ge",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "D4.7",
+      "label_name": "EC & độ mặn an toàn (GĐ 7)",
+      "group": "D",
+      "group_name": "Mặn & EC",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "EC <0,8 mS/cm và độ mặn đất <0,3 % ngưỡng an toàn, không ảnh hưởng đến hấp thu dinh dưỡng.",
+      "recommendation": "Duy trì theo dõi định kỳ, đặc biệt trong mùa khô và các khu vực gần vùng nhiễm mặn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "ec",
+          "op": "lt",
+          "val": 0.8
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 0.3
+        }
+      ]
+    },
+    {
+      "label_id": "E1.1",
+      "label_name": "Nắng nóng cực đoan (GĐ 1)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥35°C, gây stress nhiệt, tăng thoát hơi nước , nếu kéo dài, rễ bị tổn thương và khả năng hút nước giảm, có thể gây cháy lá hoặc làm lá héo úa và rụng.",
+      "recommendation": "Tưới mát gốc vào sáng sớm/chiều mát, che lưới giảm nắng nếu cây non, tránh bón phân giữa trưa nắng gắt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "E2.1",
+      "label_name": "Nhiệt độ cao — cần theo dõi (GĐ 1)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≥30°C, cây có thể bị stress nhẹ nếu kéo dài.",
+      "recommendation": "Tăng tần suất tưới ẩm, theo dõi biểu hiện héo lá vào buổi trưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 30
+        }
+      ]
+    },
+    {
+      "label_id": "E3.1",
+      "label_name": "Nhiệt độ lạnh (GĐ 1)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≤22°C, cây hấp thu nước kém, có thể làm chậm sinh trưởng.",
+      "recommendation": "Theo dõi sinh trưởng, hạn chế tưới nước lạnh trực tiếp vào gốc vào sáng sớm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "air_temp",
+          "op": "le",
+          "val": 22
+        }
+      ]
+    },
+    {
+      "label_id": "E4.1",
+      "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 1)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ trong khoảng 24-30°C, thuận lợi cho giai đoạn 'Cây con (0-12 tháng)'.",
+      "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            24,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E1.2",
+      "label_name": "Nắng nóng cực đoan (GĐ 2)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥35°C, gây stress nhiệt, tăng thoát hơi nước, nếu kéo dài, rễ bị tổn thương và khả năng hút nước giảm, có thể gây cháy lá hoặc làm lá héo úa và rụng.",
+      "recommendation": "Tưới mát gốc vào sáng sớm/chiều mát, che lưới giảm nắng nếu cây non, tránh bón phân giữa trưa nắng gắt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "E2.2",
+      "label_name": "Nhiệt độ cao — cần theo dõi (GĐ 2)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≥30°C, cây có thể bị stress nhẹ nếu kéo dài.",
+      "recommendation": "Tăng tần suất tưới ẩm, theo dõi biểu hiện héo lá vào buổi trưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 30
+        }
+      ]
+    },
+    {
+      "label_id": "E3.2",
+      "label_name": "Nhiệt độ lạnh (GĐ 2)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≤22°C, cây hấp thu nước kém, có thể làm chậm sinh trưởng.",
+      "recommendation": "Theo dõi sinh trưởng, hạn chế tưới nước lạnh trực tiếp vào gốc vào sáng sớm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "air_temp",
+          "op": "le",
+          "val": 22
+        }
+      ]
+    },
+    {
+      "label_id": "E4.2",
+      "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 2)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ trong khoảng 24-30°C, thuận lợi cho giai đoạn 'Kiến thiết cơ bản (1-3 năm)'.",
+      "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            24,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E1.3",
+      "label_name": "Nắng nóng cực đoan (GĐ 3)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥35°C, gây stress nhiệt, tăng thoát hơi nước, nếu kéo dài, rễ bị tổn thương và khả năng hút nước giảm, có thể gây cháy lá hoặc làm lá héo úa và rụng.",
+      "recommendation": "Tưới mát gốc vào sáng sớm/chiều mát, che lưới giảm nắng nếu cây non, tránh bón phân giữa trưa nắng gắt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "E2.3",
+      "label_name": "Nhiệt độ cao — cần theo dõi (GĐ 3)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≥30°C, cây có thể bị stress nhẹ nếu kéo dài.",
+      "recommendation": "Tăng tần suất tưới ẩm, theo dõi biểu hiện héo lá vào buổi trưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 30
+        }
+      ]
+    },
+    {
+      "label_id": "E3.3",
+      "label_name": "Nhiệt độ lạnh (GĐ 3)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≤22°C, có thể làm chậm sinh trưởng.",
+      "recommendation": "Theo dõi sinh trưởng, hạn chế tưới nước lạnh trực tiếp vào gốc vào sáng sớm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "air_temp",
+          "op": "le",
+          "val": 22
+        }
+      ]
+    },
+    {
+      "label_id": "E4.3",
+      "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 3)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ trong khoảng 24-30°C, thuận lợi cho giai đoạn 'Trưởng thành sinh dưỡng'.",
+      "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            24,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E1.4",
+      "label_name": "Nắng nóng cực đoan (GĐ 4)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥35°C, gây rối loạn sinh lý, ức chế quá trình hình thành mầm hoa, mắt cua ra yếu hoặc chuyển sang đi đọt, hoa khô đen và rụng hàng loạt trước khi thụ phấn.",
+      "recommendation": "Tưới mát gốc vào sáng sớm/chiều mát, che lưới giảm nắng nếu cây non, tránh bón phân giữa trưa nắng gắt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "E2.4",
+      "label_name": "Nhiệt độ cao — cần theo dõi (GĐ 4)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≥30°C, cây có thể bị stress nhẹ nếu kéo dài.",
+      "recommendation": "Tăng tần suất tưới ẩm, theo dõi biểu hiện héo lá vào buổi trưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 30
+        }
+      ]
+    },
+    {
+      "label_id": "E3.4",
+      "label_name": "Nhiệt độ lạnh (GĐ 4)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≤20°C, quá trình quang hợp giảm, cây không đủ năng lượng để phát triển mầm hoa (mắt cua) làm mắt cua phát triển yếu, không đồng điều hoặc không hình thành.",
+      "recommendation": "Theo dõi sinh trưởng, hạn chế tưới nước lạnh trực tiếp vào gốc vào sáng sớm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_temp",
+          "op": "le",
+          "val": 20
+        }
+      ]
+    },
+    {
+      "label_id": "E4.4",
+      "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 4)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ trong khoảng 20-30°C, thuận lợi cho giai đoạn 'Ra hoa'.",
+      "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            20,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E1.5",
+      "label_name": "Nắng nóng cực đoan (GĐ 5)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥35°C, gây sốc nhiệt, làm rối loạn sinh lý, dẫn đến rụng trái hàng loạt, trái chậm phát triển hoặc méo mó.",
+      "recommendation": "Tưới mát gốc vào sáng sớm/chiều mát, che lưới giảm nắng nếu cây non, tránh bón phân giữa trưa nắng gắt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "E2.5",
+      "label_name": "Nhiệt độ cao — cần theo dõi (GĐ 5)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≥30°C, cây có thể bị stress nhẹ nếu kéo dài.",
+      "recommendation": "Tăng tần suất tưới ẩm, theo dõi biểu hiện héo lá vào buổi trưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 30
+        }
+      ]
+    },
+    {
+      "label_id": "E3.5",
+      "label_name": "Nhiệt độ lạnh (GĐ 5)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≤20°C, gây sốc nhiệt, làm rối loạn sinh lý, khiến cây ngừng hấp thu dinh dưỡng, rụng trái hàng loạt, trái phát triển dị dạng, hoặc dễ nhiễm nấm bệnh.",
+      "recommendation": "Theo dõi sinh trưởng, hạn chế tưới nước lạnh trực tiếp vào gốc vào sáng sớm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_temp",
+          "op": "le",
+          "val": 20
+        }
+      ]
+    },
+    {
+      "label_id": "E4.5",
+      "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 5)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ trong khoảng 20-34°C, thuận lợi cho giai đoạn 'Đậu trái non'.",
+      "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            20,
+            34
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E1.6",
+      "label_name": "Nắng nóng cực đoan (GĐ 6)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥40°C, gây stress nhiệt, tăng thoát hơi nước, nếu kéo dài, rễ bị tổn thương và khả năng hút nước giảm, có thể gây cháy lá, trái có thể bị cháy nắng làm vỏ chuyển màu nâu hoặc đen.",
+      "recommendation": "Tưới mát gốc vào sáng sớm/chiều mát, che lưới giảm nắng nếu cây non, tránh bón phân giữa trưa nắng gắt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 40
+        }
+      ]
+    },
+    {
+      "label_id": "E2.6",
+      "label_name": "Nhiệt độ cao — cần theo dõi (GĐ 6)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≥35°C, cây có thể bị stress nhẹ nếu kéo dài.",
+      "recommendation": "Tăng tần suất tưới ẩm, theo dõi biểu hiện héo lá vào buổi trưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "E3.6",
+      "label_name": "Nhiệt độ lạnh (GĐ 6)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≤20°C, quá trình quang hợp giảm, làm tăng thời gian phát triển và tích lũy dinh dưỡng của trái.",
+      "recommendation": "Theo dõi sinh trưởng, hạn chế tưới nước lạnh trực tiếp vào gốc vào sáng sớm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "air_temp",
+          "op": "le",
+          "val": 20
+        }
+      ]
+    },
+    {
+      "label_id": "E4.6",
+      "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 6)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ trong khoảng 20-35°C, thuận lợi cho giai đoạn 'Nuôi trái'.",
+      "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            20,
+            35
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E1.7",
+      "label_name": "Nắng nóng cực đoan (GĐ 7)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥40°C, gây stress nhiệt, tăng thoát hơi nước, nếu kéo dài, rễ bị tổn thương và khả năng hút nước giảm, có thể gây cháy lá, cháy lõi hoặc sượng cơm làm giảm chất lượng quả.",
+      "recommendation": "Tưới mát gốc vào sáng sớm/chiều mát, che lưới giảm nắng nếu cây non, tránh bón phân giữa trưa nắng gắt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 40
+        }
+      ]
+    },
+    {
+      "label_id": "E2.7",
+      "label_name": "Nhiệt độ cao — cần theo dõi (GĐ 7)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≥35°C, cây có thể bị stress nhẹ nếu kéo dài.",
+      "recommendation": "Tăng tần suất tưới ẩm, theo dõi biểu hiện héo lá vào buổi trưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "E3.7",
+      "label_name": "Nhiệt độ lạnh (GĐ 7)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ không khí ≤20°C, có thể làm chậm sinh trưởng, trái kém phát triển, múi bị sượng hoặc nhạt vị.",
+      "recommendation": "Theo dõi sinh trưởng, hạn chế tưới nước lạnh trực tiếp vào gốc vào sáng sớm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "air_temp",
+          "op": "le",
+          "val": 20
+        }
+      ]
+    },
+    {
+      "label_id": "E4.7",
+      "label_name": "Khí hậu lý tưởng cho sinh trưởng (GĐ 7)",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ trong khoảng 24-30°C, thuận lợi cho giai đoạn 'Trưởng thành trái - Thu hoạch'.",
+      "recommendation": "Duy trì điều kiện canh tác hiện tại.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            24,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E5.4",
+      "label_name": "Nhiệt độ thuận lợi cho thụ phấn",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Nhiệt độ ban đêm 20-24°C và độ ẩm không khí vừa phải, điều kiện lý tưởng để hoa nở đồng loạt và thụ phấn tốt (chủ yếu nhờ dơi/côn trùng về đêm).",
+      "recommendation": "Tận dụng điều kiện tốt, có thể hỗ trợ thụ phấn bổ sung vào ban đêm 19h-22h để tăng tỷ lệ đậu trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            20,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "E6.5",
+      "label_name": "Nhiệt độ cao gây sốc trái non",
+      "group": "E",
+      "group_name": "Nhiệt độ & khí hậu",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ không khí ≥35°C trong giai đoạn đậu trái non gây sốc nhiệt, tăng tỷ lệ rụng trái sinh lý.",
+      "recommendation": "Tưới mát gốc, có thể phun sương giảm nhiệt tán lá vào giờ nắng gắt, tránh xử lý hóa chất lúc nhiệt độ cao.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "F1",
+      "label_name": "CEC rất thấp — đất nghèo dinh dưỡng",
+      "group": "F",
+      "group_name": "CEC & giữ dinh dưỡng",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Critical",
+      "description": "CEC < 10 meq/100g, đất có khả năng giữ dinh dưỡng kém, dễ rửa trôi phân bón, hiệu quả bón phân thấp.",
+      "recommendation": "Tăng cường hữu cơ, bón phân chia nhiều lần liều nhỏ thay vì bón liều cao một lần.",
+      "conditions": [
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "F2",
+      "label_name": "CEC trung bình — cần cải thiện",
+      "group": "F",
+      "group_name": "CEC & giữ dinh dưỡng",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Warning",
+      "description": "CEC 10-20 meq/100g, khả năng giữ dinh dưỡng ở mức trung bình, có thể cải thiện thêm.",
+      "recommendation": "Bổ sung hữu cơ định kỳ, hạn chế xói mòn/rửa trôi đất.",
+      "conditions": [
+        {
+          "col": "cec",
+          "op": "between",
+          "val": [
+            10,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "F3",
+      "label_name": "CEC tốt",
+      "group": "F",
+      "group_name": "CEC & giữ dinh dưỡng",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Normal",
+      "description": "CEC > 20 meq/100g, đất có khả năng giữ dinh dưỡng tốt, hiệu quả sử dụng phân bón cao.",
+      "recommendation": "Duy trì độ phì đất hiện tại bằng hữu cơ và luân canh hợp lý.",
+      "conditions": [
+        {
+          "col": "cec",
+          "op": "gt",
+          "val": 20
+        }
+      ]
+    },
+    {
+      "label_id": "G1.1",
+      "label_name": "Rễ có nguy cơ thiếu oxy (GĐ 1)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất rất cao >90% kết hợp CEC thấp < 10 meq/100g: thoát nước kém, vùng rễ thiếu oxy, ức chế hô hấp rễ, tạo điều kiện nấm Phytophthora tấn công.",
+      "recommendation": "Cải thiện thoát nước, lên liếp cao, hạn chế tưới khi đất đã bão hòa nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "G2.1",
+      "label_name": "Điều kiện thuận lợi cho bộ rễ phát triển (GĐ 1)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm 75-85%, pH 5,5-6,5 và hữu cơ >4%: điều kiện lý tưởng cho rễ tơ phát triển, tăng khả năng hấp thu nước và dinh dưỡng.",
+      "recommendation": "Duy trì điều kiện hiện tại, có thể bổ sung nấm đối kháng Trichoderma định kỳ để bảo vệ rễ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            75,
+            85
+          ]
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "col": "organic_matter",
+          "op": "gt",
+          "val": 4.0
+        }
+      ]
+    },
+    {
+      "label_id": "G1.2",
+      "label_name": "Rễ có nguy cơ thiếu oxy (GĐ 2)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất rất cao >90% kết hợp CEC thấp < 10 meq/100g: thoát nước kém, vùng rễ thiếu oxy, ức chế hô hấp rễ, tạo điều kiện nấm Phytophthora tấn công.",
+      "recommendation": "Cải thiện thoát nước, lên liếp cao, hạn chế tưới khi đất đã bão hòa nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "G2.2",
+      "label_name": "Điều kiện thuận lợi cho bộ rễ phát triển (GĐ 2)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm 65-75%, pH 5,5-6,5 và hữu cơ >4%: điều kiện lý tưởng cho rễ tơ phát triển, tăng khả năng hấp thu nước và dinh dưỡng.",
+      "recommendation": "Duy trì điều kiện hiện tại, có thể bổ sung nấm đối kháng Trichoderma định kỳ để bảo vệ rễ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            75
+          ]
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "col": "organic_matter",
+          "op": "gt",
+          "val": 4.0
+        }
+      ]
+    },
+    {
+      "label_id": "G1.3",
+      "label_name": "Rễ có nguy cơ thiếu oxy (GĐ 3)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất rất cao >90% kết hợp CEC thấp < 10 meq/100g: thoát nước kém, vùng rễ thiếu oxy, ức chế hô hấp rễ, tạo điều kiện nấm Phytophthora tấn công.",
+      "recommendation": "Cải thiện thoát nước, lên liếp cao, hạn chế tưới khi đất đã bão hòa nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "G2.3",
+      "label_name": "Điều kiện thuận lợi cho bộ rễ phát triển (GĐ 3)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm 65-75%, pH 5,5-6,5 và hữu cơ >4%: điều kiện lý tưởng cho rễ tơ phát triển, tăng khả năng hấp thu nước và dinh dưỡng.",
+      "recommendation": "Duy trì điều kiện hiện tại, có thể bổ sung nấm đối kháng Trichoderma định kỳ để bảo vệ rễ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            75
+          ]
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "col": "organic_matter",
+          "op": "gt",
+          "val": 4.0
+        }
+      ]
+    },
+    {
+      "label_id": "G1.4",
+      "label_name": "Rễ có nguy cơ thiếu oxy (GĐ 4)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất rất cao >90% kết hợp CEC thấp < 10 meq/100g: thoát nước kém, vùng rễ thiếu oxy, ức chế hô hấp rễ, tạo điều kiện nấm Phytophthora tấn công, cây tiếp tục ra lá, không phân hóa mầm hoa.",
+      "recommendation": "Cải thiện thoát nước, lên liếp cao, hạn chế tưới khi đất đã bão hòa nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "G2.4",
+      "label_name": "Điều kiện thuận lợi cho bộ rễ phát triển (GĐ 4)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm 50-60%, pH 5,5-6,5 và hữu cơ >4%: điều kiện lý tưởng cho rễ tơ phát triển, tăng khả năng hấp thu nước và dinh dưỡng cho quá trình nuôi bông.",
+      "recommendation": "Duy trì điều kiện hiện tại, có thể bổ sung nấm đối kháng Trichoderma định kỳ để bảo vệ rễ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            50,
+            60
+          ]
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "col": "organic_matter",
+          "op": "gt",
+          "val": 4.0
+        }
+      ]
+    },
+    {
+      "label_id": "G1.5",
+      "label_name": "Rễ có nguy cơ thiếu oxy (GĐ 5)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất rất cao >90% kết hợp CEC thấp < 10 meq/100g: thoát nước kém, vùng rễ thiếu oxy, ức chế hô hấp rễ, tạo điều kiện nấm Phytophthora tấn công, cây ra đọt non, trái non bị rụng do cạnh tranh dinh dưỡng.",
+      "recommendation": "Cải thiện thoát nước, lên liếp cao, hạn chế tưới khi đất đã bão hòa nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "G2.5",
+      "label_name": "Điều kiện thuận lợi cho bộ rễ phát triển (GĐ 5)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm 65-75%, pH 5,5-6,5 và hữu cơ >4%: điều kiện lý tưởng cho rễ tơ phát triển, tăng khả năng hấp thu nước và dinh dưỡng cho quá trình nuôi trái, tăng tỷ lệ đậu trái.",
+      "recommendation": "Duy trì điều kiện hiện tại, có thể bổ sung nấm đối kháng Trichoderma định kỳ để bảo vệ rễ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            75
+          ]
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "col": "organic_matter",
+          "op": "gt",
+          "val": 4.0
+        }
+      ]
+    },
+    {
+      "label_id": "G1.6",
+      "label_name": "Rễ có nguy cơ thiếu oxy (GĐ 6)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất rất cao >90% kết hợp CEC thấp < 10 meq/100g: thoát nước kém, vùng rễ thiếu oxy, ức chế hô hấp rễ, tạo điều kiện nấm Phytophthora tấn công, trái phát triển không cân đối do thiếu dinh dưỡng.",
+      "recommendation": "Cải thiện thoát nước, lên liếp cao, hạn chế tưới khi đất đã bão hòa nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "G2.6",
+      "label_name": "Điều kiện thuận lợi cho bộ rễ phát triển (GĐ 6)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm 65-80%, pH 5,5-6,5 và hữu cơ >4%: điều kiện lý tưởng cho rễ tơ phát triển, tăng khả năng hấp thu nước và dinh dưỡng cho quá trình nuôi trái.",
+      "recommendation": "Duy trì điều kiện hiện tại, có thể bổ sung nấm đối kháng Trichoderma định kỳ để bảo vệ rễ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            65,
+            80
+          ]
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "col": "organic_matter",
+          "op": "gt",
+          "val": 4.0
+        }
+      ]
+    },
+    {
+      "label_id": "G1.7",
+      "label_name": "Rễ có nguy cơ thiếu oxy (GĐ 7)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất rất cao >90% kết hợp CEC thấp < 10 meq/100g: thoát nước kém, vùng rễ thiếu oxy, ức chế hô hấp rễ, tạo điều kiện nấm Phytophthora tấn công, giảm chất lượng trái do thiếu dinh dưỡng.",
+      "recommendation": "Cải thiện thoát nước, lên liếp cao, hạn chế tưới khi đất đã bão hòa nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "gt",
+          "val": 90
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 10
+        }
+      ]
+    },
+    {
+      "label_id": "G2.7",
+      "label_name": "Điều kiện thuận lợi cho bộ rễ phát triển (GĐ 7)",
+      "group": "G",
+      "group_name": "Sức khỏe bộ rễ",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm  60-70%, pH 5,5-6,5 và hữu cơ >4%: điều kiện lý tưởng cho rễ tơ phát triển, tăng khả năng hấp thu nước và dinh dưỡng.",
+      "recommendation": "Duy trì điều kiện hiện tại, có thể bổ sung nấm đối kháng Trichoderma định kỳ để bảo vệ rễ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            60,
+            70
+          ]
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "col": "organic_matter",
+          "op": "gt",
+          "val": 4.0
+        }
+      ]
+    },
+    {
+      "label_id": "H1.1",
+      "label_name": "Nguy cơ nấm bệnh cao do ẩm độ không khí cao (GĐ 1)",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm không khí ≥85% kéo dài tạo điều kiện thuận lợi cho nấm bệnh phát triển (thán thư, đốm lá...).",
+      "recommendation": "Tăng cường thông thoáng tán cây (tỉa cành), phun phòng nấm sinh học/hóa học theo khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "H1.2",
+      "label_name": "Nguy cơ nấm bệnh cao do ẩm độ không khí cao (GĐ 2)",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm không khí ≥85% kéo dài tạo điều kiện thuận lợi cho nấm bệnh phát triển (thán thư, đốm lá...).",
+      "recommendation": "Tăng cường thông thoáng tán cây (tỉa cành), phun phòng nấm sinh học/hóa học theo khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "H1.3",
+      "label_name": "Nguy cơ nấm bệnh cao do ẩm độ không khí cao (GĐ 3)",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm không khí ≥85% kéo dài tạo điều kiện thuận lợi cho nấm bệnh phát triển (thán thư, đốm lá...).",
+      "recommendation": "Tăng cường thông thoáng tán cây (tỉa cành), phun phòng nấm sinh học/hóa học theo khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "H1.4",
+      "label_name": "Nguy cơ nấm bệnh cao do ẩm độ không khí cao (GĐ 4)",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm không khí ≥85% kéo dài tạo điều kiện thuận lợi cho nấm bệnh phát triển (thán thư, đốm lá...).",
+      "recommendation": "Tăng cường thông thoáng tán cây (tỉa cành), phun phòng nấm sinh học/hóa học theo khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "H1.5",
+      "label_name": "Nguy cơ nấm bệnh cao do ẩm độ không khí cao (GĐ 5)",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm không khí ≥85% kéo dài tạo điều kiện thuận lợi cho nấm bệnh phát triển (thán thư, đốm lá...).",
+      "recommendation": "Tăng cường thông thoáng tán cây (tỉa cành), phun phòng nấm sinh học/hóa học theo khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "H1.6",
+      "label_name": "Nguy cơ nấm bệnh cao do ẩm độ không khí cao (GĐ 6)",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm không khí ≥85% kéo dài tạo điều kiện thuận lợi cho nấm bệnh phát triển (thán thư, đốm lá...).",
+      "recommendation": "Tăng cường thông thoáng tán cây (tỉa cành), phun phòng nấm sinh học/hóa học theo khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "H1.7",
+      "label_name": "Nguy cơ nấm bệnh cao do ẩm độ không khí cao (GĐ 7)",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm không khí ≥85% kéo dài tạo điều kiện thuận lợi cho nấm bệnh phát triển (thán thư, đốm lá...).",
+      "recommendation": "Tăng cường thông thoáng tán cây (tỉa cành), phun phòng nấm sinh học/hóa học theo khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "H2.4",
+      "label_name": "Độ ẩm quá cao nguy cơ nấm hoa",
+      "group": "H",
+      "group_name": "Nguy cơ nấm bệnh",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm không khí cao kết hợp mưa trong giai đoạn ra hoa tạo điều kiện cho nấm bồ hóng, thán thư tấn công hoa, gây thối hoa.",
+      "recommendation": "Phun phòng nấm trước và sau mưa, tỉa hoa/cành tăm để thông thoáng, tránh phun thuốc lúc hoa đang nở rộ (ảnh hưởng thụ phấn).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I1.1",
+      "label_name": "Nguy cơ cao thối rễ Phytophthora (GĐ 1)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "Đất quá ẩm (≥85%) kéo dài kết hợp thoát nước kém, điều kiện lý tưởng cho nấm Phytophthora palmivora gây thối rễ, chảy nhựa thân.",
+      "recommendation": "Khơi thông rãnh thoát nước ngay, hạn chế tưới, xử lý gốc bằng thuốc gốc đồng/phosphonate, bồi đất hữu cơ + Trichoderma quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I2.1",
+      "label_name": "Nguy cơ Phytophthora thấp (GĐ 1)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+      "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "I1.2",
+      "label_name": "Nguy cơ cao thối rễ Phytophthora (GĐ 2)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "Đất quá ẩm (≥85%) kéo dài kết hợp thoát nước kém, điều kiện lý tưởng cho nấm Phytophthora palmivora gây thối rễ, chảy nhựa thân.",
+      "recommendation": "Khơi thông rãnh thoát nước ngay, hạn chế tưới, xử lý gốc bằng thuốc gốc đồng/phosphonate, bồi đất hữu cơ + Trichoderma quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I2.2",
+      "label_name": "Nguy cơ Phytophthora thấp (GĐ 2)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+      "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "I1.3",
+      "label_name": "Nguy cơ cao thối rễ Phytophthora (GĐ 3)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "Đất quá ẩm (≥85%) kéo dài kết hợp thoát nước kém, điều kiện lý tưởng cho nấm Phytophthora palmivora gây thối rễ, chảy nhựa thân.",
+      "recommendation": "Khơi thông rãnh thoát nước ngay, hạn chế tưới, xử lý gốc bằng thuốc gốc đồng/phosphonate, bồi đất hữu cơ + Trichoderma quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I2.3",
+      "label_name": "Nguy cơ Phytophthora thấp (GĐ 3)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+      "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "I1.4",
+      "label_name": "Nguy cơ cao thối rễ Phytophthora (GĐ 4)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Đất quá ẩm (≥85%) kéo dài kết hợp thoát nước kém, điều kiện lý tưởng cho nấm Phytophthora palmivora gây thối rễ, chảy nhựa thân.",
+      "recommendation": "Khơi thông rãnh thoát nước ngay, hạn chế tưới, xử lý gốc bằng thuốc gốc đồng/phosphonate, bồi đất hữu cơ + Trichoderma quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I2.4",
+      "label_name": "Nguy cơ Phytophthora thấp (GĐ 4)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+      "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "I1.5",
+      "label_name": "Nguy cơ cao thối rễ Phytophthora (GĐ 5)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Đất quá ẩm (≥85%) kéo dài kết hợp thoát nước kém, điều kiện lý tưởng cho nấm Phytophthora palmivora gây thối rễ, chảy nhựa thân.",
+      "recommendation": "Khơi thông rãnh thoát nước ngay, hạn chế tưới, xử lý gốc bằng thuốc gốc đồng/phosphonate, bồi đất hữu cơ + Trichoderma quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I2.5",
+      "label_name": "Nguy cơ Phytophthora thấp (GĐ 5)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+      "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "I1.6",
+      "label_name": "Nguy cơ cao thối rễ Phytophthora (GĐ 6)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Đất quá ẩm (≥85%) kéo dài kết hợp thoát nước kém, điều kiện lý tưởng cho nấm Phytophthora palmivora gây thối rễ, chảy nhựa thân.",
+      "recommendation": "Khơi thông rãnh thoát nước ngay, hạn chế tưới, xử lý gốc bằng thuốc gốc đồng/phosphonate, bồi đất hữu cơ + Trichoderma quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I2.6",
+      "label_name": "Nguy cơ Phytophthora thấp (GĐ 6)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+      "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "I1.7",
+      "label_name": "Nguy cơ cao thối rễ Phytophthora (GĐ 7)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Đất quá ẩm (≥85%) kéo dài kết hợp thoát nước kém, điều kiện lý tưởng cho nấm Phytophthora palmivora gây thối rễ, chảy nhựa thân.",
+      "recommendation": "Khơi thông rãnh thoát nước ngay, hạn chế tưới, xử lý gốc bằng thuốc gốc đồng/phosphonate, bồi đất hữu cơ + Trichoderma quanh gốc.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "I2.7",
+      "label_name": "Nguy cơ Phytophthora thấp (GĐ 7)",
+      "group": "I",
+      "group_name": "Nguy cơ Phytophthora",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất ở mức an toàn, thoát nước tốt, nguy cơ thối rễ do Phytophthora thấp.",
+      "recommendation": "Duy trì kiểm soát thoát nước và phòng bệnh định kỳ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 75
+        }
+      ]
+    },
+    {
+      "label_id": "J1.1",
+      "label_name": "Nguy cơ cháy lá do nắng nóng + mặn (GĐ 1)",
+      "group": "J",
+      "group_name": "Nguy cơ cháy lá",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ cao (>35℃) kết hợp độ mặn đất/nước cao (>0,3% và >0,5‰) làm tăng nguy cơ cháy mép lá, khô đầu lá, rễ non chưa hóa gỗ dễ bị cháy.",
+      "recommendation": "Tưới rửa mặn bằng nước ngọt, che lưới giảm nắng giai đoạn cây non, bổ sung Canxi-Silic tăng sức đề kháng lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "air_temp",
+          "op": "gt",
+          "val": 35
+        },
+        {
+          "col": "soil_salinity",
+          "op": "gt",
+          "val": 0.3
+        },
+        {
+          "col": "water_salinity",
+          "op": "gt",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "J1.2",
+      "label_name": "Nguy cơ cháy lá do nắng nóng + mặn (GĐ 2)",
+      "group": "J",
+      "group_name": "Nguy cơ cháy lá",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ cao (>35℃) kết hợp độ mặn đất/nước cao (>0,3% và >0,5‰) làm tăng nguy cơ cháy mép lá, khô đầu lá, rễ non chưa hóa gỗ dễ bị cháy.",
+      "recommendation": "Tưới rửa mặn bằng nước ngọt, che lưới giảm nắng giai đoạn cây non, bổ sung Canxi-Silic tăng sức đề kháng lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "air_temp",
+          "op": "gt",
+          "val": 35
+        },
+        {
+          "col": "soil_salinity",
+          "op": "gt",
+          "val": 0.3
+        },
+        {
+          "col": "water_salinity",
+          "op": "gt",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "J1.3",
+      "label_name": "Nguy cơ cháy lá do nắng nóng + mặn (GĐ 3)",
+      "group": "J",
+      "group_name": "Nguy cơ cháy lá",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ cao (>35℃) kết hợp độ mặn đất/nước cao (>0,3% và >0,5‰) làm tăng nguy cơ cháy mép lá, khô đầu lá, rễ non chưa hóa gỗ dễ bị cháy.",
+      "recommendation": "Tưới rửa mặn bằng nước ngọt, che lưới giảm nắng giai đoạn cây non, bổ sung Canxi-Silic tăng sức đề kháng lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "air_temp",
+          "op": "gt",
+          "val": 35
+        },
+        {
+          "col": "soil_salinity",
+          "op": "gt",
+          "val": 0.3
+        },
+        {
+          "col": "water_salinity",
+          "op": "gt",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "J1.4",
+      "label_name": "Nguy cơ cháy lá do nắng nóng + mặn (GĐ 4)",
+      "group": "J",
+      "group_name": "Nguy cơ cháy lá",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ cao (>35℃) kết hợp độ mặn đất/nước cao (>0,3% và >0,5‰) làm tăng nguy cơ cháy mép lá, khô đầu lá, mầm hoa khô đen và chết, nụ hoa bị héo và rụng hàng loạt.",
+      "recommendation": "Tưới rửa mặn bằng nước ngọt, che lưới giảm nắng giai đoạn cây non, bổ sung Canxi-Silic tăng sức đề kháng lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_temp",
+          "op": "gt",
+          "val": 35
+        },
+        {
+          "col": "soil_salinity",
+          "op": "gt",
+          "val": 0.3
+        },
+        {
+          "col": "water_salinity",
+          "op": "gt",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "J1.5",
+      "label_name": "Nguy cơ cháy lá do nắng nóng + mặn (GĐ 5)",
+      "group": "J",
+      "group_name": "Nguy cơ cháy lá",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ cao (>35℃) kết hợp độ mặn đất/nước cao (>0,3% và >0,5‰) làm tăng nguy cơ cháy mép lá, khô đầu lá, cây bị sốc dẫn đến rụng trái non, méo trái, dị dạng.",
+      "recommendation": "Tưới rửa mặn bằng nước ngọt, che lưới giảm nắng giai đoạn cây non, bổ sung Canxi-Silic tăng sức đề kháng lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_temp",
+          "op": "gt",
+          "val": 35
+        },
+        {
+          "col": "soil_salinity",
+          "op": "gt",
+          "val": 0.3
+        },
+        {
+          "col": "water_salinity",
+          "op": "gt",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "J1.6",
+      "label_name": "Nguy cơ cháy lá do nắng nóng + mặn (GĐ 6)",
+      "group": "J",
+      "group_name": "Nguy cơ cháy lá",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ cao (>35℃) kết hợp độ mặn đất/nước cao (>0,3% và >0,5‰) làm tăng nguy cơ cháy mép lá, khô đầu lá, trái bị đỏ gai, còi cọc.",
+      "recommendation": "Tưới rửa mặn bằng nước ngọt, che lưới giảm nắng giai đoạn cây non, bổ sung Canxi-Silic tăng sức đề kháng lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "air_temp",
+          "op": "gt",
+          "val": 35
+        },
+        {
+          "col": "soil_salinity",
+          "op": "gt",
+          "val": 0.3
+        },
+        {
+          "col": "water_salinity",
+          "op": "gt",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "J1.7",
+      "label_name": "Nguy cơ cháy lá do nắng nóng + mặn (GĐ 7)",
+      "group": "J",
+      "group_name": "Nguy cơ cháy lá",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Nhiệt độ cao (>35℃) kết hợp độ mặn đất/nước cao (>0,3% và >0,5‰) làm tăng nguy cơ cháy mép lá, khô đầu lá, trái dễ bị nứt hoặc có hiện tượng thối đít do cây thiếu canxi và bo.",
+      "recommendation": "Tưới rửa mặn bằng nước ngọt, che lưới giảm nắng giai đoạn cây non, bổ sung Canxi-Silic tăng sức đề kháng lá.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "air_temp",
+          "op": "gt",
+          "val": 35
+        },
+        {
+          "col": "soil_salinity",
+          "op": "gt",
+          "val": 0.3
+        },
+        {
+          "col": "water_salinity",
+          "op": "gt",
+          "val": 0.5
+        }
+      ]
+    },
+    {
+      "label_id": "K1.4",
+      "label_name": "Nguy cơ rụng hoa do mưa lớn",
+      "group": "K",
+      "group_name": "Nguy cơ rụng hoa",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "Mưa lớn (≥50mm/ngày) làm ướt hoa, rửa trôi phấn hoa, tăng tỷ lệ rụng hoa.",
+      "recommendation": "Che mưa nếu có điều kiện, phun bổ sung Bo + Canxi trước mùa mưa để tăng độ bền hoa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "rainfall",
+          "op": "ge",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "K2.4",
+      "label_name": "Nguy cơ rụng hoa do thừa đạm",
+      "group": "K",
+      "group_name": "Nguy cơ rụng hoa",
+      "stage": [
+        4
+      ],
+      "severity": "Critical",
+      "description": "N > 140mg/kg khiến cây ra đọt non cạnh tranh dinh dưỡng với hoa, gây rụng hoa sinh lý.",
+      "recommendation": "Ngừng bón đạm, phun MKP/Kali trắng để hãm đọt, ổn định hoa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "n",
+          "op": "gt",
+          "val": 140
+        }
+      ]
+    },
+    {
+      "label_id": "K3.4",
+      "label_name": "Nguy cơ rụng hoa do nhiệt độ bất lợi",
+      "group": "K",
+      "group_name": "Nguy cơ rụng hoa",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ quá cao (≥35°C) hoặc quá thấp ảnh hưởng đến sức sống hạt phấn, tăng tỷ lệ rụng hoa.",
+      "recommendation": "Theo dõi dự báo thời tiết, tưới mát gốc giảm nhiệt nếu nắng nóng kéo dài.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "K4.4",
+      "label_name": "Hoa phát triển ổn định — ít nguy cơ rụng",
+      "group": "K",
+      "group_name": "Nguy cơ rụng hoa",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Điều kiện ẩm độ, dinh dưỡng và nhiệt độ đều trong ngưỡng thuận lợi, tỷ lệ rụng hoa sinh lý ở mức thấp bình thường.",
+      "recommendation": "Duy trì chăm sóc hiện tại, theo dõi sâu bệnh hại hoa (bọ trĩ, rầy).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "rainfall",
+          "op": "lt",
+          "val": 20
+        },
+        {
+          "col": "n",
+          "op": "le",
+          "val": 140
+        },
+        {
+          "col": "air_temp",
+          "op": "between",
+          "val": [
+            22,
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "L1.5",
+      "label_name": "Nguy cơ rụng trái non do thiếu Kali",
+      "group": "L",
+      "group_name": "Nguy cơ rụng trái non",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "K thấp khiến cây ưu tiên dinh dưỡng không đủ nuôi toàn bộ số trái đậu, dẫn đến rụng sinh lý đợt 1-2.",
+      "recommendation": "Bổ sung Kali qua gốc/lá, kết hợp Canxi-Bo để tăng sức giữ trái.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "L2.5",
+      "label_name": "Nguy cơ rụng trái non do mưa kéo dài",
+      "group": "L",
+      "group_name": "Nguy cơ rụng trái non",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Mưa kéo dài làm giảm hô hấp rễ, giảm vận chuyển dinh dưỡng nuôi trái, tăng rụng trái non.",
+      "recommendation": "Thoát nước nhanh, tránh để úng gốc, hạn chế bón phân hóa học ngay sau mưa lớn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "rainfall",
+          "op": "ge",
+          "val": 40
+        }
+      ]
+    },
+    {
+      "label_id": "L3.5",
+      "label_name": "Nguy cơ rụng trái non do sốc nhiệt",
+      "group": "L",
+      "group_name": "Nguy cơ rụng trái non",
+      "stage": [
+        5
+      ],
+      "severity": "Warning",
+      "description": "Nhiệt độ cao đột ngột gây mất nước cục bộ ở cuống trái non, tăng tỷ lệ rụng.",
+      "recommendation": "Tưới mát gốc, che lưới giảm nắng tạm thời giai đoạn nắng nóng cực đoan.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "air_temp",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "L4.5",
+      "label_name": "Đậu trái ổn định",
+      "group": "L",
+      "group_name": "Nguy cơ rụng trái non",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Dinh dưỡng và điều kiện thời tiết thuận lợi, tỷ lệ đậu trái duy trì ổn định, rụng sinh lý ở mức bình thường (~70-80% rụng tự nhiên theo từng đợt).",
+      "recommendation": "Tỉa bớt trái dư để tập trung dinh dưỡng nuôi trái còn lại theo mật độ khuyến cáo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 80
+        },
+        {
+          "col": "rainfall",
+          "op": "lt",
+          "val": 30
+        }
+      ]
+    },
+    {
+      "label_id": "M1.6",
+      "label_name": "Thiếu Kali ảnh hưởng kích thước trái",
+      "group": "M",
+      "group_name": "Chất lượng nuôi trái",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "K thấp kéo dài làm trái phát triển không đều, kích thước nhỏ, gai trái không nở đều.",
+      "recommendation": "Bón Kali định kỳ, ưu tiên K2SO4, kết hợp phân bón lá chứa Kali hữu cơ.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 100
+        }
+      ]
+    },
+    {
+      "label_id": "M2.6",
+      "label_name": "Thiếu Canxi — nguy cơ nứt trái",
+      "group": "M",
+      "group_name": "Chất lượng nuôi trái",
+      "stage": [
+        6
+      ],
+      "severity": "Critical",
+      "description": "Thiếu Canxi (gián tiếp qua EC/pH bất thường) làm vỏ trái giòn, dễ nứt khi mưa lớn hoặc tưới đột ngột.",
+      "recommendation": "Phun bổ sung Canxi-Bo định kỳ 10-15 ngày/lần, duy trì ẩm độ đất ổn định tránh sốc nước.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "ph",
+          "op": "lt",
+          "val": 5.0
+        }
+      ]
+    },
+    {
+      "label_id": "M3.6",
+      "label_name": "Thiếu Magie giảm tích lũy chất khô",
+      "group": "M",
+      "group_name": "Chất lượng nuôi trái",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Thiếu Magie (liên quan CEC thấp/mất cân bằng cation) làm giảm khả năng quang hợp, ảnh hưởng tích lũy tinh bột/đường trong cơm trái.",
+      "recommendation": "Bổ sung MgSO4 qua gốc hoặc phun lá, đặc biệt trên đất có CEC thấp.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "cec",
+          "op": "lt",
+          "val": 12
+        }
+      ]
+    },
+    {
+      "label_id": "M4.6",
+      "label_name": "Đủ dinh dưỡng cho tăng trọng trái",
+      "group": "M",
+      "group_name": "Chất lượng nuôi trái",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "N-P-K cân đối, độ ẩm ổn định, điều kiện thuận lợi để trái tăng trọng nhanh và đều.",
+      "recommendation": "Duy trì chế độ bón và tưới hiện tại, theo dõi sự phát triển trái theo từng đợt 15 ngày.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 75
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 100
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            55,
+            85
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "M5.6",
+      "label_name": "Nguy cơ trái phát triển không đều do thiếu nước",
+      "group": "M",
+      "group_name": "Chất lượng nuôi trái",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Thiếu nước cục bộ trong giai đoạn nuôi trái có thể khiến các trái trên cùng cây phát triển không đồng đều.",
+      "recommendation": "Tưới đều, đảm bảo phân bố nước đồng đều quanh tán, kiểm tra hệ thống tưới nhỏ giọt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 55
+        }
+      ]
+    },
+    {
+      "label_id": "N1.7",
+      "label_name": "Điều kiện thuận lợi cho cơm vàng, dẻo",
+      "group": "N",
+      "group_name": "Chất lượng cơm trái",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Kali và hữu cơ đầy đủ, ẩm độ ổn định giai đoạn chín giúp cơm trái vàng đều, dẻo, vị ngọt đậm.",
+      "recommendation": "Duy trì chăm sóc, hạn chế bón đạm muộn để tránh ảnh hưởng màu cơm.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 90
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 2.5
+        }
+      ]
+    },
+    {
+      "label_id": "N2.7",
+      "label_name": "Nguy cơ cơm nhão do mưa nhiều trước thu hoạch",
+      "group": "N",
+      "group_name": "Chất lượng cơm trái",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Mưa lớn/độ ẩm đất cao trong giai đoạn gần thu hoạch làm tăng hàm lượng nước trong cơm, giảm độ dẻo, dễ gây 'sượng nước'.",
+      "recommendation": "Hạn chế tưới nước 7-10 ngày trước thu hoạch, đảm bảo thoát nước tốt khi có mưa.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "N3.7",
+      "label_name": "Nguy cơ sượng trái do thiếu Kali/Magie",
+      "group": "N",
+      "group_name": "Chất lượng cơm trái",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Thiếu Kali và Magie giai đoạn chín làm cơm trái nhạt màu, sượng cứng (hiện tượng sượng cơm sinh lý).",
+      "recommendation": "Đảm bảo bón đủ Kali-Magie xuyên suốt giai đoạn nuôi trái, tránh để thiếu hụt kéo dài.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "N4.7",
+      "label_name": "Hữu cơ thấp ảnh hưởng hương vị trái",
+      "group": "N",
+      "group_name": "Chất lượng cơm trái",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "Đất nghèo hữu cơ làm giảm khả năng tích lũy vi lượng cần thiết cho hương vị đặc trưng của cơm sầu riêng.",
+      "recommendation": "Tăng cường hữu cơ ngay sau thu hoạch để chuẩn bị cho vụ kế tiếp.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "organic_matter",
+          "op": "lt",
+          "val": 2.0
+        }
+      ]
+    },
+    {
+      "label_id": "O1.7",
+      "label_name": "Điều kiện thu hoạch thuận lợi",
+      "group": "O",
+      "group_name": "Điều kiện thu hoạch",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Thời tiết khô ráo, độ ẩm đất ổn định, thuận lợi để thu hoạch và vận chuyển trái không bị dập úng.",
+      "recommendation": "Tiến hành thu hoạch theo độ tuổi trái khuyến cáo (thường 95-120 ngày sau đậu trái tùy giống).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "rainfall",
+          "op": "lt",
+          "val": 10
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            45,
+            75
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "O2.7",
+      "label_name": "Cảnh báo mưa lớn ảnh hưởng thu hoạch",
+      "group": "O",
+      "group_name": "Điều kiện thu hoạch",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "Mưa lớn gần ngày thu hoạch làm tăng độ ẩm trái, dễ gây thối cuống, khó bảo quản và vận chuyển xa.",
+      "recommendation": "Lên kế hoạch thu hoạch sớm hơn nếu dự báo mưa lớn, để ráo trái trước khi đóng gói.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "rainfall",
+          "op": "ge",
+          "val": 30
+        }
+      ]
+    },
+    {
+      "label_id": "O3.7",
+      "label_name": "Nguy cơ nứt trái khi thu hoạch do ẩm độ cao đột ngột",
+      "group": "O",
+      "group_name": "Điều kiện thu hoạch",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất tăng đột ngột trước thu hoạch (mưa hoặc tưới nhiều) làm tăng áp suất nước trong trái, dễ nứt gai/vỏ.",
+      "recommendation": "Ngừng tưới hoàn toàn 10-14 ngày trước thu hoạch dự kiến.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 85
+        }
+      ]
+    },
+    {
+      "label_id": "P1.1",
+      "label_name": "Cần tăng cường tưới (GĐ 1)",
+      "group": "P",
+      "group_name": "Tưới tiêu",
+      "stage": [
+        1
+      ],
+      "severity": "Warning",
+      "description": "Lượng nước dự trữ (water_storage) thấp kết hợp độ ẩm đất thấp, hệ thống tưới chưa đáp ứng đủ nhu cầu cây.",
+      "recommendation": "Kiểm tra nguồn nước dự trữ, tăng tần suất hoặc thời lượng tưới.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "water_storage",
+          "op": "lt",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "P1.2",
+      "label_name": "Cần tăng cường tưới (GĐ 2)",
+      "group": "P",
+      "group_name": "Tưới tiêu",
+      "stage": [
+        2
+      ],
+      "severity": "Warning",
+      "description": "Lượng nước dự trữ (water_storage) thấp kết hợp độ ẩm đất thấp, hệ thống tưới chưa đáp ứng đủ nhu cầu cây.",
+      "recommendation": "Kiểm tra nguồn nước dự trữ, tăng tần suất hoặc thời lượng tưới.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "water_storage",
+          "op": "lt",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "P1.3",
+      "label_name": "Cần tăng cường tưới (GĐ 3)",
+      "group": "P",
+      "group_name": "Tưới tiêu",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "Lượng nước dự trữ (water_storage) thấp kết hợp độ ẩm đất thấp, hệ thống tưới chưa đáp ứng đủ nhu cầu cây.",
+      "recommendation": "Kiểm tra nguồn nước dự trữ, tăng tần suất hoặc thời lượng tưới.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "water_storage",
+          "op": "lt",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "P1.6",
+      "label_name": "Cần tăng cường tưới (GĐ 6)",
+      "group": "P",
+      "group_name": "Tưới tiêu",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Lượng nước dự trữ (water_storage) thấp kết hợp độ ẩm đất thấp, hệ thống tưới chưa đáp ứng đủ nhu cầu cây.",
+      "recommendation": "Kiểm tra nguồn nước dự trữ, tăng tần suất hoặc thời lượng tưới.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "water_storage",
+          "op": "lt",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 50
+        }
+      ]
+    },
+    {
+      "label_id": "P2",
+      "label_name": "Hệ thống tưới đáp ứng tốt",
+      "group": "P",
+      "group_name": "Tưới tiêu",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Normal",
+      "description": "Nguồn nước dự trữ và độ ẩm đất đảm bảo, hệ thống tưới hoạt động hiệu quả.",
+      "recommendation": "Duy trì bảo trì hệ thống tưới định kỳ.",
+      "conditions": [
+        {
+          "col": "water_storage",
+          "op": "ge",
+          "val": 1
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            50,
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "Q1",
+      "label_name": "Nguy cơ ngập úng do thoát nước kém",
+      "group": "Q",
+      "group_name": "Thoát nước",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Critical",
+      "description": "Độ ẩm đất duy trì rất cao trong thời gian dài, dấu hiệu hệ thống thoát nước kém hoặc liếp trồng thấp.",
+      "recommendation": "Nâng cao liếp trồng, đào rãnh thoát nước xung quanh vườn, tránh trồng ở vùng trũng.",
+      "conditions": [
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 88
+        }
+      ]
+    },
+    {
+      "label_id": "Q2",
+      "label_name": "Thoát nước tốt",
+      "group": "Q",
+      "group_name": "Thoát nước",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Normal",
+      "description": "Độ ẩm đất không tích tụ quá cao sau mưa/tưới, hệ thống thoát nước hoạt động hiệu quả.",
+      "recommendation": "Duy trì bảo trì hệ thống mương/rãnh thoát nước theo mùa.",
+      "conditions": [
+        {
+          "col": "soil_humidity",
+          "op": "lt",
+          "val": 80
+        }
+      ]
+    },
+    {
+      "label_id": "R1.1",
+      "label_name": "Sinh trưởng kém do thiếu dinh dưỡng tổng hợp (GĐ 1)",
+      "group": "R",
+      "group_name": "Tình trạng sinh trưởng",
+      "stage": [
+        1
+      ],
+      "severity": "Critical",
+      "description": "N, P, K đồng thời ở mức thấp, cây chậm phát triển chiều cao/tán lá so với chuẩn giai đoạn kiến thiết.",
+      "recommendation": "Xây dựng lại quy trình bón phân cân đối NPK + hữu cơ, kiểm tra lại pH và CEC đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 60
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 18
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 55
+        }
+      ]
+    },
+    {
+      "label_id": "R2.1",
+      "label_name": "Sinh trưởng tốt, đúng tiến độ (GĐ 1)",
+      "group": "R",
+      "group_name": "Tình trạng sinh trưởng",
+      "stage": [
+        1
+      ],
+      "severity": "Normal",
+      "description": "Điều kiện dinh dưỡng, ẩm độ và pH đều thuận lợi, cây phát triển đúng tiến độ kiến thiết cơ bản.",
+      "recommendation": "Tiếp tục chăm sóc theo quy trình, định hình tán/khung cành cho giai đoạn tiếp theo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 1
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 70
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "R1.2",
+      "label_name": "Sinh trưởng kém do thiếu dinh dưỡng tổng hợp (GĐ 2)",
+      "group": "R",
+      "group_name": "Tình trạng sinh trưởng",
+      "stage": [
+        2
+      ],
+      "severity": "Critical",
+      "description": "N, P, K đồng thời ở mức thấp, cây chậm phát triển chiều cao/tán lá so với chuẩn giai đoạn kiến thiết.",
+      "recommendation": "Xây dựng lại quy trình bón phân cân đối NPK + hữu cơ, kiểm tra lại pH và CEC đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 60
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 18
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 55
+        }
+      ]
+    },
+    {
+      "label_id": "R2.2",
+      "label_name": "Sinh trưởng tốt, đúng tiến độ (GĐ 2)",
+      "group": "R",
+      "group_name": "Tình trạng sinh trưởng",
+      "stage": [
+        2
+      ],
+      "severity": "Normal",
+      "description": "Điều kiện dinh dưỡng, ẩm độ và pH đều thuận lợi, cây phát triển đúng tiến độ kiến thiết cơ bản.",
+      "recommendation": "Tiếp tục chăm sóc theo quy trình, định hình tán/khung cành cho giai đoạn tiếp theo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 2
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 70
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "R1.3",
+      "label_name": "Sinh trưởng kém do thiếu dinh dưỡng tổng hợp (GĐ 3)",
+      "group": "R",
+      "group_name": "Tình trạng sinh trưởng",
+      "stage": [
+        3
+      ],
+      "severity": "Critical",
+      "description": "N, P, K đồng thời ở mức thấp, cây chậm phát triển chiều cao/tán lá so với chuẩn giai đoạn kiến thiết.",
+      "recommendation": "Xây dựng lại quy trình bón phân cân đối NPK + hữu cơ, kiểm tra lại pH và CEC đất.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 60
+        },
+        {
+          "col": "p",
+          "op": "lt",
+          "val": 18
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 55
+        }
+      ]
+    },
+    {
+      "label_id": "R2.3",
+      "label_name": "Sinh trưởng tốt, đúng tiến độ (GĐ 3)",
+      "group": "R",
+      "group_name": "Tình trạng sinh trưởng",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Điều kiện dinh dưỡng, ẩm độ và pH đều thuận lợi, cây phát triển đúng tiến độ kiến thiết cơ bản.",
+      "recommendation": "Tiếp tục chăm sóc theo quy trình, định hình tán/khung cành cho giai đoạn tiếp theo.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 70
+        },
+        {
+          "col": "ph",
+          "op": "between",
+          "val": [
+            5.5,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "S1",
+      "label_name": "Mất cân bằng N:K nghiêm trọng",
+      "group": "S",
+      "group_name": "Cân bằng dinh dưỡng",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Warning",
+      "description": "Tỷ lệ N/K quá cao gây mất cân đối sinh lý, ảnh hưởng đến chất lượng sinh trưởng/trái tùy giai đoạn.",
+      "recommendation": "Điều chỉnh công thức phân bón theo từng giai đoạn, ưu tiên giảm N tăng K khi cây chuyển sang ra hoa/nuôi trái.",
+      "conditions": [
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 80
+        },
+        {
+          "col": "k",
+          "op": "gt",
+          "val": 0
+        },
+        {
+          "col": "n_over_k_ratio",
+          "op": "gt",
+          "val": 2.5
+        }
+      ]
+    },
+    {
+      "label_id": "S2",
+      "label_name": "NPK cân đối toàn diện",
+      "group": "S",
+      "group_name": "Cân bằng dinh dưỡng",
+      "stage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "severity": "Normal",
+      "description": "N, P, K trong tỷ lệ cân đối phù hợp, hỗ trợ tốt cho mục tiêu sinh trưởng/ra hoa/đậu trái của giai đoạn hiện tại.",
+      "recommendation": "Duy trì công thức bón phân hiện tại, điều chỉnh nhẹ theo từng giai đoạn sinh trưởng.",
+      "conditions": [
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 70
+        },
+        {
+          "col": "p",
+          "op": "ge",
+          "val": 18
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 70
+        }
+      ]
+    },
+    {
+      "label_id": "T1.3",
+      "label_name": "Cây đủ điều kiện chuyển giai đoạn ra hoa",
+      "group": "T",
+      "group_name": "Khả năng ra hoa",
+      "stage": [
+        3
+      ],
+      "severity": "Normal",
+      "description": "Cây trưởng thành đủ tuổi sinh lý, dinh dưỡng tích lũy đầy đủ (N-P-K cân đối, hữu cơ tốt), sẵn sàng xử lý ra hoa.",
+      "recommendation": "Có thể bắt đầu quy trình xiết nước/xử lý ra hoa theo lịch canh tác.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "n",
+          "op": "ge",
+          "val": 80
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 2.5
+        }
+      ]
+    },
+    {
+      "label_id": "T2.3",
+      "label_name": "Cây chưa đủ điều kiện ra hoa — cần nuôi dưỡng thêm",
+      "group": "T",
+      "group_name": "Khả năng ra hoa",
+      "stage": [
+        3
+      ],
+      "severity": "Warning",
+      "description": "Dinh dưỡng tích lũy chưa đủ (N hoặc hữu cơ thấp), nếu xử lý ra hoa sớm có thể làm suy cây.",
+      "recommendation": "Tiếp tục bón phục hồi, hoãn xử lý ra hoa đến khi cây đạt thể trạng tốt.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 3
+        },
+        {
+          "col": "n",
+          "op": "lt",
+          "val": 60
+        }
+      ]
+    },
+    {
+      "label_id": "T3.4",
+      "label_name": "Khả năng ra hoa tốt",
+      "group": "T",
+      "group_name": "Khả năng ra hoa",
+      "stage": [
+        4
+      ],
+      "severity": "Normal",
+      "description": "Điều kiện khô hạn chủ động kết hợp dinh dưỡng cân đối tạo điều kiện phân hóa mầm hoa tốt, dự kiến tỷ lệ ra hoa cao.",
+      "recommendation": "Tiếp tục theo dõi mầm hoa, chuẩn bị phân bón giai đoạn nuôi hoa (Bo, Canxi).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            30,
+            45
+          ]
+        },
+        {
+          "col": "n",
+          "op": "le",
+          "val": 100
+        }
+      ]
+    },
+    {
+      "label_id": "T4.4",
+      "label_name": "Nguy cơ ra hoa không đồng loạt",
+      "group": "T",
+      "group_name": "Khả năng ra hoa",
+      "stage": [
+        4
+      ],
+      "severity": "Warning",
+      "description": "Độ ẩm đất không đồng đều hoặc dao động thất thường trong giai đoạn xiết nước, dễ gây ra hoa rải rác/không tập trung.",
+      "recommendation": "Ổn định lại chế độ xiết nước, đảm bảo đồng đều giữa các gốc trong vườn.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 4
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            45,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "U1.5",
+      "label_name": "Khả năng đậu trái cao",
+      "group": "U",
+      "group_name": "Khả năng đậu trái",
+      "stage": [
+        5
+      ],
+      "severity": "Normal",
+      "description": "Điều kiện dinh dưỡng (đủ Kali-Bo-Canxi) và thời tiết (ít mưa, nhiệt độ ổn định) thuận lợi cho tỷ lệ đậu trái cao.",
+      "recommendation": "Theo dõi và tỉa trái non theo mật độ khuyến cáo (giữ 80-120 trái/cây tùy độ tuổi).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 80
+        },
+        {
+          "col": "rainfall",
+          "op": "lt",
+          "val": 25
+        }
+      ]
+    },
+    {
+      "label_id": "U2.5",
+      "label_name": "Khả năng đậu trái thấp — cần can thiệp",
+      "group": "U",
+      "group_name": "Khả năng đậu trái",
+      "stage": [
+        5
+      ],
+      "severity": "Critical",
+      "description": "Thiếu Kali kết hợp mưa nhiều làm giảm đáng kể tỷ lệ đậu trái, nguy cơ thất thu năng suất.",
+      "recommendation": "Bổ sung Kali-Canxi-Bo khẩn cấp qua lá, cải thiện thoát nước ngay.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 5
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 70
+        },
+        {
+          "col": "rainfall",
+          "op": "ge",
+          "val": 35
+        }
+      ]
+    },
+    {
+      "label_id": "V1.6",
+      "label_name": "Tiềm năng năng suất cao (GĐ 6)",
+      "group": "V",
+      "group_name": "Khả năng đạt năng suất",
+      "stage": [
+        6
+      ],
+      "severity": "Normal",
+      "description": "Dinh dưỡng, ẩm độ và sức khỏe rễ đều ở mức tốt, dự báo năng suất và trọng lượng trái đạt chuẩn.",
+      "recommendation": "Duy trì chăm sóc, ghi nhận dữ liệu để tối ưu cho vụ sau.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 100
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 2.5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            55,
+            85
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "V2.6",
+      "label_name": "Nguy cơ giảm năng suất (GĐ 6)",
+      "group": "V",
+      "group_name": "Khả năng đạt năng suất",
+      "stage": [
+        6
+      ],
+      "severity": "Warning",
+      "description": "Một hoặc nhiều yếu tố dinh dưỡng/nước dưới ngưỡng tối ưu, có thể ảnh hưởng đến trọng lượng và số lượng trái thu hoạch.",
+      "recommendation": "Rà soát lại quy trình bón phân và tưới, ưu tiên khắc phục yếu tố hạn chế nhất (Kali, nước, hữu cơ).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 6
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "V1.7",
+      "label_name": "Tiềm năng năng suất cao (GĐ 7)",
+      "group": "V",
+      "group_name": "Khả năng đạt năng suất",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Dinh dưỡng, ẩm độ và sức khỏe rễ đều ở mức tốt, dự báo năng suất và trọng lượng trái đạt chuẩn.",
+      "recommendation": "Duy trì chăm sóc, ghi nhận dữ liệu để tối ưu cho vụ sau.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 100
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 2.5
+        },
+        {
+          "col": "soil_humidity",
+          "op": "between",
+          "val": [
+            55,
+            85
+          ]
+        }
+      ]
+    },
+    {
+      "label_id": "V2.7",
+      "label_name": "Nguy cơ giảm năng suất (GĐ 7)",
+      "group": "V",
+      "group_name": "Khả năng đạt năng suất",
+      "stage": [
+        7
+      ],
+      "severity": "Warning",
+      "description": "Một hoặc nhiều yếu tố dinh dưỡng/nước dưới ngưỡng tối ưu, có thể ảnh hưởng đến trọng lượng và số lượng trái thu hoạch.",
+      "recommendation": "Rà soát lại quy trình bón phân và tưới, ưu tiên khắc phục yếu tố hạn chế nhất (Kali, nước, hữu cơ).",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 90
+        }
+      ]
+    },
+    {
+      "label_id": "W1.7",
+      "label_name": "Đạt tiêu chuẩn chất lượng xuất khẩu",
+      "group": "W",
+      "group_name": "Chất lượng xuất khẩu",
+      "stage": [
+        7
+      ],
+      "severity": "Normal",
+      "description": "Kali, hữu cơ đầy đủ, độ ẩm ổn định trước thu hoạch, độ mặn/EC an toàn — các yếu tố then chốt cho cơm vàng đều, không sượng, đạt chuẩn xuất khẩu.",
+      "recommendation": "Thực hiện đúng quy trình thu hoạch, đóng gói theo tiêu chuẩn GlobalGAP/VietGAP để giữ chất lượng.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "k",
+          "op": "ge",
+          "val": 100
+        },
+        {
+          "col": "organic_matter",
+          "op": "ge",
+          "val": 2.5
+        },
+        {
+          "col": "soil_salinity",
+          "op": "lt",
+          "val": 1.0
+        }
+      ]
+    },
+    {
+      "label_id": "W2.7",
+      "label_name": "Nguy cơ không đạt chuẩn xuất khẩu",
+      "group": "W",
+      "group_name": "Chất lượng xuất khẩu",
+      "stage": [
+        7
+      ],
+      "severity": "Critical",
+      "description": "Thiếu Kali kết hợp độ ẩm đất cao bất thường gần thu hoạch, nguy cơ cơm sượng/nhão, không đạt tiêu chuẩn xuất khẩu nghiêm ngặt.",
+      "recommendation": "Khắc phục ngay dinh dưỡng Kali, kiểm soát chặt nước tưới 2 tuần trước thu hoạch, phân loại kỹ trước đóng gói.",
+      "conditions": [
+        {
+          "col": "stage",
+          "op": "eq",
+          "val": 7
+        },
+        {
+          "col": "k",
+          "op": "lt",
+          "val": 90
+        },
+        {
+          "col": "soil_humidity",
+          "op": "ge",
+          "val": 80
+        }
+      ]
+    }
+  ],
+  "file_rule_map": {
+    "_comment": "Ánh xạ file dữ liệu sang nhóm nhãn áp dụng (dùng tham chiếu trong knowledge base, không bắt buộc cho hệ thống rule mới — engine có thể quét toàn bộ 'labels' và lọc theo 'stage' + 'conditions').",
+    "soil.xlsx": {
+      "groups": [
+        "A",
+        "G",
+        "I",
+        "Q"
+      ]
+    },
+    "air.xlsx": {
+      "groups": [
+        "E",
+        "H",
+        "J"
+      ]
+    },
+    "water.xlsx": {
+      "groups": [
+        "A",
+        "P",
+        "Q"
+      ]
+    },
+    "soil_chem.xlsx": {
+      "groups": [
+        "C",
+        "F"
+      ]
+    },
+    "npk.xlsx": {
+      "groups": [
+        "B",
+        "S",
+        "M",
+        "N"
+      ]
+    },
+    "soil_exchange.xlsx": {
+      "groups": [
+        "D",
+        "F"
+      ]
+    },
+    "salinity.xlsx": {
+      "groups": [
+        "D",
+        "J"
+      ]
+    },
+    "temp_gradient.xlsx": {
+      "groups": [
+        "E"
+      ]
+    },
+    "ph_ec.xlsx": {
+      "groups": [
+        "C",
+        "D"
+      ]
+    },
+    "moisture_ph_n.xlsx": {
+      "groups": [
+        "A",
+        "C",
+        "B"
+      ]
+    },
+    "climate_water.xlsx": {
+      "groups": [
+        "A",
+        "E",
+        "P"
+      ]
+    }
+  }
+}

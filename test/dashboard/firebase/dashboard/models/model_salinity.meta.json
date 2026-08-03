@@ -1,0 +1,36 @@
+{
+  "file": "salinity.xlsx",
+  "stem": "salinity",
+  "features": [
+    "Growth Stage"
+  ],
+  "groups": [
+    "D",
+    "J"
+  ],
+  "note": "Growth Stage + Soil salinity + Water salinity",
+  "n_train": 459,
+  "n_test": 115,
+  "accuracy": 1.0,
+  "classes": [
+    "D4.1",
+    "D4.2",
+    "D4.3",
+    "D4.4",
+    "D4.5",
+    "D4.6",
+    "D4.7"
+  ],
+  "label_meaning": {
+    "D4.1": "EC & độ mặn an toàn (GĐ 1)",
+    "D4.2": "EC & độ mặn an toàn (GĐ 2)",
+    "D4.3": "EC & độ mặn an toàn (GĐ 3)",
+    "D4.4": "EC & độ mặn an toàn (GĐ 4)",
+    "D4.5": "EC & độ mặn an toàn (GĐ 5)",
+    "D4.6": "EC & độ mặn an toàn (GĐ 6)",
+    "D4.7": "EC & độ mặn an toàn (GĐ 7)"
+  },
+  "feature_defaults": {
+    "Growth Stage": 4.0
+  }
+}

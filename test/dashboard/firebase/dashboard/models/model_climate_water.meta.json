@@ -1,0 +1,63 @@
+{
+  "file": "climate_water.xlsx",
+  "stem": "climate_water",
+  "features": [
+    "Growth Stage",
+    "Air Temperature (°C)",
+    "Rainfall (mm/ngày)"
+  ],
+  "groups": [
+    "A",
+    "E",
+    "P"
+  ],
+  "note": "Growth Stage + Soil Temperature + Air Temperature + Water Storage + Rainfall (5 cot)",
+  "n_train": 598920,
+  "n_test": 149730,
+  "accuracy": 1.0,
+  "classes": [
+    "A2.1",
+    "A2.2",
+    "A2.3",
+    "A2.5",
+    "A2.6",
+    "A4.4",
+    "A4.7",
+    "A6.4",
+    "A7.5",
+    "E1.1",
+    "E1.2",
+    "E1.3",
+    "E1.4",
+    "E1.5",
+    "E2.4",
+    "E2.7",
+    "E3.4",
+    "E3.7"
+  ],
+  "label_meaning": {
+    "A2.1": "Đất thiếu ẩm nhẹ (GĐ 1)",
+    "A2.2": "Đất thiếu ẩm nhẹ (GĐ 2)",
+    "A2.3": "Đất thiếu ẩm nhẹ (GĐ 3)",
+    "A2.5": "Đất thiếu ẩm nhẹ (GĐ 5)",
+    "A2.6": "Đất thiếu ẩm nhẹ (GĐ 6)",
+    "A4.4": "Ẩm độ & nước ổn định (GĐ 4)",
+    "A4.7": "Ẩm độ & nước ổn định (GĐ 7)",
+    "A6.4": "Mưa lớn trong mùa ra hoa — nguy hiểm",
+    "A7.5": "Mưa lớn giai đoạn đậu trái non",
+    "E1.1": "Nắng nóng cực đoan (GĐ 1)",
+    "E1.2": "Nắng nóng cực đoan (GĐ 2)",
+    "E1.3": "Nắng nóng cực đoan (GĐ 3)",
+    "E1.4": "Nắng nóng cực đoan (GĐ 4)",
+    "E1.5": "Nắng nóng cực đoan (GĐ 5)",
+    "E2.4": "Nhiệt độ cao — cần theo dõi (GĐ 4)",
+    "E2.7": "Nhiệt độ cao — cần theo dõi (GĐ 7)",
+    "E3.4": "Nhiệt độ lạnh (GĐ 4)",
+    "E3.7": "Nhiệt độ lạnh (GĐ 7)"
+  },
+  "feature_defaults": {
+    "Growth Stage": 4.0,
+    "Air Temperature (°C)": 28.0,
+    "Rainfall (mm/ngày)": 75.0
+  }
+}
